@@ -1,0 +1,1 @@
+cmd_/home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/Module.symvers := sed 's/\.ko$$/\.o/' /home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/modules.order | scripts/mod/modpost -m -a  -o /home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/Module.symvers -e -i Module.symvers   -T -
