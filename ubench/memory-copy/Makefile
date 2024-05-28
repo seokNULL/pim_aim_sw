@@ -1,27 +1,30 @@
-CC ?= gcc
+CC ?= g++
 
 CFLAGS += -g
 #CFLAGS += -O2 -fno-inline -Wall -Wstrict-prototypes
 CFLAGS += -I. -I../include -I../dma-utils
 CFLAGS += $(EXTRA_FLAGS)
 
-DMA-FROM-DEVICE = dma-from-device
-DMA-UTILS_OBJS := $(patsubst %.c,%.o,$(wildcard ../dma-utils/*.c))
-DMA-FROM-DEVICE_OBJS := dma_from_device.o
-DMA-FROM-DEVICE_OBJS += $(DMA-UTILS_OBJS)
+TARGET = ../../bin/memcpy
+TARGET2 = memcpy
+OBJS = memcpy.o
 
-ifneq ($(CROSS_COMPILE_FLAG),)
-	CC=$(CROSS_COMPILE_FLAG)gcc
-endif
+OBJECTS = $(patsubst %.cpp,%.o, $(wildcard ${PWD}/*.cpp))
 
-all: clean dma-from-device
+# Default target executed when no arguments are given to make.
+.DEFAULT_GOAL=all
 
-dma-from-device: $(DMA-FROM-DEVICE_OBJS)
-	$(CC) -lrt -o $@ $< -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -D_LARGE_FILE_SOURCE
+${TARGET}: ${OBJS}
+	${CXX} ${CXXFLAGS} -o $@ $^ ${LIBS}
+${TARGET2}: ${OBJS}
+	${CXX} ${CXXFLAGS} -o $@ $^ ${LIBS}
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c -std=c99 -o $@ $< -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -D_LARGE_FILE_SOURCE -D_AIO_AIX_SOURCE
+all: ${TARGET2}
+.PHONY: all
+
+test: ${TARGET}
+.PHONY: test
 
 clean:
-	@rm -f *.o */*.o ../dma-utils/*.o
-	rm -rf *.o *.bin dma-from-device
+	rm -f *.o *.d ${TARGET2}
+	rm -f *.o *.d ${TARGET}

@@ -1,8 +1,8 @@
 /*
  * This file is part of the Xilinx DMA IP Core driver for Linux
  *
- * Copyright (c) 2017-2022, Xilinx, Inc. All rights reserved.
- * Copyright (c) 2022-2023, Advanced Micro Devices, Inc. All rights reserved.
+ * Copyright (c) 2017-2020,  Xilinx, Inc.
+ * All rights reserved.
  *
  * This source code is free software; you can redistribute it and/or modify it
  * under the terms and conditions of the GNU General Public License,
@@ -33,7 +33,7 @@
 #define QDMA_C2H_DEFAULT_BUF_SZ (4096)
 #define DUMP_LINE_SZ			(81)
 #define QDMA_Q_DUMP_MAX_QUEUES	(100)
-#define QDMA_Q_DUMP_LINE_SZ	(25 * 1024)
+#define QDMA_Q_DUMP_LINE_SZ	(24 * 1024)
 #define QDMA_Q_LIST_LINE_SZ	(200)
 
 static int xnl_dev_list(struct sk_buff *skb2, struct genl_info *info);
@@ -105,8 +105,7 @@ static struct nla_policy xnl_policy[XNL_ATTR_MAX] = {
 };
 #endif
 #else
-#if ((KERNEL_VERSION(5, 2, 0) > LINUX_VERSION_CODE) || (LINUX_VERSION_CODE > \
-		KERNEL_VERSION(5, 9, 0)))
+#if KERNEL_VERSION(5, 2, 0) >= LINUX_VERSION_CODE
 static struct nla_policy xnl_policy[XNL_ATTR_MAX] = {
 	[XNL_ATTR_GENMSG] =		{ .type = NLA_NUL_STRING },
 
@@ -137,9 +136,6 @@ static struct nla_policy xnl_policy[XNL_ATTR_MAX] = {
 	[XNL_ATTR_REG_ADDR] =		{ .type = NLA_U32 },
 	[XNL_ATTR_REG_VAL] =		{ .type = NLA_U32 },
 
-	[XNL_ATTR_CSR_INDEX] =		{ .type = NLA_U32 },
-	[XNL_ATTR_CSR_COUNT] =		{ .type = NLA_U32 },
-
 	[XNL_ATTR_QIDX] =		{ .type = NLA_U32 },
 	[XNL_ATTR_NUM_Q] =		{ .type = NLA_U32 },
 	[XNL_ATTR_QFLAG] =		{ .type = NLA_U32 },
@@ -156,9 +152,6 @@ static struct nla_policy xnl_policy[XNL_ATTR_MAX] = {
 	[XNL_ATTR_RANGE_END] =		{ .type = NLA_U32 },
 
 	[XNL_ATTR_INTR_VECTOR_IDX] =	{ .type = NLA_U32 },
-	[XNL_ATTR_INTR_VECTOR_START_IDX] =	{ .type = NLA_U32 },
-	[XNL_ATTR_INTR_VECTOR_END_IDX] =	{ .type = NLA_U32 },
-	[XNL_ATTR_RSP_BUF_LEN] =	{ .type = NLA_U32 },
 	[XNL_ATTR_PIPE_GL_MAX] =	{ .type = NLA_U32 },
 	[XNL_ATTR_PIPE_FLOW_ID] =	{ .type = NLA_U32 },
 	[XNL_ATTR_PIPE_SLR_ID] =	{ .type = NLA_U32 },
@@ -169,12 +162,6 @@ static struct nla_policy xnl_policy[XNL_ATTR_MAX] = {
 	[XNL_ATTR_ERROR]   =		{ .type = NLA_U32 },
 	[XNL_ATTR_PING_PONG_EN]   =	{ .type = NLA_U32 },
 	[XNL_ATTR_APERTURE_SZ]   =	{ .type = NLA_U32 },
-	[XNL_ATTR_DEV_STAT_PING_PONG_LATMIN1]   =	{ .type = NLA_U32 },
-	[XNL_ATTR_DEV_STAT_PING_PONG_LATMIN2]   =	{ .type = NLA_U32 },
-	[XNL_ATTR_DEV_STAT_PING_PONG_LATMAX1]   =	{ .type = NLA_U32 },
-	[XNL_ATTR_DEV_STAT_PING_PONG_LATMAX2]   =	{ .type = NLA_U32 },
-	[XNL_ATTR_DEV_STAT_PING_PONG_LATAVG1]   =	{ .type = NLA_U32 },
-	[XNL_ATTR_DEV_STAT_PING_PONG_LATAVG2]   =	{ .type = NLA_U32 },
 	[XNL_ATTR_DEV]		=	{ .type = NLA_BINARY,
 					  .len = QDMA_DEV_ATTR_STRUCT_SIZE, },
 	[XNL_ATTR_GLOBAL_CSR]		=	{ .type = NLA_BINARY,
@@ -212,270 +199,326 @@ static int xnl_register_write(struct sk_buff *, struct genl_info *);
 static int xnl_get_global_csr(struct sk_buff *skb2, struct genl_info *info);
 static int xnl_get_queue_state(struct sk_buff *, struct genl_info *);
 static int xnl_config_reg_info_dump(struct sk_buff *, struct genl_info *);
-
-#ifdef TANDEM_BOOT_SUPPORTED
-static int xnl_en_st(struct sk_buff *skb2, struct genl_info *info);
-#endif
-
 #ifdef ERR_DEBUG
 static int xnl_err_induce(struct sk_buff *skb2, struct genl_info *info);
 #endif
 
+static struct genl_ops xnl_ops[] = {
+	{
+		.cmd = XNL_CMD_DEV_LIST,
 #ifdef RHEL_RELEASE_VERSION
 #if RHEL_RELEASE_VERSION(8, 3) > RHEL_RELEASE_CODE
-#define GENL_OPS_POLICY
+		.policy = xnl_policy,
 #endif
 #else
-#if ((KERNEL_VERSION(5, 2, 0) > LINUX_VERSION_CODE) || (LINUX_VERSION_CODE > \
-		KERNEL_VERSION(5, 9, 0)))
-#define GENL_OPS_POLICY
-#endif
-#endif
-
-#ifdef GENL_OPS_POLICY
-static struct genl_ops xnl_ops[] = {
-	{
-		.cmd = XNL_CMD_DEV_LIST,
+#if KERNEL_VERSION(5, 2, 0) > LINUX_VERSION_CODE
 		.policy = xnl_policy,
+#endif
+#endif
 		.doit = xnl_dev_list,
 	},
 	{
 		.cmd = XNL_CMD_DEV_CAP,
+#ifdef RHEL_RELEASE_VERSION
+#if RHEL_RELEASE_VERSION(8, 3) > RHEL_RELEASE_CODE
 		.policy = xnl_policy,
-		.doit = xnl_dev_version_capabilities,
-	},
-	{
-		.cmd = XNL_CMD_DEV_INFO,
-		.policy = xnl_policy,
-		.doit = xnl_dev_info,
-	},
-	{
-		.cmd = XNL_CMD_DEV_STAT,
-		.policy = xnl_policy,
-		.doit = xnl_dev_stat,
-	},
-	{
-		.cmd = XNL_CMD_DEV_STAT_CLEAR,
-		.policy = xnl_policy,
-		.doit = xnl_dev_stat_clear,
-	},
-	{
-		.cmd = XNL_CMD_Q_LIST,
-		.policy = xnl_policy,
-		.doit = xnl_q_list,
-	},
-	{
-		.cmd = XNL_CMD_Q_ADD,
-		.policy = xnl_policy,
-		.doit = xnl_q_add,
-	},
-	{
-		.cmd = XNL_CMD_Q_START,
-		.policy = xnl_policy,
-		.doit = xnl_q_start,
-	},
-	{
-		.cmd = XNL_CMD_Q_STOP,
-		.policy = xnl_policy,
-		.doit = xnl_q_stop,
-	},
-	{
-		.cmd = XNL_CMD_Q_DEL,
-		.policy = xnl_policy,
-		.doit = xnl_q_del,
-	},
-	{
-		.cmd = XNL_CMD_Q_DUMP,
-		.policy = xnl_policy,
-		.doit = xnl_q_dump,
-	},
-	{
-		.cmd = XNL_CMD_Q_DESC,
-		.policy = xnl_policy,
-		.doit = xnl_q_dump_desc,
-	},
-	{
-		.cmd = XNL_CMD_REG_DUMP,
-		.policy = xnl_policy,
-		.doit = xnl_config_reg_dump,
-	},
-	{
-		.cmd = XNL_CMD_REG_INFO_READ,
-		.policy = xnl_policy,
-		.doit = xnl_config_reg_info_dump,
-	},
-	{
-		.cmd = XNL_CMD_Q_CMPT,
-		.policy = xnl_policy,
-		.doit = xnl_q_dump_cmpt,
-	},
-	{
-		.cmd = XNL_CMD_Q_UDD,
-		.policy = xnl_policy,
-		.doit = xnl_q_read_udd,
-	},
-	{
-		.cmd = XNL_CMD_Q_RX_PKT,
-		.policy = xnl_policy,
-		.doit = xnl_q_read_pkt,
-	},
-	{
-		.cmd = XNL_CMD_Q_CMPT_READ,
-		.policy = xnl_policy,
-		.doit = xnl_q_cmpt_read,
-	},
-	{
-		.cmd = XNL_CMD_INTR_RING_DUMP,
-		.policy = xnl_policy,
-		.doit = xnl_intr_ring_dump,
-	},
-	{
-		.cmd = XNL_CMD_REG_RD,
-		.policy = xnl_policy,
-		.doit = xnl_register_read,
-	},
-	{
-		.cmd = XNL_CMD_REG_WRT,
-		.policy = xnl_policy,
-		.doit = xnl_register_write,
-	},
-	{
-		.cmd = XNL_CMD_GLOBAL_CSR,
-		.policy = xnl_policy,
-		.doit = xnl_get_global_csr,
-	},
-	{
-		.cmd = XNL_CMD_GET_Q_STATE,
-		.policy = xnl_policy,
-		.doit = xnl_get_queue_state,
-	},
-
-#ifdef TANDEM_BOOT_SUPPORTED
-	{
-		.cmd = XNL_CMD_EN_ST,
-		.policy = xnl_policy,
-		.doit = xnl_en_st,
-	},
 #endif
-
-#ifdef ERR_DEBUG
-	{
-		.cmd = XNL_CMD_Q_ERR_INDUCE,
-		.policy = xnl_policy,
-		.doit = xnl_err_induce,
-	}
-#endif
-};
 #else
-static struct genl_ops xnl_ops[] = {
-	{
-		.cmd = XNL_CMD_DEV_LIST,
-		.doit = xnl_dev_list,
-	},
-	{
-		.cmd = XNL_CMD_DEV_CAP,
+#if KERNEL_VERSION(5, 2, 0) > LINUX_VERSION_CODE
+		.policy = xnl_policy,
+#endif
+#endif
 		.doit = xnl_dev_version_capabilities,
 	},
 	{
 		.cmd = XNL_CMD_DEV_INFO,
+#ifdef RHEL_RELEASE_VERSION
+#if RHEL_RELEASE_VERSION(8, 3) > RHEL_RELEASE_CODE
+		.policy = xnl_policy,
+#endif
+#else
+#if KERNEL_VERSION(5, 2, 0) > LINUX_VERSION_CODE
+		.policy = xnl_policy,
+#endif
+#endif
 		.doit = xnl_dev_info,
 	},
 	{
 		.cmd = XNL_CMD_DEV_STAT,
+#ifdef RHEL_RELEASE_VERSION
+#if RHEL_RELEASE_VERSION(8, 3) > RHEL_RELEASE_CODE
+		.policy = xnl_policy,
+#endif
+#else
+#if KERNEL_VERSION(5, 2, 0) > LINUX_VERSION_CODE
+		.policy = xnl_policy,
+#endif
+#endif
 		.doit = xnl_dev_stat,
 	},
 	{
 		.cmd = XNL_CMD_DEV_STAT_CLEAR,
+#ifdef RHEL_RELEASE_VERSION
+#if RHEL_RELEASE_VERSION(8, 3) > RHEL_RELEASE_CODE
+		.policy = xnl_policy,
+#endif
+#else
+#if KERNEL_VERSION(5, 2, 0) > LINUX_VERSION_CODE
+		.policy = xnl_policy,
+#endif
+#endif
 		.doit = xnl_dev_stat_clear,
 	},
 	{
 		.cmd = XNL_CMD_Q_LIST,
+#ifdef RHEL_RELEASE_VERSION
+#if RHEL_RELEASE_VERSION(8, 3) > RHEL_RELEASE_CODE
+		.policy = xnl_policy,
+#endif
+#else
+#if KERNEL_VERSION(5, 2, 0) > LINUX_VERSION_CODE
+		.policy = xnl_policy,
+#endif
+#endif
 		.doit = xnl_q_list,
 	},
 	{
 		.cmd = XNL_CMD_Q_ADD,
+#ifdef RHEL_RELEASE_VERSION
+#if RHEL_RELEASE_VERSION(8, 3) > RHEL_RELEASE_CODE
+		.policy = xnl_policy,
+#endif
+#else
+#if KERNEL_VERSION(5, 2, 0) > LINUX_VERSION_CODE
+		.policy = xnl_policy,
+#endif
+#endif
 		.doit = xnl_q_add,
 	},
 	{
 		.cmd = XNL_CMD_Q_START,
+#ifdef RHEL_RELEASE_VERSION
+#if RHEL_RELEASE_VERSION(8, 3) > RHEL_RELEASE_CODE
+		.policy = xnl_policy,
+#endif
+#else
+#if KERNEL_VERSION(5, 2, 0) > LINUX_VERSION_CODE
+		.policy = xnl_policy,
+#endif
+#endif
 		.doit = xnl_q_start,
 	},
 	{
 		.cmd = XNL_CMD_Q_STOP,
+#ifdef RHEL_RELEASE_VERSION
+#if RHEL_RELEASE_VERSION(8, 3) > RHEL_RELEASE_CODE
+		.policy = xnl_policy,
+#endif
+#else
+#if KERNEL_VERSION(5, 2, 0) > LINUX_VERSION_CODE
+		.policy = xnl_policy,
+#endif
+#endif
 		.doit = xnl_q_stop,
 	},
 	{
 		.cmd = XNL_CMD_Q_DEL,
+#ifdef RHEL_RELEASE_VERSION
+#if RHEL_RELEASE_VERSION(8, 3) > RHEL_RELEASE_CODE
+		.policy = xnl_policy,
+#endif
+#else
+#if KERNEL_VERSION(5, 2, 0) > LINUX_VERSION_CODE
+		.policy = xnl_policy,
+#endif
+#endif
 		.doit = xnl_q_del,
 	},
 	{
 		.cmd = XNL_CMD_Q_DUMP,
+#ifdef RHEL_RELEASE_VERSION
+#if RHEL_RELEASE_VERSION(8, 3) > RHEL_RELEASE_CODE
+		.policy = xnl_policy,
+#endif
+#else
+#if KERNEL_VERSION(5, 2, 0) > LINUX_VERSION_CODE
+		.policy = xnl_policy,
+#endif
+#endif
 		.doit = xnl_q_dump,
 	},
 	{
 		.cmd = XNL_CMD_Q_DESC,
+#ifdef RHEL_RELEASE_VERSION
+#if RHEL_RELEASE_VERSION(8, 3) > RHEL_RELEASE_CODE
+		.policy = xnl_policy,
+#endif
+#else
+#if KERNEL_VERSION(5, 2, 0) > LINUX_VERSION_CODE
+		.policy = xnl_policy,
+#endif
+#endif
 		.doit = xnl_q_dump_desc,
 	},
 	{
 		.cmd = XNL_CMD_REG_DUMP,
+#ifdef RHEL_RELEASE_VERSION
+#if RHEL_RELEASE_VERSION(8, 3) > RHEL_RELEASE_CODE
+		.policy = xnl_policy,
+#endif
+#else
+#if KERNEL_VERSION(5, 2, 0) > LINUX_VERSION_CODE
+		.policy = xnl_policy,
+#endif
+#endif
 		.doit = xnl_config_reg_dump,
 	},
 	{
 		.cmd = XNL_CMD_REG_INFO_READ,
+	#ifdef RHEL_RELEASE_VERSION
+	#if RHEL_RELEASE_VERSION(8, 3) > RHEL_RELEASE_CODE
+		.policy = xnl_policy,
+	#endif
+	#else
+	#if KERNEL_VERSION(5, 2, 0) > LINUX_VERSION_CODE
+		.policy = xnl_policy,
+	#endif
+	#endif
 		.doit = xnl_config_reg_info_dump,
 	},
 	{
 		.cmd = XNL_CMD_Q_CMPT,
+#ifdef RHEL_RELEASE_VERSION
+#if RHEL_RELEASE_VERSION(8, 3) > RHEL_RELEASE_CODE
+		.policy = xnl_policy,
+#endif
+#else
+#if KERNEL_VERSION(5, 2, 0) > LINUX_VERSION_CODE
+		.policy = xnl_policy,
+#endif
+#endif
 		.doit = xnl_q_dump_cmpt,
 	},
 	{
 		.cmd = XNL_CMD_Q_UDD,
+#ifdef RHEL_RELEASE_VERSION
+#if RHEL_RELEASE_VERSION(8, 3) > RHEL_RELEASE_CODE
+		.policy = xnl_policy,
+#endif
+#else
+#if KERNEL_VERSION(5, 2, 0) > LINUX_VERSION_CODE
+		.policy = xnl_policy,
+#endif
+#endif
 		.doit = xnl_q_read_udd,
 	},
 	{
 		.cmd = XNL_CMD_Q_RX_PKT,
+#ifdef RHEL_RELEASE_VERSION
+#if RHEL_RELEASE_VERSION(8, 3) > RHEL_RELEASE_CODE
+		.policy = xnl_policy,
+#endif
+#else
+#if KERNEL_VERSION(5, 2, 0) > LINUX_VERSION_CODE
+		.policy = xnl_policy,
+#endif
+#endif
 		.doit = xnl_q_read_pkt,
 	},
 	{
 		.cmd = XNL_CMD_Q_CMPT_READ,
+#ifdef RHEL_RELEASE_VERSION
+#if RHEL_RELEASE_VERSION(8, 3) > RHEL_RELEASE_CODE
+		.policy = xnl_policy,
+#endif
+#else
+#if KERNEL_VERSION(5, 2, 0) > LINUX_VERSION_CODE
+		.policy = xnl_policy,
+#endif
+#endif
 		.doit = xnl_q_cmpt_read,
 	},
 	{
 		.cmd = XNL_CMD_INTR_RING_DUMP,
+#ifdef RHEL_RELEASE_VERSION
+#if RHEL_RELEASE_VERSION(8, 3) > RHEL_RELEASE_CODE
+		.policy = xnl_policy,
+#endif
+#else
+#if KERNEL_VERSION(5, 2, 0) > LINUX_VERSION_CODE
+		.policy = xnl_policy,
+#endif
+#endif
 		.doit = xnl_intr_ring_dump,
 	},
 	{
 		.cmd = XNL_CMD_REG_RD,
+#ifdef RHEL_RELEASE_VERSION
+#if RHEL_RELEASE_VERSION(8, 3) > RHEL_RELEASE_CODE
+		.policy = xnl_policy,
+#endif
+#else
+#if KERNEL_VERSION(5, 2, 0) > LINUX_VERSION_CODE
+		.policy = xnl_policy,
+#endif
+#endif
 		.doit = xnl_register_read,
 	},
 	{
 		.cmd = XNL_CMD_REG_WRT,
+#ifdef RHEL_RELEASE_VERSION
+#if RHEL_RELEASE_VERSION(8, 3) > RHEL_RELEASE_CODE
+		.policy = xnl_policy,
+#endif
+#else
+#if KERNEL_VERSION(5, 2, 0) > LINUX_VERSION_CODE
+		.policy = xnl_policy,
+#endif
+#endif
 		.doit = xnl_register_write,
 	},
 	{
 		.cmd = XNL_CMD_GLOBAL_CSR,
+#ifdef RHEL_RELEASE_VERSION
+#if RHEL_RELEASE_VERSION(8, 3) > RHEL_RELEASE_CODE
+		.policy = xnl_policy,
+#endif
+#else
+#if KERNEL_VERSION(5, 2, 0) > LINUX_VERSION_CODE
+		.policy = xnl_policy,
+#endif
+#endif
 		.doit = xnl_get_global_csr,
 	},
 	{
 		.cmd = XNL_CMD_GET_Q_STATE,
+#ifdef RHEL_RELEASE_VERSION
+#if RHEL_RELEASE_VERSION(8, 3) > RHEL_RELEASE_CODE
+		.policy = xnl_policy,
+#endif
+#else
+#if KERNEL_VERSION(5, 2, 0) > LINUX_VERSION_CODE
+		.policy = xnl_policy,
+#endif
+#endif
 		.doit = xnl_get_queue_state,
 	},
-
-#ifdef TANDEM_BOOT_SUPPORTED
-	{
-		.cmd = XNL_CMD_EN_ST,
-		.doit = xnl_en_st,
-	},
-#endif
-
 #ifdef ERR_DEBUG
 	{
 		.cmd = XNL_CMD_Q_ERR_INDUCE,
+#ifdef RHEL_RELEASE_VERSION
+#if RHEL_RELEASE_VERSION(8, 3) > RHEL_RELEASE_CODE
+		.policy = xnl_policy,
+#endif
+#else
+#if KERNEL_VERSION(5, 2, 0) > LINUX_VERSION_CODE
+		.policy = xnl_policy,
+#endif
+#endif
 		.doit = xnl_err_induce,
 	}
 #endif
 };
-#endif
 
 static struct genl_family xnl_family = {
 #ifdef GENL_ID_GENERATE
@@ -603,8 +646,7 @@ static int xnl_dump_attrs(struct genl_info *info)
 		struct nlattr *na = info->attrs[i];
 
 		if (na) {
-#if ((KERNEL_VERSION(5, 2, 0) > LINUX_VERSION_CODE) || (LINUX_VERSION_CODE > \
-		KERNEL_VERSION(5, 9, 0)))
+#if KERNEL_VERSION(5, 2, 0) > LINUX_VERSION_CODE
 			if (xnl_policy[i].type == NLA_NUL_STRING) {
 #else
 			if (1) {
@@ -1484,14 +1526,9 @@ static int xnl_q_list(struct sk_buff *skb2, struct genl_info *info)
 	struct xlnx_pci_dev *xpdev;
 	char *buf;
 	int rv = 0;
-	char ebuf[XNL_RESP_BUFLEN_MIN];
-	struct qdma_queue_conf qconf;
-	unsigned char is_qp;
 	uint32_t qmax = 0;
 	uint32_t buflen = 0, max_buflen = 0;
 	struct qdma_queue_count q_count;
-	unsigned int qidx, num_q;
-	struct xlnx_qdata *qdata;
 
 	if (info == NULL)
 		return -EINVAL;
@@ -1506,12 +1543,6 @@ static int xnl_q_list(struct sk_buff *skb2, struct genl_info *info)
 	if (!buf)
 		return -ENOMEM;
 	buflen = XNL_RESP_BUFLEN_MIN;
-	rv = qconf_get(&qconf, info, ebuf, XNL_RESP_BUFLEN_MIN, &is_qp);
-	if (rv < 0)
-		return rv;
-
-	qidx = qconf.qidx;
-	num_q = nla_get_u32(info->attrs[XNL_ATTR_NUM_Q]);
 
 	rv = qdma_get_queue_count(xpdev->dev_hndl, &q_count, buf, buflen);
 	if (rv < 0) {
@@ -1521,33 +1552,20 @@ static int xnl_q_list(struct sk_buff *skb2, struct genl_info *info)
 	}
 
 	qmax = q_count.h2c_qcnt + q_count.c2h_qcnt;
+
 	if (!qmax) {
 		rv += snprintf(buf, 8, "Zero Qs\n\n");
 		goto send_rsp;
 	}
 
-	qdata = xnl_rcv_check_qidx(info, xpdev, &qconf, buf, buflen);
-	if (!qdata)
-		goto send_rsp;
-
-	num_q = nla_get_u32(info->attrs[XNL_ATTR_NUM_Q]);
-
-	if (num_q > QDMA_Q_DUMP_MAX_QUEUES) {
-		pr_err("Can not dump more than %d queues\n",
-			   QDMA_Q_DUMP_MAX_QUEUES);
-		rv += snprintf(buf, 40, "Can not dump more than %d queues\n",
-				QDMA_Q_DUMP_MAX_QUEUES);
-		goto send_rsp;
-	}
-
+	max_buflen = (qmax * QDMA_Q_LIST_LINE_SZ);
 	kfree(buf);
-	max_buflen = (num_q * 2 * QDMA_Q_LIST_LINE_SZ);
 	buf = xnl_mem_alloc(max_buflen, info);
 	if (!buf)
 		return -ENOMEM;
 
 	buflen = max_buflen;
-	rv = qdma_queue_list(xpdev->dev_hndl, qidx, num_q, buf, buflen);
+	rv = qdma_queue_list(xpdev->dev_hndl, buf, buflen);
 	if (rv < 0) {
 		pr_err("qdma_queue_list() failed: %d", rv);
 		goto send_rsp;
@@ -1633,16 +1651,8 @@ add_q:
 			}
 		}
 	}
-/* Suppress Q additions prints if num_q's greater than 2048.
- * And print only consolidated Q's added, to overcome attr failure.
- * TODO: This is a workaround. Need to comeup with proper fix.
- */
-	if (num_q > 2048) {
-		memset(buf, 0, strlen(buf) + 1);
-		snprintf(buf, 25, "Added %u Queues.\n", i);
-	} else {
-		cur += snprintf(cur, end - cur, "Added %u Queues.\n", i);
-	}
+
+	cur += snprintf(cur, end - cur, "Added %u Queues.\n", i);
 
 send_resp:
 	rv2 = xnl_respond_buffer(info, buf, strlen(buf), rv);
@@ -2849,33 +2859,6 @@ free_msg_buff:
 	kfree(csr);
 	return rv;
 }
-
-#ifdef TANDEM_BOOT_SUPPORTED
-static int xnl_en_st(struct sk_buff *skb2, struct genl_info *info)
-{
-	struct xlnx_pci_dev *xpdev;
-	int rv;
-	char *buf;
-
-	if (info == NULL)
-		return -EINVAL;
-
-	xnl_dump_attrs(info);
-
-	xpdev = xnl_rcv_check_xpdev(info);
-	if (!xpdev)
-		return -EINVAL;
-	buf = xnl_mem_alloc(XNL_RESP_BUFLEN_MIN, info);
-	if (!buf)
-		return -ENOMEM;
-
-	qdma_init_st_ctxt(xpdev->dev_hndl, buf, XNL_RESP_BUFLEN_MAX);
-	rv = xnl_respond_buffer(info, buf, XNL_RESP_BUFLEN_MAX, 0);
-
-	kfree(buf);
-	return rv;
-}
-#endif
 
 int xlnx_nl_init(void)
 {

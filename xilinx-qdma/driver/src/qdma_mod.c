@@ -1,8 +1,8 @@
 /*
  * This file is part of the Xilinx DMA IP Core driver for Linux
  *
- * Copyright (c) 2017-2022, Xilinx, Inc. All rights reserved.
- * Copyright (c) 2022-2023, Advanced Micro Devices, Inc. All rights reserved.
+ * Copyright (c) 2017-2020,  Xilinx, Inc.
+ * All rights reserved.
  *
  * This source code is free software; you can redistribute it and/or modify it
  * under the terms and conditions of the GNU General Public License,
@@ -20,7 +20,6 @@
 #define pr_fmt(fmt)	KBUILD_MODNAME ":%s: " fmt, __func__
 
 #include "qdma_mod.h"
-
 #include <linux/module.h>
 #include <linux/kernel.h>
 #include <linux/version.h>
@@ -32,6 +31,9 @@
 
 #include "nl.h"
 #include "libqdma/xdev.h"
+#ifdef NEWTON
+#include "qdma_if.h"
+#endif
 
 /* include early, to verify it depends only on the headers above */
 #include "version.h"
@@ -63,6 +65,7 @@ module_param(num_threads, uint, 0644);
 MODULE_PARM_DESC(num_threads,
 "Number of threads to be created each for request and writeback processing");
 
+static struct bd_dev_info dev_info;
 
 #include "pci_ids.h"
 
@@ -1114,10 +1117,10 @@ int xpdev_queue_delete(struct xlnx_pci_dev *xpdev, unsigned int qidx, u8 q_type,
 	if (q_type != Q_CMPT) {
 		spin_lock(&xpdev->cdev_lock);
 		qdata->xcdev->dir_init &= ~(1 << (q_type ? 1 : 0));
-		spin_unlock(&xpdev->cdev_lock);
 
 		if (!qdata->xcdev->dir_init)
 			qdma_cdev_destroy(qdata->xcdev);
+		spin_unlock(&xpdev->cdev_lock);
 	}
 
 	memset(qdata, 0, sizeof(*qdata));
@@ -1541,6 +1544,7 @@ int qdma_device_write_bypass_register(struct xlnx_pci_dev *xpdev,
 	return 0;
 }
 
+static unsigned int kaim_if_cdev_bd_idx = 0;
 static int probe_one(struct pci_dev *pdev, const struct pci_device_id *id)
 {
 	struct qdma_dev_conf conf;
@@ -1607,6 +1611,9 @@ static int probe_one(struct pci_dev *pdev, const struct pci_device_id *id)
 
 	xpdev->dev_hndl = dev_hndl;
 	xpdev->idx = conf.bdf;
+#ifdef NEWTON
+	kaim_if_cdev_bd_idx = conf.bdf;
+#endif
 
 	xpdev->cdev_cb.xpdev = xpdev;
 	rv = qdma_cdev_device_init(&xpdev->cdev_cb);
@@ -1628,6 +1635,11 @@ static int probe_one(struct pci_dev *pdev, const struct pci_device_id *id)
 
 	dev_set_drvdata(&pdev->dev, xpdev);
 
+#ifdef NEWTON
+	dev_info.bd_idx[dev_info.bd_total_cnt] = xpdev->idx;
+	dev_info.bd_total_cnt++;
+#endif
+        
 	return 0;
 
 close_device:
@@ -1643,7 +1655,8 @@ static void xpdev_device_cleanup(struct xlnx_pci_dev *xpdev)
 {
 	struct xlnx_qdata *qdata = xpdev->qdata;
 	struct xlnx_qdata *qmax = qdata + (xpdev->qmax * 2); /* h2c and c2h */
-
+	
+	spin_lock(&xpdev->cdev_lock);
 	for (; qdata != qmax; qdata++) {
 		if (qdata->xcdev) {
 			/* if either h2c(1) or c2h(2) bit set, but not both */
@@ -1651,25 +1664,38 @@ static void xpdev_device_cleanup(struct xlnx_pci_dev *xpdev)
 				qdata->xcdev->dir_init == 2) {
 				qdma_cdev_destroy(qdata->xcdev);
 			} else { /* both bits are set so remove one */
-				spin_lock(&xpdev->cdev_lock);
 				qdata->xcdev->dir_init >>= 1;
-				spin_unlock(&xpdev->cdev_lock);
 			}
 		}
 		memset(qdata, 0, sizeof(*qdata));
 	}
+	spin_unlock(&xpdev->cdev_lock);
 }
 
 static void remove_one(struct pci_dev *pdev)
 {
 	struct xlnx_dma_dev *xdev = NULL;
 	struct xlnx_pci_dev *xpdev = dev_get_drvdata(&pdev->dev);
-
+    int i = 0;
+        
 	if (!xpdev) {
 		pr_info("%s NOT attached.\n", dev_name(&pdev->dev));
 		return;
+    }
+
+#ifdef NEWTON
+	for (i = 0; i < dev_info.bd_total_cnt; i++)
+	{
+		if (dev_info.bd_idx[i] == xpdev->idx)
+		{
+			dev_info.bd_idx[i] = 0;
+			break;
+		}
 	}
 
+	dev_info.bd_total_cnt--;
+#endif
+        
 	xdev = (struct xlnx_dma_dev *)(xpdev->dev_hndl);
 
 	pr_info("%s pdev 0x%p, xdev 0x%p, hndl 0x%lx, qdma%05x.\n",
@@ -1769,18 +1795,10 @@ static void qdma_error_resume(struct pci_dev *pdev)
 	}
 
 	pr_info("dev 0x%p,0x%p.\n", pdev, xpdev);
-#ifdef RHEL_RELEASE_VERSION
-#if RHEL_RELEASE_VERSION(8, 3) > RHEL_RELEASE_CODE
-	pci_cleanup_aer_uncorrect_error_status(pdev);
-#else
-	pci_aer_clear_nonfatal_status(pdev);
-#endif
-#else
 #if KERNEL_VERSION(5, 7, 0) <= LINUX_VERSION_CODE
 	pci_aer_clear_nonfatal_status(pdev);
 #else
 	pci_cleanup_aer_uncorrect_error_status(pdev);
-#endif
 #endif
 }
 
@@ -1810,18 +1828,14 @@ static void qdma_reset_prepare(struct pci_dev *pdev)
 	qdma_device_offline(pdev, xpdev->dev_hndl, XDEV_FLR_ACTIVE);
 
 	/* FLR setting is required for Versal Hard IP */
-	if ((xdev->version_info.ip_type == QDMA_VERSAL_HARD_IP) &&
-			(xdev->version_info.device_type ==
-			 QDMA_DEVICE_VERSAL_CPM4))
+	if (xdev->version_info.ip_type == QDMA_VERSAL_HARD_IP)
 		qdma_device_flr_quirk_set(pdev, xpdev->dev_hndl);
 	xpdev_queue_delete_all(xpdev);
 	xpdev_device_cleanup(xpdev);
 	xdev->conf.qsets_max = 0;
 	xdev->conf.qsets_base = -1;
 
-	if ((xdev->version_info.ip_type == QDMA_VERSAL_HARD_IP) &&
-			(xdev->version_info.device_type ==
-			 QDMA_DEVICE_VERSAL_CPM4))
+	if (xdev->version_info.ip_type == QDMA_VERSAL_HARD_IP)
 		qdma_device_flr_quirk_check(pdev, xpdev->dev_hndl);
 }
 
@@ -1849,18 +1863,14 @@ static void qdma_reset_notify(struct pci_dev *pdev, bool prepare)
 	if (prepare) {
 		qdma_device_offline(pdev, xpdev->dev_hndl, XDEV_FLR_ACTIVE);
 		/* FLR setting is not required for 2018.3 IP */
-		if ((xdev->version_info.ip_type == QDMA_VERSAL_HARD_IP) &&
-				(xdev->version_info.device_type ==
-				 QDMA_DEVICE_VERSAL_CPM4))
+		if (xdev->version_info.ip_type == QDMA_VERSAL_HARD_IP)
 			qdma_device_flr_quirk_set(pdev, xpdev->dev_hndl);
 		xpdev_queue_delete_all(xpdev);
 		xpdev_device_cleanup(xpdev);
 		xdev->conf.qsets_max = 0;
 		xdev->conf.qsets_base = -1;
 
-		if ((xdev->version_info.ip_type == QDMA_VERSAL_HARD_IP) &&
-				(xdev->version_info.device_type ==
-				 QDMA_DEVICE_VERSAL_CPM4))
+		if (xdev->version_info.ip_type == QDMA_VERSAL_HARD_IP)
 			qdma_device_flr_quirk_check(pdev, xpdev->dev_hndl);
 	} else
 		qdma_device_online(pdev, xpdev->dev_hndl, XDEV_FLR_ACTIVE);
@@ -1890,6 +1900,262 @@ static struct pci_driver pci_driver = {
 	.err_handler = &qdma_err_handler,
 };
 
+#ifdef NEWTON
+static int kaim_if_cdev_open(struct inode *inode, struct file *file) {
+    printk(KERN_INFO "qdma aim interface device opened\n");
+    return 0;
+}
+
+static int kaim_if_cdev_release(struct inode *inode, struct file *file) {
+    printk(KERN_INFO "qdma aim interface device released\n");
+    return 0;
+}
+
+static ssize_t kaim_if_cdev_read(struct file *file, char __user *data, size_t size, loff_t *offset) {
+    printk(KERN_INFO "qdma aim interface device read called\n");
+    return size;
+}
+
+static ssize_t kaim_if_cdev_write(struct file *file, const char __user *data, size_t size, loff_t *offset) {
+    printk("data: %s", data);
+    printk(KERN_INFO "qdma aim interface device write called\n");
+    return size;
+}
+
+static long kaim_if_cdev_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
+{
+    int ret = 0;
+    int buf_size = 2048;
+    char *buf, *err;
+    struct qdma_aim_if_ioctl ioctl_param;
+    struct xlnx_pci_dev *xpdev = NULL;
+
+    buf = kzalloc(buf_size, GFP_KERNEL);
+    err = kzalloc(buf_size, GFP_KERNEL);
+
+    // xpdev = xpdev_find_by_idx(kaim_if_cdev_bd_idx, err, buf_size);
+    // if (!xpdev) {
+    //     ret = -EINVAL;
+    //     printk(KERN_INFO "fail xpdev_find_by_idx");
+    //     goto exit_ioctl;
+    // }
+
+    switch (cmd) {
+    case QDMA_AIM_IF_IOCTL_QUEUE_ADD: {
+        struct qdma_queue_conf qconf;
+        memcpy(&ioctl_param, (void*)arg, sizeof(ioctl_param));
+        printk(KERN_INFO "QDMA_AIM_IF_IOCTL_QUEUE_ADD ioctl called");
+
+        memset(&qconf, 0, sizeof(qconf));
+        qconf.qidx = ioctl_param.qidx;
+        qconf.q_type = ioctl_param.q_type;
+        qconf.st = ioctl_param.st;
+
+	    xpdev = xpdev_find_by_idx(ioctl_param.bd_idx, err, buf_size);
+
+        if (!xpdev) {
+          	ret = -EINVAL;
+            printk(KERN_INFO "fail xpdev_find_by_idx");
+            goto exit_ioctl;
+        }
+
+        ret = xpdev_queue_add(xpdev, &qconf, buf, buf_size);
+        if (ret < 0) {
+            printk(KERN_INFO "fail xpdev_queue_add");
+            break;
+        }
+        break;
+    }
+    case QDMA_AIM_IF_IOCTL_QUEUE_START: {
+        struct xlnx_qdata *qdata = NULL;
+        struct qdma_queue_conf qconf;
+        memcpy(&ioctl_param, (void*)arg, sizeof(ioctl_param));
+        // unsigned int is_qp = 0;
+
+        printk(KERN_INFO "QDMA_AIM_IF_IOCTL_QUEUE_START ioctl called");
+
+        xpdev = xpdev_find_by_idx(ioctl_param.bd_idx, err, buf_size);
+
+        if (!xpdev) {
+          	ret = -EINVAL;
+            printk(KERN_INFO "fail xpdev_find_by_idx");
+            goto exit_ioctl;
+        }
+
+        qdata = xpdev_queue_get(xpdev, ioctl_param.qidx, ioctl_param.q_type,
+                                1, buf, buf_size);
+        if (!qdata) {
+            ret = -EINVAL;
+            printk(KERN_INFO "fail xpdev_queue_get");
+            break;
+        }
+
+        memset(&qconf, 0, sizeof(qconf));
+        qconf.qidx = ioctl_param.qidx;
+        /** Indicates the streaming mode */
+        qconf.st = ioctl_param.st;   // 0 for mm, 1 for st
+        /** queue_type_t */
+        qconf.q_type = ioctl_param.q_type; // Q_H2C, Q_C2H, Q_CMPT, Q_H2C_C2H
+
+        qconf.desc_rng_sz_idx = 1; // 15 : 16384(rng_sz), 0 : 2048(rng_sz), 1 : 64(rng_sz);
+        /** writeback enable, disabled for ST C2H */
+        qconf.wb_status_en = 1;
+        /** @wbi_intvl_en -Write back/Interrupt interval */
+        qconf.cmpl_status_acc_en = 1;
+        /** @wbi_chk -Writeback/Interrupt after pending check */
+        qconf.cmpl_status_pend_chk = 1;
+        /** @wrb_en - Enable status descriptor for CMPT */
+        qconf.cmpl_stat_en = 1;
+        /**  tigger_mode_t */
+        qconf.cmpl_trig_mode = 1;
+        /**  enable status desc. for CMPT */
+        qconf.cmpl_en_intr = 1;
+        /** poll or interrupt */
+        qconf.irq_en = (qconf.q_type == 0)? 1 : 0;
+
+        ret = qdma_queue_config(xpdev->dev_hndl, qdata->qhndl, &qconf,
+                                buf, buf_size);
+		if (ret < 0) {
+			printk("qdma_queue_config failed: %d", ret);
+			break;
+		}
+
+        ret = qdma_queue_start(xpdev->dev_hndl, qdata->qhndl, buf, buf_size);
+        printk("%s", buf);
+        if (ret < 0) {
+            printk(KERN_INFO "fail qdma_queue_start");
+            break;
+        }
+        break;
+    }
+    case QDMA_AIM_IF_IOCTL_QUEUE_STOP: {
+        struct xlnx_qdata *qdata = NULL;
+        memcpy(&ioctl_param, (void*)arg, sizeof(ioctl_param));
+
+        printk(KERN_INFO "QDMA_AIM_IF_IOCTL_QUEUE_STOP ioctl called");
+
+        xpdev = xpdev_find_by_idx(ioctl_param.bd_idx, err, buf_size);
+
+        if (!xpdev) {
+          	ret = -EINVAL;
+            printk(KERN_INFO "fail xpdev_find_by_idx");
+            goto exit_ioctl;
+        }
+
+        qdata = xpdev_queue_get(xpdev, ioctl_param.qidx, ioctl_param.q_type,
+                                1, buf, buf_size);
+        if (!qdata) {
+            ret = -EINVAL;
+            printk(KERN_INFO "fail xpdev_queue_get");
+            break;
+        }
+
+        ret = qdma_queue_stop(xpdev->dev_hndl, qdata->qhndl, buf, buf_size);
+        if (ret < 0) {
+            printk(KERN_INFO "fail qdma_queue_start");
+            break;
+        }
+        break;
+    }
+    case QDMA_AIM_IF_IOCTL_QUEUE_DELETE: {
+        printk(KERN_INFO "QDMA_AIM_IF_IOCTL_QUEUE_DELETE ioctl called");
+        memcpy(&ioctl_param, (void*)arg, sizeof(ioctl_param));
+
+        xpdev = xpdev_find_by_idx(ioctl_param.bd_idx, err, buf_size);
+
+        if (!xpdev) {
+          	ret = -EINVAL;
+            printk(KERN_INFO "fail xpdev_find_by_idx");
+            goto exit_ioctl;
+        }
+
+        ret = xpdev_queue_delete(xpdev, ioctl_param.qidx, ioctl_param.q_type,
+                                 buf, buf_size);
+        if (ret < 0) {
+            printk(KERN_INFO "fail xpdev_queue_delete");
+            break;
+        }
+        break;
+    }
+    case QDMA_CDEV_IOCTL_GET_FPGA_MEM: {
+        struct pci_dev *pdev = NULL;
+		struct fpga_mem_info *info;
+
+		info = (struct fpga_mem_info*)arg;
+
+		printk(KERN_INFO "QDMA_CDEV_IOCTL_GET_FPGA_MEM ioctl called");
+
+		xpdev = xpdev_find_by_idx(info->bd_idx, err, buf_size);
+
+		if (!xpdev) {
+        	ret = -EINVAL;
+     		printk(KERN_INFO "fail xpdev_find_by_idx");
+        	goto exit_ioctl;
+    	}
+		pdev = xpdev->pdev;
+
+		printk(KERN_INFO "QDMA_CDEV_IOCTL_GET_FPGA_MEM ioctl called");
+
+        info->mem_start = pci_resource_start(pdev, 4);
+        info->mem_length = pci_resource_len(pdev, 4);
+
+        break;
+    }
+	case QDMA_AIM_IF_IOCTL_GET_DEVICE_ENTITY_INFO:
+	{
+		int ret;
+
+		ret = copy_to_user((unsigned int *)arg, &dev_info, sizeof(dev_info));
+		if(ret)
+			printk("Copy failed. Data is left to be copied from the device\n");
+
+		break;
+    }
+	case QDMA_AIM_IF_IOCTL_GET_BD_IDX:
+	{
+		int ret;
+
+		ret = copy_to_user((unsigned int *)arg, &kaim_if_cdev_bd_idx, sizeof(kaim_if_cdev_bd_idx));
+		if(ret)
+			printk("Copy failed. Data is left to be copied from the device\n");
+
+		break;
+    }
+    case QDMA_AIM_IF_IOCTL_GET_BD_INFO:
+	{
+		printk("QDMA_AIM_IF_IOCTL_GET_BD_INFO is called\n");
+
+		memcpy((void*)arg, &dev_info, sizeof(dev_info));
+		break;
+	}      
+    }
+exit_ioctl:
+    kfree(buf);
+    kfree(err);
+    return ret;
+}
+
+static int qdma_uevent(struct device *dev, struct kobj_uevent_env *env)
+{
+	add_uevent_var(env, "DEVMODE=%#o", 0666);
+	return 0;
+}
+
+static struct file_operations kaim_if_fops = {
+    .owner = THIS_MODULE,
+    .open = kaim_if_cdev_open,
+    .release = kaim_if_cdev_release,
+    .read = kaim_if_cdev_read,
+    .write = kaim_if_cdev_write,
+    .unlocked_ioctl = kaim_if_cdev_ioctl
+};
+
+static const unsigned int MINOR = 1;
+static dev_t dev = 0;
+static struct class* cls;
+static struct cdev* kaim_if_cdev;
+#endif // #ifdef NEWTON
+
 static int __init qdma_mod_init(void)
 {
 	int rv;
@@ -1908,7 +2174,68 @@ static int __init qdma_mod_init(void)
 	if (rv < 0)
 		return rv;
 
-	return pci_register_driver(&pci_driver);
+// additional codes to add a character device
+#ifdef NEWTON
+    printk(KERN_DEBUG "qdma interface device init\n");
+#ifdef __QDMA_VF__
+    rv = alloc_chrdev_region(&dev, 0, MINOR, "qdma-vf-if");
+#else
+    rv = alloc_chrdev_region(&dev, 0, MINOR, "qdma-pf-if");
+#endif
+    if(rv < 0) {
+        printk(KERN_ERR "failed to alloc chrdev region\n");
+        goto fail_alloc_chrdev_region;
+    }
+
+    kaim_if_cdev = cdev_alloc();
+    if(!kaim_if_cdev) {
+        rv = -ENOMEM;
+        printk(KERN_ERR "failed to alloc cdev\n");
+        goto fail_alloc_cdev;
+    }
+
+    cdev_init(kaim_if_cdev, &kaim_if_fops);
+    rv = cdev_add(kaim_if_cdev, dev, MINOR);
+    if(rv < 0) {
+        printk(KERN_ERR "failed to add cdev\n");
+        goto fail_add_cdev;
+    }
+#ifdef __QDMA_VF__
+    cls = class_create(THIS_MODULE, "qdma-vf-if");
+#else
+    cls = class_create(THIS_MODULE, "qdma-pf-if");
+#endif
+    if(!cls) {
+        rv = -EEXIST;
+        printk(KERN_ERR "failed to create class\n");
+        goto fail_create_class;
+    }
+	cls->dev_uevent = qdma_uevent;
+#ifdef __QDMA_VF__
+    if(!device_create(cls, NULL, dev, NULL, "qdma-vf-if")) {
+#else
+    if(!device_create(cls, NULL, dev, NULL, "qdma-pf-if")) {
+#endif
+        rv = -EINVAL;
+        printk(KERN_ERR "failed to create device\n");
+        goto fail_create_device;
+    }
+
+    dev_info.bd_total_cnt = 0;
+#endif // #ifdef NEWTON
+    return pci_register_driver(&pci_driver);
+
+#ifdef NEWTON
+fail_create_device:
+    class_destroy(cls);
+fail_create_class:
+    cdev_del(kaim_if_cdev);
+fail_add_cdev:
+fail_alloc_cdev:
+    unregister_chrdev_region(dev, MINOR);
+fail_alloc_chrdev_region:
+    return rv;
+#endif
 }
 
 static void __exit qdma_mod_exit(void)
@@ -1921,6 +2248,15 @@ static void __exit qdma_mod_exit(void)
 	qdma_cdev_cleanup();
 
 	libqdma_exit();
+
+#ifdef NEWTON
+    // additional codes to add a character device
+    printk(KERN_DEBUG "qdma interface device deinit\n");
+    device_destroy(cls, dev);
+    class_destroy(cls);
+    cdev_del(kaim_if_cdev);
+    unregister_chrdev_region(dev, MINOR);
+#endif
 }
 
 module_init(qdma_mod_init);

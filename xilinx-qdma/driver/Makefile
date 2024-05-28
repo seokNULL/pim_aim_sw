@@ -1,23 +1,6 @@
-#/*
-# * This file is part of the Xilinx DMA IP Core driver for Linux
-# *
-# * Copyright (c) 2017-2022, Xilinx, Inc. All rights reserved.
-# * Copyright (c) 2022-2023, Advanced Micro Devices, Inc. All rights reserved.
-# *
-# * This source code is free software; you can redistribute it and/or modify it
-# * under the terms and conditions of the GNU General Public License,
-# * version 2, as published by the Free Software Foundation.
-# *
-# * This program is distributed in the hope that it will be useful, but WITHOUT
-# * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-# * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-# * more details.
-# *
-# * The full GNU General Public License is included in this distribution in
-# * the file called "COPYING".
-# */
-
 SHELL = /bin/bash
+
+NEWTON = 1
 
 #
 # makefile parameters:
@@ -92,6 +75,11 @@ ifeq ($(LOOPBACK),1)
   FLAGS += -DLOOPBACK_TEST
 endif
 
+# Collaborate with Newton1 device driver
+ifeq ($(NEWTON),1)
+  FLAGS += -DNEWTON
+endif
+
 ifeq ($(DEBUG_THREADS),1)
   FLAGS += -DDEBUG -DDEBUG_THREADS
 endif
@@ -112,21 +100,6 @@ endif
 ifeq ($(ERR_DEBUG),1)
   EXTRA_FLAGS += -DERR_DEBUG
 #  FLAGS += -DERR_DEBUG
-  export EXTRA_FLAGS
-endif
-
-ifeq ($(TANDEM_BOOT_SUPPORTED),1)
-  EXTRA_FLAGS += -DTANDEM_BOOT_SUPPORTED
-  export EXTRA_FLAGS
-endif
-
-ifeq ($(EQDMA_CPM5_VF_GT_256Q_SUPPORTED),1)
-  EXTRA_FLAGS += -DEQDMA_CPM5_VF_GT_256Q_SUPPORTED
-  export EXTRA_FLAGS
-endif
-
-ifeq ($(EQDMA_CPM5_10BIT_TAG_ENABLE),1)
-  EXTRA_FLAGS += -DEQDMA_CPM5_10BIT_TAG_ENABLE
   export EXTRA_FLAGS
 endif
 
@@ -196,14 +169,14 @@ $(shell rm -f $(srcdir)/src/libqdma; ln -fs $(srcdir)/libqdma $(srcdir)/src;)
 .PHONY: default
 default: mod_pf mod_vf post
 
-.PHONY: pf
+.PHONY: pf 
 pf: mod_pf
 
-.PHONY: vf
+.PHONY: vf 
 vf: mod_vf
 
 .PHONY: mods
-mod: mod_pf mod_vf
+mod: mod_pf mod_vf 
 
 .PHONY: mod_pf
 mod_pf:
@@ -238,8 +211,8 @@ clean:
 	  srcdir=$(shell pwd)/$$dir $(MAKE) -C $$dir clean;\
 	done;
 	@-/bin/rm -f *.symvers eval.mak 2>/dev/null;
-	@-/bin/rm -rf $(shell pwd)/libqdma/qdma_access/*.o $(shell pwd)/libqdma/qdma_access/.*.o.* $(shell pwd)/libqdma/qdma_access/.*.cmd $(shell pwd)/libqdma/qdma_access/.*.o.cmd
-	@-/bin/rm -rf $(shell pwd)/src/libqdma
+	@-/bin/rm -rf $(shell pwd)/libqdma/qdma_access/*.o $(shell pwd)/libqdma/qdma_access/.*.o.* $(shell pwd)/libqdma/qdma_access/.*.cmd $(shell pwd)/libqdma/qdma_access/*/.*.o.cmd
+	@-/bin/rm -f $(shell pwd)/src/libqdma
 
 .PHONY: install-mods
 install-mods:

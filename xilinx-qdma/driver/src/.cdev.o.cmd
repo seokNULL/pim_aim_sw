@@ -1,8 +1,8 @@
-cmd_/home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/cdev.o := gcc -Wp,-MMD,/home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/.cdev.o.d  -nostdinc -isystem /usr/lib/gcc/x86_64-linux-gnu/9/include -I./arch/x86/include -I./arch/x86/include/generated  -I./include -I./arch/x86/include/uapi -I./arch/x86/include/generated/uapi -I./include/uapi -I./include/generated/uapi -include ./include/linux/compiler-version.h -include ./include/linux/kconfig.h -I./ubuntu/include -include ./include/linux/compiler_types.h -D__KERNEL__ -fmacro-prefix-map=./= -Wall -Wundef -Werror=strict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -fshort-wchar -fno-PIE -Werror=implicit-function-declaration -Werror=implicit-int -Werror=return-type -Wno-format-security -std=gnu89 -mno-sse -mno-mmx -mno-sse2 -mno-3dnow -mno-avx -fcf-protection=none -m64 -falign-jumps=1 -falign-loops=1 -mno-80387 -mno-fp-ret-in-387 -mpreferred-stack-boundary=3 -mskip-rax-setup -mtune=generic -mno-red-zone -mcmodel=kernel -DCONFIG_X86_X32_ABI -Wno-sign-compare -fno-asynchronous-unwind-tables -mindirect-branch=thunk-extern -mindirect-branch-register -mfunction-return=thunk-extern -fno-jump-tables -fno-delete-null-pointer-checks -Wno-frame-address -Wno-format-truncation -Wno-format-overflow -Wno-address-of-packed-member -O2 --param=allow-store-data-races=0 -Wframe-larger-than=1024 -fstack-protector-strong -Wimplicit-fallthrough=5 -Wno-main -Wno-unused-but-set-variable -Wno-unused-const-variable -fno-omit-frame-pointer -fno-optimize-sibling-calls -fno-stack-clash-protection -g -pg -mrecord-mcount -mfentry -DCC_USING_FENTRY -Wdeclaration-after-statement -Wvla -Wno-pointer-sign -Wno-stringop-truncation -Wno-array-bounds -Wno-stringop-overflow -Wno-restrict -Wno-maybe-uninitialized -Wno-alloc-size-larger-than -fno-strict-overflow -fno-stack-check -fconserve-stack -Werror=date-time -Werror=incompatible-pointer-types -Werror=designated-init -Wno-packed-not-aligned -DLINUX -D__KERNEL__ -DMODULE -O2 -pipe -Wall -Werror -DGITSP -DGIT -DKERNEL_HAS_KCONFIG_H -DKERNEL_HAS_EXPORT_H -DDEBUGFS -I/home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/libqdma/qdma_access -I/home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/libqdma -DUBUNTU_VERSION_CODE -DUBUNTU_VERSION_CODE -D__QDMA_VF__ -I/home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/../include -I/lib/modules/5.15.0-101-generic/build/../include -I/home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/../libqdma/qdma_access/qdma_soft_access -I/home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/../libqdma/qdma_access/eqdma_soft_access -I/home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/../libqdma/qdma_access/eqdma_cpm5_access -I/home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/../libqdma/qdma_access/qdma_cpm4_access -I.  -fsanitize=bounds -fsanitize=shift -fsanitize=bool -fsanitize=enum  -DMODULE  -DKBUILD_BASENAME='"cdev"' -DKBUILD_MODNAME='"qdma_vf"' -D__KBUILD_MODNAME=kmod_qdma_vf -c -o /home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/cdev.o /home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/cdev.c
+cmd_/home/sy/work/pim_aimx_sw/xilinx-qdma/driver/src/cdev.o := gcc -Wp,-MMD,/home/sy/work/pim_aimx_sw/xilinx-qdma/driver/src/.cdev.o.d  -nostdinc -isystem /usr/lib/gcc/x86_64-linux-gnu/9/include -I./arch/x86/include -I./arch/x86/include/generated  -I./include -I./arch/x86/include/uapi -I./arch/x86/include/generated/uapi -I./include/uapi -I./include/generated/uapi -include ./include/linux/compiler-version.h -include ./include/linux/kconfig.h -I./ubuntu/include -include ./include/linux/compiler_types.h -D__KERNEL__ -fmacro-prefix-map=./= -Wall -Wundef -Werror=strict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -fshort-wchar -fno-PIE -Werror=implicit-function-declaration -Werror=implicit-int -Werror=return-type -Wno-format-security -std=gnu89 -mno-sse -mno-mmx -mno-sse2 -mno-3dnow -mno-avx -fcf-protection=none -m64 -falign-jumps=1 -falign-loops=1 -mno-80387 -mno-fp-ret-in-387 -mpreferred-stack-boundary=3 -mskip-rax-setup -mtune=generic -mno-red-zone -mcmodel=kernel -DCONFIG_X86_X32_ABI -Wno-sign-compare -fno-asynchronous-unwind-tables -mindirect-branch=thunk-extern -mindirect-branch-register -mfunction-return=thunk-extern -fno-jump-tables -fno-delete-null-pointer-checks -Wno-frame-address -Wno-format-truncation -Wno-format-overflow -Wno-address-of-packed-member -O2 --param=allow-store-data-races=0 -Wframe-larger-than=1024 -fstack-protector-strong -Wimplicit-fallthrough=5 -Wno-main -Wno-unused-but-set-variable -Wno-unused-const-variable -fno-omit-frame-pointer -fno-optimize-sibling-calls -fno-stack-clash-protection -g -pg -mrecord-mcount -mfentry -DCC_USING_FENTRY -Wdeclaration-after-statement -Wvla -Wno-pointer-sign -Wno-stringop-truncation -Wno-array-bounds -Wno-stringop-overflow -Wno-restrict -Wno-maybe-uninitialized -Wno-alloc-size-larger-than -fno-strict-overflow -fno-stack-check -fconserve-stack -Werror=date-time -Werror=incompatible-pointer-types -Werror=designated-init -Wno-packed-not-aligned -DLINUX -D__KERNEL__ -DMODULE -O2 -pipe -Wall -Werror -DGITSP -DGIT -DKERNEL_HAS_KCONFIG_H -DKERNEL_HAS_EXPORT_H -DDEBUGFS -DNEWTON -I/home/sy/work/pim_aimx_sw/xilinx-qdma/driver/src/libqdma/qdma_access -I/home/sy/work/pim_aimx_sw/xilinx-qdma/driver/src/libqdma -DUBUNTU_VERSION_CODE -DUBUNTU_VERSION_CODE -D__QDMA_VF__ -I/home/sy/work/pim_aimx_sw/xilinx-qdma/driver/src/../include -I/lib/modules/5.15.0-101-generic/build/../include -I/home/sy/work/pim_aimx_sw/xilinx-qdma/driver/src/../libqdma/qdma_access/qdma_soft_access -I/home/sy/work/pim_aimx_sw/xilinx-qdma/driver/src/../libqdma/qdma_access/eqdma_soft_access -I/home/sy/work/pim_aimx_sw/xilinx-qdma/driver/src/../libqdma/qdma_access/qdma_s80_hard_access -I.  -fsanitize=bounds -fsanitize=shift -fsanitize=bool -fsanitize=enum  -DMODULE  -DKBUILD_BASENAME='"cdev"' -DKBUILD_MODNAME='"qdma_vf"' -D__KBUILD_MODNAME=kmod_qdma_vf -c -o /home/sy/work/pim_aimx_sw/xilinx-qdma/driver/src/cdev.o /home/sy/work/pim_aimx_sw/xilinx-qdma/driver/src/cdev.c
 
-source_/home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/cdev.o := /home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/cdev.c
+source_/home/sy/work/pim_aimx_sw/xilinx-qdma/driver/src/cdev.o := /home/sy/work/pim_aimx_sw/xilinx-qdma/driver/src/cdev.c
 
-deps_/home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/cdev.o := \
+deps_/home/sy/work/pim_aimx_sw/xilinx-qdma/driver/src/cdev.o := \
   include/linux/compiler-version.h \
     $(wildcard include/config/CC_VERSION_TEXT) \
   include/linux/kconfig.h \
@@ -17,7 +17,7 @@ deps_/home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/cdev.o := \
     $(wildcard include/config/RETPOLINE) \
     $(wildcard include/config/ARCH_USE_BUILTIN_BSWAP) \
     $(wildcard include/config/KCOV) \
-  /home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/cdev.h \
+  /home/sy/work/pim_aimx_sw/xilinx-qdma/driver/src/cdev.h \
   include/linux/cdev.h \
   include/linux/kobject.h \
     $(wildcard include/config/UEVENT_HELPER) \
@@ -789,9 +789,9 @@ deps_/home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/cdev.o := \
   include/linux/device/driver.h \
   arch/x86/include/asm/device.h \
   include/linux/pm_wakeup.h \
-  /home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/version.h \
-  /home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/libqdma/version.h \
-  /home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/libqdma/libqdma_export.h \
+  /home/sy/work/pim_aimx_sw/xilinx-qdma/driver/src/version.h \
+  /home/sy/work/pim_aimx_sw/xilinx-qdma/driver/src/libqdma/version.h \
+  /home/sy/work/pim_aimx_sw/xilinx-qdma/driver/src/libqdma/libqdma_export.h \
   include/linux/interrupt.h \
     $(wildcard include/config/IRQ_FORCED_THREADING) \
     $(wildcard include/config/GENERIC_IRQ_PROBE) \
@@ -824,11 +824,10 @@ deps_/home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/cdev.o := \
   include/asm-generic/sections.h \
   arch/x86/include/asm/extable.h \
     $(wildcard include/config/BPF_JIT) \
-  /home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/libqdma/libqdma_config.h \
-  /home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/libqdma/qdma_access/qdma_access_export.h \
-  /home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/libqdma/qdma_platform_env.h \
-  /home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/libqdma/qdma_compat.h \
-  include/generated/uapi/linux/version.h \
+  /home/sy/work/pim_aimx_sw/xilinx-qdma/driver/src/libqdma/libqdma_config.h \
+  /home/sy/work/pim_aimx_sw/xilinx-qdma/driver/src/libqdma/libqdma_shared.h \
+  /home/sy/work/pim_aimx_sw/xilinx-qdma/driver/src/libqdma/qdma_access/qdma_access_export.h \
+  /home/sy/work/pim_aimx_sw/xilinx-qdma/driver/src/libqdma/qdma_platform_env.h \
   arch/x86/include/asm/cacheflush.h \
   include/linux/mm.h \
     $(wildcard include/config/SYSCTL) \
@@ -1084,9 +1083,10 @@ deps_/home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/cdev.o := \
   include/linux/aio.h \
   include/uapi/linux/aio_abi.h \
   include/linux/kthread.h \
+  include/generated/uapi/linux/version.h \
   include/linux/uio.h \
   include/uapi/linux/uio.h \
-  /home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/qdma_mod.h \
+  /home/sy/work/pim_aimx_sw/xilinx-qdma/driver/src/qdma_mod.h \
     $(wildcard include/config/BAR) \
   include/net/genetlink.h \
   include/linux/genetlink.h \
@@ -1260,22 +1260,25 @@ deps_/home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/cdev.o := \
   include/linux/ns_common.h \
   include/linux/seq_file_net.h \
   include/linux/seq_file.h \
-  /home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/libqdma/xdev.h \
-  /home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/libqdma/libqdma_export.h \
-  /home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/libqdma/qdma_mbox.h \
-  /home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/libqdma/qdma_device.h \
-  /home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/libqdma/qdma_access/qdma_access_common.h \
-  /home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/libqdma/qdma_access/qdma_access_export.h \
-  /home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/libqdma/qdma_access/qdma_access_errors.h \
-  /home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/libqdma/qdma_access/qdma_mbox_protocol.h \
-  /home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/libqdma/qdma_access/qdma_platform.h \
-  /home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/libqdma/qdma_access/qdma_access_common.h \
-  /home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/libqdma/qdma_access/qdma_resource_mgmt.h \
-  /home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/libqdma/qdma_access/qdma_access_errors.h \
-  /home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/libqdma/qdma_debugfs.h \
+  /home/sy/work/pim_aimx_sw/xilinx-qdma/driver/src/libqdma/xdev.h \
+  /home/sy/work/pim_aimx_sw/xilinx-qdma/driver/src/libqdma/libqdma_export.h \
+  /home/sy/work/pim_aimx_sw/xilinx-qdma/driver/src/libqdma/qdma_mbox.h \
+  /home/sy/work/pim_aimx_sw/xilinx-qdma/driver/src/libqdma/qdma_compat.h \
+  /home/sy/work/pim_aimx_sw/xilinx-qdma/driver/src/libqdma/qdma_device.h \
+  /home/sy/work/pim_aimx_sw/xilinx-qdma/driver/src/libqdma/qdma_access/qdma_access_common.h \
+  /home/sy/work/pim_aimx_sw/xilinx-qdma/driver/src/libqdma/qdma_access/qdma_access_export.h \
+  /home/sy/work/pim_aimx_sw/xilinx-qdma/driver/src/libqdma/qdma_access/qdma_access_errors.h \
+  /home/sy/work/pim_aimx_sw/xilinx-qdma/driver/src/libqdma/qdma_access/qdma_mbox_protocol.h \
+  /home/sy/work/pim_aimx_sw/xilinx-qdma/driver/src/libqdma/qdma_access/qdma_platform.h \
+  /home/sy/work/pim_aimx_sw/xilinx-qdma/driver/src/libqdma/qdma_access/qdma_access_common.h \
+  /home/sy/work/pim_aimx_sw/xilinx-qdma/driver/src/libqdma/qdma_access/qdma_resource_mgmt.h \
+  /home/sy/work/pim_aimx_sw/xilinx-qdma/driver/src/libqdma/qdma_access/qdma_access_errors.h \
+  /home/sy/work/pim_aimx_sw/xilinx-qdma/driver/src/libqdma/qdma_debugfs.h \
   include/linux/debugfs.h \
     $(wildcard include/config/DEBUG_FS) \
+  /home/sy/work/pim_aimx_sw/xilinx-qdma/driver/src/libqdma/qdma_if.h \
+  /home/sy/work/pim_aimx_sw/xilinx-qdma/driver/src/libqdma/./libqdma_shared.h \
 
-/home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/cdev.o: $(deps_/home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/cdev.o)
+/home/sy/work/pim_aimx_sw/xilinx-qdma/driver/src/cdev.o: $(deps_/home/sy/work/pim_aimx_sw/xilinx-qdma/driver/src/cdev.o)
 
-$(deps_/home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/cdev.o):
+$(deps_/home/sy/work/pim_aimx_sw/xilinx-qdma/driver/src/cdev.o):

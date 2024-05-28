@@ -28,6 +28,7 @@ MODULE_INFO(retpoline, "Y");
 static const struct modversion_info ____versions[]
 __used __section("__versions") = {
 	{ 0x30ff7695, "module_layout" },
+	{ 0x4e517eb9, "cdev_alloc" },
 	{ 0x2d3385d3, "system_wq" },
 	{ 0xba3b280a, "kmem_cache_destroy" },
 	{ 0x11eb121f, "cdev_del" },
@@ -49,7 +50,6 @@ __used __section("__versions") = {
 	{ 0xc3690fc, "_raw_spin_lock_bh" },
 	{ 0x837b7b09, "__dynamic_pr_debug" },
 	{ 0xc85ac280, "device_destroy" },
-	{ 0x66cca4f9, "__x86_indirect_thunk_rcx" },
 	{ 0xeae3dfd6, "__const_udelay" },
 	{ 0x145ca79, "pci_release_regions" },
 	{ 0xc6f46339, "init_timer_key" },
@@ -86,11 +86,12 @@ __used __section("__versions") = {
 	{ 0x8a23e3a5, "kthread_stop" },
 	{ 0x4ea30931, "sysfs_create_group" },
 	{ 0x49f10e03, "pci_aer_clear_nonfatal_status" },
+	{ 0x4c9d28b0, "phys_base" },
+	{ 0x531b604e, "__virt_addr_valid" },
 	{ 0x9166fada, "strncpy" },
 	{ 0xfacd8c28, "nla_put" },
 	{ 0xb4ecd821, "debugfs_remove" },
 	{ 0xa751b1a4, "dma_alloc_attrs" },
-	{ 0x54e2277e, "kmem_cache_free" },
 	{ 0x4dfa8d4b, "mutex_lock" },
 	{ 0x8c03d20c, "destroy_workqueue" },
 	{ 0xe9ad80dc, "kfree_skb_reason" },
@@ -108,7 +109,6 @@ __used __section("__versions") = {
 	{ 0x87a21cb3, "__ubsan_handle_out_of_bounds" },
 	{ 0x167c5967, "print_hex_dump" },
 	{ 0xcf2aeb9e, "_dev_info" },
-	{ 0xd09a2dad, "kmem_cache_alloc" },
 	{ 0xf2fc12e4, "__free_pages" },
 	{ 0x6383b27c, "__x86_indirect_thunk_rdx" },
 	{ 0x618911fc, "numa_node" },
@@ -145,6 +145,7 @@ __used __section("__versions") = {
 	{ 0xc6717c3, "genlmsg_put" },
 	{ 0x210cdac4, "pci_request_regions" },
 	{ 0x6df1aaf1, "kernel_sigaction" },
+	{ 0xe52b6749, "set_user_nice" },
 	{ 0x433f0b06, "__pci_register_driver" },
 	{ 0x96848186, "scnprintf" },
 	{ 0xb3f0559, "class_destroy" },
@@ -154,6 +155,7 @@ __used __section("__versions") = {
 	{ 0xc5b6f236, "queue_work_on" },
 	{ 0x656e4a6e, "snprintf" },
 	{ 0xd6928da2, "pci_iomap" },
+	{ 0xc82c6e84, "vmalloc_to_page" },
 	{ 0x7748724, "pci_enable_device_mem" },
 	{ 0x7f02188f, "__msecs_to_jiffies" },
 	{ 0xc60d0620, "__num_online_cpus" },
@@ -167,8 +169,10 @@ __used __section("__versions") = {
 	{ 0xe3ec2f2b, "alloc_chrdev_region" },
 	{ 0xcba6fac7, "__put_page" },
 	{ 0x71ac56b2, "get_user_pages_fast" },
+	{ 0xc31db0ce, "is_vmalloc_addr" },
 	{ 0xc1514a3b, "free_irq" },
 	{ 0xaa5345e1, "pci_save_state" },
+	{ 0x9c6febfc, "add_uevent_var" },
 	{ 0x587f22d7, "devmap_managed_key" },
 };
 
@@ -334,9 +338,5 @@ MODULE_ALIAS("pci:v000010EEd0000C048sv*sd*bc*sc*i*");
 MODULE_ALIAS("pci:v000010EEd0000C148sv*sd*bc*sc*i*");
 MODULE_ALIAS("pci:v000010EEd0000C248sv*sd*bc*sc*i*");
 MODULE_ALIAS("pci:v000010EEd0000C348sv*sd*bc*sc*i*");
-MODULE_ALIAS("pci:v000010EEd0000C058sv*sd*bc*sc*i*");
-MODULE_ALIAS("pci:v000010EEd0000C158sv*sd*bc*sc*i*");
-MODULE_ALIAS("pci:v000010EEd0000C258sv*sd*bc*sc*i*");
-MODULE_ALIAS("pci:v000010EEd0000C358sv*sd*bc*sc*i*");
 
-MODULE_INFO(srcversion, "4B981AC38EE61FADC1BC965");
+MODULE_INFO(srcversion, "31B3323734FACE050068761");

@@ -1,8 +1,8 @@
-cmd_/home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/libqdma/qdma_debugfs.o := gcc -Wp,-MMD,/home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/libqdma/.qdma_debugfs.o.d  -nostdinc -isystem /usr/lib/gcc/x86_64-linux-gnu/9/include -I./arch/x86/include -I./arch/x86/include/generated  -I./include -I./arch/x86/include/uapi -I./arch/x86/include/generated/uapi -I./include/uapi -I./include/generated/uapi -include ./include/linux/compiler-version.h -include ./include/linux/kconfig.h -I./ubuntu/include -include ./include/linux/compiler_types.h -D__KERNEL__ -fmacro-prefix-map=./= -Wall -Wundef -Werror=strict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -fshort-wchar -fno-PIE -Werror=implicit-function-declaration -Werror=implicit-int -Werror=return-type -Wno-format-security -std=gnu89 -mno-sse -mno-mmx -mno-sse2 -mno-3dnow -mno-avx -fcf-protection=none -m64 -falign-jumps=1 -falign-loops=1 -mno-80387 -mno-fp-ret-in-387 -mpreferred-stack-boundary=3 -mskip-rax-setup -mtune=generic -mno-red-zone -mcmodel=kernel -DCONFIG_X86_X32_ABI -Wno-sign-compare -fno-asynchronous-unwind-tables -mindirect-branch=thunk-extern -mindirect-branch-register -mfunction-return=thunk-extern -fno-jump-tables -fno-delete-null-pointer-checks -Wno-frame-address -Wno-format-truncation -Wno-format-overflow -Wno-address-of-packed-member -O2 --param=allow-store-data-races=0 -Wframe-larger-than=1024 -fstack-protector-strong -Wimplicit-fallthrough=5 -Wno-main -Wno-unused-but-set-variable -Wno-unused-const-variable -fno-omit-frame-pointer -fno-optimize-sibling-calls -fno-stack-clash-protection -g -pg -mrecord-mcount -mfentry -DCC_USING_FENTRY -Wdeclaration-after-statement -Wvla -Wno-pointer-sign -Wno-stringop-truncation -Wno-array-bounds -Wno-stringop-overflow -Wno-restrict -Wno-maybe-uninitialized -Wno-alloc-size-larger-than -fno-strict-overflow -fno-stack-check -fconserve-stack -Werror=date-time -Werror=incompatible-pointer-types -Werror=designated-init -Wno-packed-not-aligned -DLINUX -D__KERNEL__ -DMODULE -O2 -pipe -Wall -Werror -DGITSP -DGIT -DKERNEL_HAS_KCONFIG_H -DKERNEL_HAS_EXPORT_H -DDEBUGFS -I/home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/libqdma/qdma_access -I/home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/libqdma -DUBUNTU_VERSION_CODE -DUBUNTU_VERSION_CODE -D__QDMA_VF__ -I/home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/../include -I/lib/modules/5.15.0-101-generic/build/../include -I/home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/../libqdma/qdma_access/qdma_soft_access -I/home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/../libqdma/qdma_access/eqdma_soft_access -I/home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/../libqdma/qdma_access/eqdma_cpm5_access -I/home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/../libqdma/qdma_access/qdma_cpm4_access -I.  -fsanitize=bounds -fsanitize=shift -fsanitize=bool -fsanitize=enum  -DMODULE  -DKBUILD_BASENAME='"qdma_debugfs"' -DKBUILD_MODNAME='"qdma_vf"' -D__KBUILD_MODNAME=kmod_qdma_vf -c -o /home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/libqdma/qdma_debugfs.o /home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/libqdma/qdma_debugfs.c
+cmd_/home/aim/newton1_sdk/aimddk/kernel/drivers/xilinx/dma_ip_drivers/QDMA/linux-kernel/driver/src/libqdma/qdma_debugfs.o := gcc -Wp,-MMD,/home/aim/newton1_sdk/aimddk/kernel/drivers/xilinx/dma_ip_drivers/QDMA/linux-kernel/driver/src/libqdma/.qdma_debugfs.o.d  -nostdinc -isystem /usr/lib/gcc/x86_64-linux-gnu/11/include -I./arch/x86/include -I./arch/x86/include/generated  -I./include -I./arch/x86/include/uapi -I./arch/x86/include/generated/uapi -I./include/uapi -I./include/generated/uapi -include ./include/linux/compiler-version.h -include ./include/linux/kconfig.h -I./ubuntu/include -include ./include/linux/compiler_types.h -D__KERNEL__ -fmacro-prefix-map=./= -Wall -Wundef -Werror=strict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -fshort-wchar -fno-PIE -Werror=implicit-function-declaration -Werror=implicit-int -Werror=return-type -Wno-format-security -std=gnu89 -mno-sse -mno-mmx -mno-sse2 -mno-3dnow -mno-avx -fcf-protection=none -m64 -falign-jumps=1 -falign-loops=1 -mno-80387 -mno-fp-ret-in-387 -mpreferred-stack-boundary=3 -mskip-rax-setup -mtune=generic -mno-red-zone -mcmodel=kernel -DCONFIG_X86_X32_ABI -Wno-sign-compare -fno-asynchronous-unwind-tables -mindirect-branch=thunk-extern -mindirect-branch-register -mindirect-branch-cs-prefix -mfunction-return=thunk-extern -fno-jump-tables -fno-delete-null-pointer-checks -Wno-frame-address -Wno-format-truncation -Wno-format-overflow -Wno-address-of-packed-member -O2 -fno-allow-store-data-races -Wframe-larger-than=1024 -fstack-protector-strong -Wimplicit-fallthrough=5 -Wno-main -Wno-unused-but-set-variable -Wno-unused-const-variable -fno-omit-frame-pointer -fno-optimize-sibling-calls -fno-stack-clash-protection -g -pg -mrecord-mcount -mfentry -DCC_USING_FENTRY -Wdeclaration-after-statement -Wvla -Wno-pointer-sign -Wno-stringop-truncation -Wno-zero-length-bounds -Wno-array-bounds -Wno-stringop-overflow -Wno-restrict -Wno-maybe-uninitialized -Wno-alloc-size-larger-than -fno-strict-overflow -fno-stack-check -fconserve-stack -Werror=date-time -Werror=incompatible-pointer-types -Werror=designated-init -Wno-packed-not-aligned -DLINUX -D__KERNEL__ -DMODULE -O2 -pipe -Wall -Werror -DGITSP -DGIT -DKERNEL_HAS_KCONFIG_H -DKERNEL_HAS_EXPORT_H -DDEBUGFS -DNEWTON -I/home/aim/newton1_sdk/aimddk/kernel/drivers/xilinx/dma_ip_drivers/QDMA/linux-kernel/driver/src/libqdma/qdma_access -I/home/aim/newton1_sdk/aimddk/kernel/drivers/xilinx/dma_ip_drivers/QDMA/linux-kernel/driver/src/libqdma -DUBUNTU_VERSION_CODE -DUBUNTU_VERSION_CODE -D__QDMA_VF__ -I/home/aim/newton1_sdk/aimddk/kernel/drivers/xilinx/dma_ip_drivers/QDMA/linux-kernel/driver/src/../include -I/lib/modules/5.15.0-79-generic/build/../include -I/home/aim/newton1_sdk/aimddk/kernel/drivers/xilinx/dma_ip_drivers/QDMA/linux-kernel/driver/src/../libqdma/qdma_access/qdma_soft_access -I/home/aim/newton1_sdk/aimddk/kernel/drivers/xilinx/dma_ip_drivers/QDMA/linux-kernel/driver/src/../libqdma/qdma_access/eqdma_soft_access -I/home/aim/newton1_sdk/aimddk/kernel/drivers/xilinx/dma_ip_drivers/QDMA/linux-kernel/driver/src/../libqdma/qdma_access/qdma_s80_hard_access -I.  -fsanitize=bounds -fsanitize=shift -fsanitize=bool -fsanitize=enum  -DMODULE  -DKBUILD_BASENAME='"qdma_debugfs"' -DKBUILD_MODNAME='"qdma_vf"' -D__KBUILD_MODNAME=kmod_qdma_vf -c -o /home/aim/newton1_sdk/aimddk/kernel/drivers/xilinx/dma_ip_drivers/QDMA/linux-kernel/driver/src/libqdma/qdma_debugfs.o /home/aim/newton1_sdk/aimddk/kernel/drivers/xilinx/dma_ip_drivers/QDMA/linux-kernel/driver/src/libqdma/qdma_debugfs.c
 
-source_/home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/libqdma/qdma_debugfs.o := /home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/libqdma/qdma_debugfs.c
+source_/home/aim/newton1_sdk/aimddk/kernel/drivers/xilinx/dma_ip_drivers/QDMA/linux-kernel/driver/src/libqdma/qdma_debugfs.o := /home/aim/newton1_sdk/aimddk/kernel/drivers/xilinx/dma_ip_drivers/QDMA/linux-kernel/driver/src/libqdma/qdma_debugfs.c
 
-deps_/home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/libqdma/qdma_debugfs.o := \
+deps_/home/aim/newton1_sdk/aimddk/kernel/drivers/xilinx/dma_ip_drivers/QDMA/linux-kernel/driver/src/libqdma/qdma_debugfs.o := \
   include/linux/compiler-version.h \
     $(wildcard include/config/CC_VERSION_TEXT) \
   include/linux/kconfig.h \
@@ -17,7 +17,7 @@ deps_/home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/libqdma/qdma_d
     $(wildcard include/config/RETPOLINE) \
     $(wildcard include/config/ARCH_USE_BUILTIN_BSWAP) \
     $(wildcard include/config/KCOV) \
-  /home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/libqdma/qdma_debugfs.h \
+  /home/aim/newton1_sdk/aimddk/kernel/drivers/xilinx/dma_ip_drivers/QDMA/linux-kernel/driver/src/libqdma/qdma_debugfs.h \
   include/linux/pci.h \
     $(wildcard include/config/PCI_IOV) \
     $(wildcard include/config/PCIEAER) \
@@ -86,16 +86,11 @@ deps_/home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/libqdma/qdma_d
   include/linux/kcsan-checks.h \
     $(wildcard include/config/KCSAN) \
     $(wildcard include/config/KCSAN_IGNORE_ATOMICS) \
-  include/linux/err.h \
+  include/linux/errno.h \
+  include/uapi/linux/errno.h \
   arch/x86/include/generated/uapi/asm/errno.h \
   include/uapi/asm-generic/errno.h \
   include/uapi/asm-generic/errno-base.h \
-  include/linux/errno.h \
-  include/uapi/linux/errno.h \
-  include/linux/overflow.h \
-  include/linux/limits.h \
-  include/uapi/linux/limits.h \
-  include/vdso/limits.h \
   include/linux/stdarg.h \
   include/uapi/linux/string.h \
   arch/x86/include/asm/string.h \
@@ -140,6 +135,9 @@ deps_/home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/libqdma/qdma_d
     $(wildcard include/config/TRACING) \
     $(wildcard include/config/FTRACE_MCOUNT_RECORD) \
   include/linux/align.h \
+  include/linux/limits.h \
+  include/uapi/linux/limits.h \
+  include/vdso/limits.h \
   include/linux/linkage.h \
     $(wildcard include/config/ARCH_USE_SYM_ANNOTATIONS) \
   include/linux/export.h \
@@ -257,6 +255,7 @@ deps_/home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/libqdma/qdma_d
   include/linux/sysfs.h \
   include/linux/kernfs.h \
     $(wildcard include/config/KERNFS) \
+  include/linux/err.h \
   include/linux/mutex.h \
     $(wildcard include/config/MUTEX_SPIN_ON_OWNER) \
     $(wildcard include/config/DEBUG_MUTEXES) \
@@ -398,7 +397,6 @@ deps_/home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/libqdma/qdma_d
   arch/x86/include/asm/sparsemem.h \
     $(wildcard include/config/NUMA_KEEP_MEMINFO) \
   arch/x86/include/asm/nospec-branch.h \
-    $(wildcard include/config/CPU_SRSO) \
     $(wildcard include/config/CPU_IBPB_ENTRY) \
   include/linux/static_key.h \
   include/linux/objtool.h \
@@ -805,6 +803,7 @@ deps_/home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/libqdma/qdma_d
     $(wildcard include/config/PM) \
     $(wildcard include/config/PM_CLK) \
     $(wildcard include/config/PM_GENERIC_DOMAINS) \
+  include/linux/overflow.h \
   include/linux/device/bus.h \
   include/linux/device/class.h \
   include/linux/device/driver.h \
@@ -880,6 +879,7 @@ deps_/home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/libqdma/qdma_d
   include/linux/percpu-refcount.h \
   include/linux/kasan.h \
     $(wildcard include/config/KASAN_STACK) \
+    $(wildcard include/config/KASAN_INLINE) \
   include/uapi/linux/pci.h \
   include/uapi/linux/pci_regs.h \
   include/linux/pci_ids.h \
@@ -1074,6 +1074,6 @@ deps_/home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/libqdma/qdma_d
     $(wildcard include/config/DEBUG_FS) \
   include/linux/seq_file.h \
 
-/home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/libqdma/qdma_debugfs.o: $(deps_/home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/libqdma/qdma_debugfs.o)
+/home/aim/newton1_sdk/aimddk/kernel/drivers/xilinx/dma_ip_drivers/QDMA/linux-kernel/driver/src/libqdma/qdma_debugfs.o: $(deps_/home/aim/newton1_sdk/aimddk/kernel/drivers/xilinx/dma_ip_drivers/QDMA/linux-kernel/driver/src/libqdma/qdma_debugfs.o)
 
-$(deps_/home/sy/work/dma_ip_drivers_ku/QDMA/linux-kernel/driver/src/libqdma/qdma_debugfs.o):
+$(deps_/home/aim/newton1_sdk/aimddk/kernel/drivers/xilinx/dma_ip_drivers/QDMA/linux-kernel/driver/src/libqdma/qdma_debugfs.o):
