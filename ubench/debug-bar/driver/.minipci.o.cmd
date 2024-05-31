@@ -1,0 +1,1 @@
+cmd_/home/sy/work/pcie_test/minipci/linux/driver/minipci.o := ld  -m elf_x86_64 -z noexecstack     -r -o /home/sy/work/pcie_test/minipci/linux/driver/minipci.o /home/sy/work/pcie_test/minipci/linux/driver/main.o

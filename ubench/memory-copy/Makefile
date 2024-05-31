@@ -1,30 +1,28 @@
-CC ?= g++
+CC ?= gcc
 
 CFLAGS += -g
 #CFLAGS += -O2 -fno-inline -Wall -Wstrict-prototypes
 CFLAGS += -I. -I../include -I../dma-utils
 CFLAGS += $(EXTRA_FLAGS)
 
-TARGET = ../../bin/memcpy
-TARGET2 = memcpy
-OBJS = memcpy.o
+DMA-XFER = mem-cpy
+DMA-UTILS_OBJS := $(patsubst %.c,%.o,$(wildcard ../dma-utils/*.c))
+# DMA-XFER_OBJS := main.o dmaxfer.o
+DMA-XFER_OBJS := main.o
+DMA-XFER_OBJS += $(DMA-UTILS_OBJS)
 
-OBJECTS = $(patsubst %.cpp,%.o, $(wildcard ${PWD}/*.cpp))
+ifneq ($(CROSS_COMPILE_FLAG),)
+	CC=$(CROSS_COMPILE_FLAG)gcc
+endif
 
-# Default target executed when no arguments are given to make.
-.DEFAULT_GOAL=all
+all: clean mem-cpy
 
-${TARGET}: ${OBJS}
-	${CXX} ${CXXFLAGS} -o $@ $^ ${LIBS}
-${TARGET2}: ${OBJS}
-	${CXX} ${CXXFLAGS} -o $@ $^ ${LIBS}
+mem-cpy: $(DMA-XFER_OBJS)
+	$(CC) -pthread -lrt  $^ -o $(DMA-XFER) -laio -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -D_LARGE_FILE_SOURCE
 
-all: ${TARGET2}
-.PHONY: all
-
-test: ${TARGET}
-.PHONY: test
+%.o: %.c
+	$(CC) $(CFLAGS) -c -std=c99 -o $@ $< -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -D_LARGE_FILE_SOURCE -D_AIO_AIX_SOURCE
 
 clean:
-	rm -f *.o *.d ${TARGET2}
-	rm -f *.o *.d ${TARGET}
+	@rm -f *.o */*.o ../dma-utils/*.o
+	rm -rf *.o *.bin dma-xfer

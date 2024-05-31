@@ -1,0 +1,1 @@
+cmd_/home/sy/work/pcie_test/minipci/linux/driver/modules.order := {   echo /home/sy/work/pcie_test/minipci/linux/driver/minipci.ko; :; } | awk '!x[$$0]++' - > /home/sy/work/pcie_test/minipci/linux/driver/modules.order
