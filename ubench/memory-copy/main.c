@@ -43,6 +43,7 @@
 #define USE_QDMA_C2C (3`)
 
 #define AIM_RESERVED_OFFSET 0x00800000 //8 MB
+// #define AIM_RESERVED_OFFSET 0x00000000 //8 MB
 
 /*Device 0's base memory address need to be checked before progrma execution*/
 #define DEV0_MEM_BASE 0x6000000000 //Device 0 - 8GB assumed 
@@ -582,6 +583,9 @@ int main(int argc, char *argv[]) {
     ZeroMat(DstOut, size);
     ZeroMat(Ans, size);
     memcpy(Ans, SrcIn, size * sizeof(float));
+	printf("Matrix Src Address(VA): %p\n", (void*)SrcIn);
+	printf("Matrix Dst Address(VA): %p\n", (void*)DstOut);
+	printf("Size: %llu(elemets), %llu(bytes)\n", size, size*sizeof(float));
 
     // Case 0: USE_MMAP
     if (strcmp(device, "cpu") == 0){    
@@ -657,7 +661,7 @@ int main(int argc, char *argv[]) {
         }
 		
 		atexit(qdma_env_cleanup);
-		
+
     	if (ret < 0)
     		return ret;
 		out:

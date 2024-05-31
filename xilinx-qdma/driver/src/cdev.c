@@ -395,9 +395,11 @@ static int map_user_buf_to_sgl(struct qdma_io_cb *iocb, bool write)
 			sizeof(struct page *)));
 	iocb->sgl = sg;
 
+	//Pinning user pages in memory
 	iocb->pages = (struct page **)(sg + pages_nr);
 	rv = get_user_pages_fast((unsigned long)buf, pages_nr, 1/* write */,
 				iocb->pages);
+	
 	/* No pages were pinned */
 	if (rv < 0) {
 		pr_err("unable to pin down %u user pages, %d.\n",
@@ -412,6 +414,7 @@ static int map_user_buf_to_sgl(struct qdma_io_cb *iocb, bool write)
 		rv = -EFAULT;
 		goto err_out;
 	}
+	printk("[KU-PIM DBG - iocb state] Kernel buf addr = 0x%p, user_buff len = %llu page number = %llu\n", iocb->buf, (u64)iocb->len, (u64)iocb->pages_nr);
 
 	for (i = 1; i < pages_nr; i++) {
 		if (iocb->pages[i - 1] == iocb->pages[i]) {
@@ -487,9 +490,9 @@ static ssize_t cdev_gen_read_write(struct file *file, char __user *buf,
 		write);
 
 	memset(&iocb, 0, sizeof(struct qdma_io_cb));
-	iocb.buf = buf;
+	iocb.buf = buf; 
 	iocb.len = count;
-
+	printk("[KU-PIM DBG]: Kernel buf addr=0x%p", iocb.buf); 
 #ifdef NEWTON
 	if (virt_addr_valid((unsigned long long)buf)){
 		iocb.is_kernel_memory = 1;
@@ -501,9 +504,11 @@ static ssize_t cdev_gen_read_write(struct file *file, char __user *buf,
 
 	if (iocb.is_kernel_memory == 1) {
 		rv = map_kernel_buf_to_sgl(&iocb, write);
+		printk("[KU-PIM DBG]: called map_kernel_buf_to_sgl\n");
 		req->dma_mapped = 1;
 	} else {
 		rv = map_user_buf_to_sgl(&iocb, write);
+		printk("[KU-PIM DBG]: called map_user_buf_to_sgl\n");
 		req->dma_mapped = 0;
 	}
 #else

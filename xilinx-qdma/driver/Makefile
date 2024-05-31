@@ -1,7 +1,7 @@
 SHELL = /bin/bash
 
 NEWTON = 1
-
+DEBUG = 1
 #
 # makefile parameters:
 # - KDIR/KSRC/KOBJ=, optional

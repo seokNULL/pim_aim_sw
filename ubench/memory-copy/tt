@@ -1,0 +1,183 @@
+[21831.229006] qdma_pf:qdma_cdev_destroy: destroying cdev 000000005511f93c
+[22499.543593] qdma_pf:xnl_dump_attrs: snd_seq 0x1, portid 0x27704.
+[22499.543604] qdma_pf:xnl_dump_attrs: nlhdr: len 28, type 44, flags 0x1, seq 0x1, pid 161540.
+[22499.543611] qdma_pf:xnl_dump_attrs: genlhdr: cmd 0x1 DEV_INFO, version 0, reserved 0x0.
+[22499.543615] qdma_pf:xnl_dump_attrs: attr 2, DEV_IDX, str .
+[22499.543679] qdma_pf:xnl_dump_attrs: snd_seq 0x99f23a01, portid 0x27704.
+[22499.543683] qdma_pf:xnl_dump_attrs: nlhdr: len 60, type 44, flags 0x1, seq 0x99f23a01, pid 161540.
+[22499.543687] qdma_pf:xnl_dump_attrs: genlhdr: cmd 0x9 Q_START, version 0, reserved 0x0.
+[22499.543690] qdma_pf:xnl_dump_attrs: attr 2, DEV_IDX, str .
+[22499.543693] qdma_pf:xnl_dump_attrs: attr 34, QIDX, str .
+[22499.543695] qdma_pf:xnl_dump_attrs: attr 35, NUM_Q, str .
+[22499.543698] qdma_pf:xnl_dump_attrs: attr 36, QFLAG, str .
+[22499.543700] qdma_pf:xnl_dump_attrs: attr 51, PIPE_GL_MAX, str .
+[22499.543734] qdma_pf:qdma_queue_add: added qdma01000-MM-0, H2C, qidx 0.
+[22499.543740] qdma_pf:xpdev_queue_add: qdma01000 idx 0, st 0, q_type H2C, added, qhndl 0x0.
+[22499.544097] qdma_pf:xnl_dump_attrs: snd_seq 0x544e7a11, portid 0x27704.
+[22499.544106] qdma_pf:xnl_dump_attrs: nlhdr: len 60, type 44, flags 0x1, seq 0x544e7a11, pid 161540.
+[22499.544111] qdma_pf:xnl_dump_attrs: genlhdr: cmd 0xa Q_STOP, version 0, reserved 0x0.
+[22499.544115] qdma_pf:xnl_dump_attrs: attr 2, DEV_IDX, str .
+[22499.544119] qdma_pf:xnl_dump_attrs: attr 34, QIDX, str .
+[22499.544122] qdma_pf:xnl_dump_attrs: attr 35, NUM_Q, str .
+[22499.544125] qdma_pf:xnl_dump_attrs: attr 36, QFLAG, str \x86.
+[22499.544127] qdma_pf:xnl_dump_attrs: attr 51, PIPE_GL_MAX, str .
+[22499.544236] qdma_pf:desc_ring_alloc: alloc 65544(0x10008)=32*2048+8, 0x000000004170f2cb, bus 0x1bf180000, cmpl status 0x000000001d7ce40d.
+[22499.544255] qdma_pf:qdma_descq_alloc_resource: qdma01000-MM-0: 0/0, rng 2048,0, desc 0x000000004170f2cb, cmpl status 0x0000000000000000.
+[22499.544263] qdma_pf:desc_alloc_irq: descq->intr_id = 3 allocated to qidx = 0
+[22499.544268] qdma_pf:get_intr_ring_index: func_id = 0, vector_index = 3, ring_index = 0
+[22499.544277] eqdma_sw_context_write: pidx=0, irq_arm=1, fnc_id=0
+[22499.544281] eqdma_sw_context_write: qen=1, frcd_en=0, wbi_chk=1, wbi_intvl_en=1
+[22499.544285] eqdma_sw_context_write: at=0, fetch_max=0, rngsz_idx=0, desc_sz=2
+[22499.544288] eqdma_sw_context_write: bypass=0, mm_chn=0, wbk_en=1, irq_en=1
+[22499.544291] eqdma_sw_context_write: port_id=0, irq_no_last=0,err=0
+[22499.544294] , err_wb_sent=0
+[22499.544297] eqdma_sw_context_write: irq_req=0, mrkr_dis=1, is_mm=ff
+[22499.544301] eqdma_sw_context_write: vec=0, intr_aggr=1
+[22499.544312] qdma_pf:qdma_thread_add_work: qdma01000-MM-0 0x00000000a6c69686 assigned to cpu 19.
+[22499.544489] qdma_pf:xnl_dump_attrs: snd_seq 0x99f23a01, portid 0x27704.
+[22499.544499] qdma_pf:xnl_dump_attrs: nlhdr: len 60, type 44, flags 0x1, seq 0x99f23a01, pid 161540.
+[22499.544505] qdma_pf:xnl_dump_attrs: genlhdr: cmd 0x9 Q_START, version 0, reserved 0x0.
+[22499.544509] qdma_pf:xnl_dump_attrs: attr 2, DEV_IDX, str .
+[22499.544513] qdma_pf:xnl_dump_attrs: attr 34, QIDX, str .
+[22499.544516] qdma_pf:xnl_dump_attrs: attr 35, NUM_Q, str .
+[22499.544519] qdma_pf:xnl_dump_attrs: attr 36, QFLAG, str 
+               .
+[22499.544521] qdma_pf:xnl_dump_attrs: attr 51, PIPE_GL_MAX, str .
+[22499.544554] qdma_pf:qdma_queue_add: added qdma01000-MM-0, C2H, qidx 0.
+[22499.544560] qdma_pf:xpdev_queue_add: qdma01000 idx 0, st 0, q_type C2H, added, qhndl 0x100.
+[22499.544606] qdma_pf:xnl_dump_attrs: snd_seq 0x544e7a81, portid 0x27704.
+[22499.544609] qdma_pf:xnl_dump_attrs: nlhdr: len 60, type 44, flags 0x1, seq 0x544e7a81, pid 161540.
+[22499.544614] qdma_pf:xnl_dump_attrs: genlhdr: cmd 0xa Q_STOP, version 0, reserved 0x0.
+[22499.544617] qdma_pf:xnl_dump_attrs: attr 2, DEV_IDX, str .
+[22499.544620] qdma_pf:xnl_dump_attrs: attr 34, QIDX, str .
+[22499.544622] qdma_pf:xnl_dump_attrs: attr 35, NUM_Q, str .
+[22499.544624] qdma_pf:xnl_dump_attrs: attr 36, QFLAG, str \x8a.
+[22499.544626] qdma_pf:xnl_dump_attrs: attr 51, PIPE_GL_MAX, str .
+[22499.544731] qdma_pf:desc_ring_alloc: alloc 65544(0x10008)=32*2048+8, 0x000000003154970b, bus 0x1bf000000, cmpl status 0x0000000006aaff95.
+[22499.544751] qdma_pf:qdma_descq_alloc_resource: qdma01000-MM-0: 0/0, rng 2048,0, desc 0x000000003154970b, cmpl status 0x0000000000000000.
+[22499.544759] qdma_pf:desc_alloc_irq: descq->intr_id = 3 allocated to qidx = 0
+[22499.544763] qdma_pf:get_intr_ring_index: func_id = 0, vector_index = 3, ring_index = 0
+[22499.544771] eqdma_sw_context_write: pidx=0, irq_arm=1, fnc_id=0
+[22499.544775] eqdma_sw_context_write: qen=1, frcd_en=0, wbi_chk=1, wbi_intvl_en=1
+[22499.544779] eqdma_sw_context_write: at=0, fetch_max=0, rngsz_idx=0, desc_sz=2
+[22499.544782] eqdma_sw_context_write: bypass=0, mm_chn=0, wbk_en=1, irq_en=1
+[22499.544785] eqdma_sw_context_write: port_id=0, irq_no_last=0,err=0
+[22499.544789] , err_wb_sent=0
+[22499.544791] eqdma_sw_context_write: irq_req=0, mrkr_dis=1, is_mm=ff
+[22499.544794] eqdma_sw_context_write: vec=0, intr_aggr=1
+[22499.544803] qdma_pf:qdma_thread_add_work: qdma01000-MM-0 0x00000000c09f7454 assigned to cpu 18.
+[22499.544975] qdma_pf:cdev_gen_llseek: qdma01000-MM-0: pos=8388608
+[22499.544987] qdma_pf:cdev_write_iter: w io->iov:00000000261e6128, io[0].iov_base:561c544cf2c0, io->nr_segs:1, io->ki_pos:800000
+[22499.544996] qdma_pf:cdev_gen_read_write: qdma01000-MM-0, priv 0x0: buf 0x561c544cf2c0, size:32768, pos 8388608, W 1.
+[22499.545003] [KU-PIM DBG]: user_buf addr=0x0000000096b3a680
+[22499.545006] [KU-PIM DBG]: user_buf addr=0x0000000096b3a680
+[22499.545013] [KU-PIM DBG - iocb state] user_buff addr = 0x0000000096b3a680, user_buff len = 32768 page numver = 0
+[22499.545018] [KU-PIM DBG]: called map_user_buf_to_sgl
+[22499.545020] qdma_pf:qdma_request_submit: qdma01000-MM-0 MM-H2C, data len 32768, sg cnt 9. ping_pong_en=0
+[22499.545027] qdma_pf:qdma_request_submit: qdma01000-MM-0: data len 32768, ep 0x800000, sgl 0x00000000d39f3652, sgl cnt 9, tm 10000 ms.
+[22499.545034] qdma_pf:qdma_request_submit: qdma01000-MM-0: cb 0x000000000029a74b submitted.
+[22499.545039] qdma_pf:descq_mm_n_h2c_cmpl_status: descq 0x00000000a6c69686, qdma01000-MM-0, pidx 0, cidx 0.
+[22499.545044] qdma_pf:descq_mm_n_h2c_cmpl_status: descq qdma01000-MM-0 empty, return.
+[22499.545047] qdma_pf:descq_mm_proc_request: qdma01000-MM-0, req 0x000000000029a74b, offset 0/32768 -> sg 0, 0x00000000d39f3652,0.
+[22499.545053] qdma_pf:descq_mm_proc_request: desc 0/2047, sgl 0, len 0,3392, offset 0.
+[22499.545058] qdma_pf:descq_mm_proc_request: desc 1/2047, sgl 1, len 0,4096, offset 0.
+[22499.545062] qdma_pf:descq_mm_proc_request: desc 2/2047, sgl 2, len 0,4096, offset 0.
+[22499.545065] qdma_pf:descq_mm_proc_request: desc 3/2047, sgl 3, len 0,4096, offset 0.
+[22499.545068] qdma_pf:descq_mm_proc_request: desc 4/2047, sgl 4, len 0,4096, offset 0.
+[22499.545071] qdma_pf:descq_mm_proc_request: desc 5/2047, sgl 5, len 0,4096, offset 0.
+[22499.545074] qdma_pf:descq_mm_proc_request: desc 6/2047, sgl 6, len 0,4096, offset 0.
+[22499.545077] qdma_pf:descq_mm_proc_request: desc 7/2047, sgl 7, len 0,4096, offset 0.
+[22499.545080] qdma_pf:descq_mm_proc_request: desc 8/2047, sgl 8, len 0,704, offset 0.
+[22499.545083] qdma_pf:descq_mm_proc_request: descq qdma01000-MM-0, +9,9, avail 2038, ep_addr 0x800000 + 0x8000(32768).
+[22499.545091] qdma_pf:descq_mm_n_h2c_cmpl_status: descq 0x00000000a6c69686, qdma01000-MM-0, pidx 9, cidx 0.
+[22499.545160] qdma_pf:data_intr_handler: qdma-pf: Data IRQ fired on Funtion#00000: index=3, vector=157
+[22499.545174] qdma_pf:data_intr_aggregate: INTR_COAL: msix[3].vector=157, msix[3].entry=3, rngsize=512, cidx = 2
+[22499.545181] qdma_pf:data_intr_aggregate: vidx = 3, dvec_start_idx = 3
+[22499.545184] qdma_pf:data_intr_aggregate: IRQ[157]: IVE[3], Qid = 0, e_color = 1, c_color = 1, intr_type = 0
+[22499.545189] qdma_pf:data_intr_aggregate: IRQ[157]: IVE[3], Qid = 0, e_color = 1, c_color = 1, intr_type = 0
+[22499.545261] qdma_pf:descq_mm_n_h2c_cmpl_status: descq 0x00000000a6c69686, qdma01000-MM-0, pidx 9, cidx 0.
+[22499.545278] qdma_pf:descq_mm_n_h2c_cmpl_status: descq_mm_n_h2c_cmpl_status descq qdma01000-MM-0, cidx 0x0 -> 0x9, avail 0x7f6 + 0x9.
+[22499.545286] qdma_pf:descq_mm_n_h2c_cmpl_status: descq_mm_n_h2c_cmpl_status qdma01000-MM-0, 0x00000000a6c69686, credit 9 + 9.
+[22499.545294] qdma_pf:descq_mm_n_h2c_cmpl_status: qdma01000-MM-0, 0x00000000a6c69686, cb 0x000000000029a74b, desc_nr 9, credit 9.
+[22499.545300] qdma_pf:descq_mm_n_h2c_cmpl_status: qdma01000-MM-0, cb 0x000000000029a74b done, credit 9 > 9.
+[22499.545307] qdma_pf:qdma_sgt_req_done: req 0x000000000029a74b, cb 0x000000000029a74b, wake up.
+[22499.545316] qdma_pf:descq_mm_n_h2c_cmpl_status: qdma01000-MM-0, 0x00000000a6c69686, credit 0.
+[22499.545388] qdma_pf:cdev_gen_llseek: qdma01000-MM-0: pos=8388608
+[22499.545403] qdma_pf:cdev_read_iter: r io->iov:00000000261e6128, io[0].iov_base:561c544d72d0, io->nr_segs:1, io->ki_pos:800000
+[22499.545411] qdma_pf:cdev_gen_read_write: qdma01000-MM-0, priv 0x100: buf 0x561c544d72d0, size:32768, pos 8388608, W 0.
+[22499.545418] [KU-PIM DBG]: user_buf addr=0x000000007a7391ae
+[22499.545421] [KU-PIM DBG]: user_buf addr=0x000000007a7391ae
+[22499.545428] [KU-PIM DBG - iocb state] user_buff addr = 0x000000007a7391ae, user_buff len = 32768 page numver = 0
+[22499.545432] [KU-PIM DBG]: called map_user_buf_to_sgl
+[22499.545435] qdma_pf:qdma_request_submit: qdma01000-MM-0 MM-C2H, data len 32768, sg cnt 9. ping_pong_en=0
+[22499.545441] qdma_pf:qdma_request_submit: qdma01000-MM-0: data len 32768, ep 0x800000, sgl 0x00000000d39f3652, sgl cnt 9, tm 10000 ms.
+[22499.545448] qdma_pf:qdma_request_submit: qdma01000-MM-0: cb 0x000000000029a74b submitted.
+[22499.545454] qdma_pf:descq_mm_n_h2c_cmpl_status: descq 0x00000000c09f7454, qdma01000-MM-0, pidx 0, cidx 0.
+[22499.545459] qdma_pf:descq_mm_n_h2c_cmpl_status: descq qdma01000-MM-0 empty, return.
+[22499.545462] qdma_pf:descq_mm_proc_request: qdma01000-MM-0, req 0x000000000029a74b, offset 0/32768 -> sg 0, 0x00000000d39f3652,0.
+[22499.545468] qdma_pf:descq_mm_proc_request: desc 0/2047, sgl 0, len 0,3376, offset 0.
+[22499.545474] qdma_pf:descq_mm_proc_request: desc 1/2047, sgl 1, len 0,4096, offset 0.
+[22499.545477] qdma_pf:descq_mm_proc_request: desc 2/2047, sgl 2, len 0,4096, offset 0.
+[22499.545480] qdma_pf:descq_mm_proc_request: desc 3/2047, sgl 3, len 0,4096, offset 0.
+[22499.545483] qdma_pf:descq_mm_proc_request: desc 4/2047, sgl 4, len 0,4096, offset 0.
+[22499.545486] qdma_pf:descq_mm_proc_request: desc 5/2047, sgl 5, len 0,4096, offset 0.
+[22499.545489] qdma_pf:descq_mm_proc_request: desc 6/2047, sgl 6, len 0,4096, offset 0.
+[22499.545492] qdma_pf:descq_mm_proc_request: desc 7/2047, sgl 7, len 0,4096, offset 0.
+[22499.545495] qdma_pf:descq_mm_proc_request: desc 8/2047, sgl 8, len 0,720, offset 0.
+[22499.545499] qdma_pf:descq_mm_proc_request: descq qdma01000-MM-0, +9,9, avail 2038, ep_addr 0x800000 + 0x8000(32768).
+[22499.545506] qdma_pf:descq_mm_n_h2c_cmpl_status: descq 0x00000000c09f7454, qdma01000-MM-0, pidx 9, cidx 0.
+[22499.545521] qdma_pf:data_intr_handler: qdma-pf: Data IRQ fired on Funtion#00000: index=3, vector=157
+[22499.545528] qdma_pf:data_intr_aggregate: INTR_COAL: msix[3].vector=157, msix[3].entry=3, rngsize=512, cidx = 3
+[22499.545532] qdma_pf:data_intr_aggregate: vidx = 3, dvec_start_idx = 3
+[22499.545535] qdma_pf:data_intr_aggregate: IRQ[157]: IVE[3], Qid = 0, e_color = 1, c_color = 1, intr_type = 1
+[22499.545539] qdma_pf:data_intr_aggregate: IRQ[157]: IVE[3], Qid = 0, e_color = 1, c_color = 1, intr_type = 1
+[22499.545619] qdma_pf:descq_mm_n_h2c_cmpl_status: descq 0x00000000c09f7454, qdma01000-MM-0, pidx 9, cidx 0.
+[22499.545635] qdma_pf:descq_mm_n_h2c_cmpl_status: descq_mm_n_h2c_cmpl_status descq qdma01000-MM-0, cidx 0x0 -> 0x9, avail 0x7f6 + 0x9.
+[22499.545642] qdma_pf:descq_mm_n_h2c_cmpl_status: descq_mm_n_h2c_cmpl_status qdma01000-MM-0, 0x00000000c09f7454, credit 9 + 9.
+[22499.545649] qdma_pf:descq_mm_n_h2c_cmpl_status: qdma01000-MM-0, 0x00000000c09f7454, cb 0x000000000029a74b, desc_nr 9, credit 9.
+[22499.545656] qdma_pf:descq_mm_n_h2c_cmpl_status: qdma01000-MM-0, cb 0x000000000029a74b done, credit 9 > 9.
+[22499.545662] qdma_pf:qdma_sgt_req_done: req 0x000000000029a74b, cb 0x000000000029a74b, wake up.
+[22499.545670] qdma_pf:descq_mm_n_h2c_cmpl_status: qdma01000-MM-0, 0x00000000c09f7454, credit 0.
+[22499.806496] qdma_pf:xnl_dump_attrs: snd_seq 0x1, portid 0x27704.
+[22499.806506] qdma_pf:xnl_dump_attrs: nlhdr: len 60, type 44, flags 0x1, seq 0x1, pid 161540.
+[22499.806512] qdma_pf:xnl_dump_attrs: genlhdr: cmd 0xb Q_DEL, version 0, reserved 0x0.
+[22499.806517] qdma_pf:xnl_dump_attrs: attr 2, DEV_IDX, str .
+[22499.806520] qdma_pf:xnl_dump_attrs: attr 34, QIDX, str .
+[22499.806523] qdma_pf:xnl_dump_attrs: attr 35, NUM_Q, str .
+[22499.806526] qdma_pf:xnl_dump_attrs: attr 36, QFLAG, str .
+[22499.806528] qdma_pf:xnl_dump_attrs: attr 51, PIPE_GL_MAX, str .
+[22499.806534] qdma_pf:qdma_thread_remove_work: qdma01000-MM-0 removing from thread ?, 19.
+[22499.806544] qdma_pf:qdma_descq_free_resource: qdma01000-MM-0: desc 0x000000004170f2cb, cmpt 0x0000000000000000.
+[22499.806550] qdma_pf:desc_ring_free: free 65544(0x10008)=32*2048+8, 0x000000004170f2cb, bus 0x1bf180000.
+[22499.806613] qdma_pf:xnl_dump_attrs: snd_seq 0x3, portid 0x27704.
+[22499.806616] qdma_pf:xnl_dump_attrs: nlhdr: len 60, type 44, flags 0x1, seq 0x3, pid 161540.
+[22499.806620] qdma_pf:xnl_dump_attrs: genlhdr: cmd 0xc Q_DUMP, version 0, reserved 0x0.
+[22499.806623] qdma_pf:xnl_dump_attrs: attr 2, DEV_IDX, str .
+[22499.806626] qdma_pf:xnl_dump_attrs: attr 34, QIDX, str .
+[22499.806628] qdma_pf:xnl_dump_attrs: attr 35, NUM_Q, str .
+[22499.806630] qdma_pf:xnl_dump_attrs: attr 36, QFLAG, str .
+[22499.806632] qdma_pf:xnl_dump_attrs: attr 51, PIPE_GL_MAX, str .
+[22499.806653] qdma_pf:qdma_queue_remove: queue qdma01000-MM-0, id 0 deleted.
+[22499.806689] qdma_pf:xnl_dump_attrs: snd_seq 0x5, portid 0x27704.
+[22499.806691] qdma_pf:xnl_dump_attrs: nlhdr: len 60, type 44, flags 0x1, seq 0x5, pid 161540.
+[22499.806694] qdma_pf:xnl_dump_attrs: genlhdr: cmd 0xb Q_DEL, version 0, reserved 0x0.
+[22499.806697] qdma_pf:xnl_dump_attrs: attr 2, DEV_IDX, str .
+[22499.806699] qdma_pf:xnl_dump_attrs: attr 34, QIDX, str .
+[22499.806701] qdma_pf:xnl_dump_attrs: attr 35, NUM_Q, str .
+[22499.806703] qdma_pf:xnl_dump_attrs: attr 36, QFLAG, str 
+               .
+[22499.806705] qdma_pf:xnl_dump_attrs: attr 51, PIPE_GL_MAX, str .
+[22499.806708] qdma_pf:qdma_thread_remove_work: qdma01000-MM-0 removing from thread ?, 18.
+[22499.806715] qdma_pf:qdma_descq_free_resource: qdma01000-MM-0: desc 0x000000003154970b, cmpt 0x0000000000000000.
+[22499.806719] qdma_pf:desc_ring_free: free 65544(0x10008)=32*2048+8, 0x000000003154970b, bus 0x1bf000000.
+[22499.806754] qdma_pf:xnl_dump_attrs: snd_seq 0x7, portid 0x27704.
+[22499.806757] qdma_pf:xnl_dump_attrs: nlhdr: len 60, type 44, flags 0x1, seq 0x7, pid 161540.
+[22499.806760] qdma_pf:xnl_dump_attrs: genlhdr: cmd 0xc Q_DUMP, version 0, reserved 0x0.
+[22499.806762] qdma_pf:xnl_dump_attrs: attr 2, DEV_IDX, str .
+[22499.806764] qdma_pf:xnl_dump_attrs: attr 34, QIDX, str .
+[22499.806766] qdma_pf:xnl_dump_attrs: attr 35, NUM_Q, str .
+[22499.806768] qdma_pf:xnl_dump_attrs: attr 36, QFLAG, str 
+               .
+[22499.806770] qdma_pf:xnl_dump_attrs: attr 51, PIPE_GL_MAX, str .
+[22499.806773] qdma_pf:qdma_device_get_pair_descq_by_id: qdma01000-p0000:01:00.0, idx 0x0, q 0x00000000a6c69686 state invalid.
+[22499.806794] qdma_pf:qdma_queue_remove: queue qdma01000-MM-0, id 0 deleted.

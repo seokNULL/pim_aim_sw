@@ -1,0 +1,210 @@
+[ 3538.990992] qdma_pf:remove_one: 0000:01:00.0 pdev 0x00000000d6a00517, xdev 0x00000000ffd1f568, hndl 0xffff8bd5cc747800, qdma01000.
+[ 3538.991006] qdma_pf:get_intr_ring_index: func_id = 0, vector_index = 3, ring_index = 0
+[ 3538.991008] qdma_pf:intr_ring_free: free 4096(0x1000)=8*512, 0x0000000090abd213, bus 0x180bab000.
+[ 3538.991167] qdma_pf:qdma_pf_trigger_vf_offline: VF count is zero
+[ 3538.991291] qdma_pf:qdma_debugfs_exit: removed qdma_pf directory from Linux debug file system
+[ 3538.991897] qdma interface device deinit
+[ 3539.040699] qdma_pf:qdma_mod_init: Xilinx QDMA PF Reference Driver v2020.2.1.1.
+[ 3539.040955] qdma_pf:qdma_debugfs_init: created qdma-pf dir in Linux debug file system
+[ 3539.040971] qdma interface device init
+[ 3539.041013] qdma_pf:probe_one: 0000:01:00.0: func 0x0, p/v 0/0,0x0000000000000000.
+[ 3539.041015] qdma_pf:probe_one: Configuring '01:00:0' as master pf
+[ 3539.041015] qdma_pf:probe_one: Driver is loaded in auto(0) mode
+[ 3539.041016] qdma_pf:qdma_device_open: qdma-pf, 01:00.00, pdev 0x00000000d6a00517, 0x10ee:0x9038.
+[ 3539.041124] Device Type: Soft IP
+[ 3539.041124] IP Type: EQDMA Soft IP
+[ 3539.041124] Vivado Release: vivado 2020.2
+[ 3539.041127] qdma_pf:qdma_device_attributes_get: qdma01000-p0000:01:00.0: num_pfs:1, num_qs:512, flr_present:0, st_en:1, mm_en:1, mm_cmpt_en:0, mailbox_en:0, mm_channel_max:1, qid2vec_ctx:0, cmpt_ovf_chk_dis:1, mailbox_intr:1, sw_desc_64b:1, cmpt_desc_64b:1, dynamic_bar:1, legacy_intr:1, cmpt_trig_count_timer:1
+[ 3539.041137] qdma_master_resource_create: New master resource created at 0
+[ 3539.041140] qdma_pf:qdma_device_open: Vivado version = vivado 2020.2
+[ 3539.041142] qdma_dev_qinfo_get: Dev Entry not created yet
+[ 3539.041144] qdma_dev_entry_create: Created the dev entry successfully
+[ 3539.041147] qdma_pf:intr_setup: dev 0000:01:00.0, xdev->num_vecs = 0
+[ 3539.041149] qdma_pf:intr_setup: current device supports only (8) msix vectors per function. ignoring input for (32) vectors
+[ 3539.041322] qdma_pf:intr_vector_setup: qdma01000-p0000:01:00.0 requesting IRQ vector #0: vec 154, type 3, qdma01000-p0000:01:00.0-mbox.
+[ 3539.041379] qdma_pf:intr_vector_setup: qdma01000-p0000:01:00.0 requesting IRQ vector #1: vec 155, type 1, qdma01000-p0000:01:00.0-user.
+[ 3539.041436] qdma_pf:intr_vector_setup: qdma01000-p0000:01:00.0 requesting IRQ vector #2: vec 156, type 0, qdma01000-p0000:01:00.0-error.
+[ 3539.041447] qdma_pf:intr_vector_setup: qdma01000-p0000:01:00.0 requesting IRQ vector #3: vec 157, type 2, qdma01000-p0000:01:00.0-data.
+[ 3539.041458] qdma_pf:intr_vector_setup: qdma01000-p0000:01:00.0 requesting IRQ vector #4: vec 158, type 2, qdma01000-p0000:01:00.0-data.
+[ 3539.041467] qdma_pf:intr_vector_setup: qdma01000-p0000:01:00.0 requesting IRQ vector #5: vec 159, type 2, qdma01000-p0000:01:00.0-data.
+[ 3539.041478] qdma_pf:intr_vector_setup: qdma01000-p0000:01:00.0 requesting IRQ vector #6: vec 160, type 2, qdma01000-p0000:01:00.0-data.
+[ 3539.041489] qdma_pf:intr_vector_setup: qdma01000-p0000:01:00.0 requesting IRQ vector #7: vec 161, type 2, qdma01000-p0000:01:00.0-data.
+[ 3539.045422] qdma_pf:intr_ring_setup: dev 0000:01:00.0 num_vectors[8] < num_queues [0]
+[ 3539.045424] qdma_pf:intr_ring_setup: Enabling Interrupt aggregation
+[ 3539.045425] qdma_pf:intr_ring_setup: 0000:01:00.0 interrupt coalescing ring with 512 entries
+[ 3539.045427] qdma_pf:intr_ring_alloc: alloc 4096(0x1000)=8*512, bus 0x104c4f000 .
+[ 3539.045430] qdma_pf:get_intr_ring_index: func_id = 0, vector_index = 3, ring_index = 0
+[ 3539.045432] qdma_pf:intr_ring_setup: ring_number = 0, vector_index = 3, ring_size = 512, ring_base = 0x04c4f000
+[ 3539.045434] qdma_pf:intr_ring_setup: dev 0000:01:00.0 interrupt coalescing ring setup successful
+[ 3539.045436] qdma_pf:get_intr_ring_index: func_id = 0, vector_index = 3, ring_index = 0
+[ 3539.045456] qdma_pf:xdev_identify_bars: AXI Master Lite BAR 2.
+[ 3539.045457] qdma_pf:xdev_identify_bars: AXI Bridge Master BAR 4.
+[ 3539.045458] qdma_pf:qdma_device_open: 0000:01:00.0, 01000, pdev 0x00000000d6a00517, xdev 0x00000000eb31530b, ch 1, q 0, vf 0.
+[ 3539.045473] qdma_pf:get_intr_ring_index: func_id = 0, vector_index = 3, ring_index = 0
+[ 3607.565507] qdma_pf:xnl_dump_attrs: snd_seq 0x1, portid 0x79d8.
+[ 3607.565519] qdma_pf:xnl_dump_attrs: nlhdr: len 28, type 38, flags 0x1, seq 0x1, pid 31192.
+[ 3607.565526] qdma_pf:xnl_dump_attrs: genlhdr: cmd 0x1 DEV_INFO, version 0, reserved 0x0.
+[ 3607.565530] qdma_pf:xnl_dump_attrs: attr 2, DEV_IDX, str .
+[ 3607.565614] qdma_pf:xnl_dump_attrs: snd_seq 0x86fc2f01, portid 0x79d8.
+[ 3607.565618] qdma_pf:xnl_dump_attrs: nlhdr: len 60, type 38, flags 0x1, seq 0x86fc2f01, pid 31192.
+[ 3607.565622] qdma_pf:xnl_dump_attrs: genlhdr: cmd 0x9 Q_START, version 0, reserved 0x0.
+[ 3607.565625] qdma_pf:xnl_dump_attrs: attr 2, DEV_IDX, str .
+[ 3607.565627] qdma_pf:xnl_dump_attrs: attr 34, QIDX, str .
+[ 3607.565630] qdma_pf:xnl_dump_attrs: attr 35, NUM_Q, str .
+[ 3607.565633] qdma_pf:xnl_dump_attrs: attr 36, QFLAG, str .
+[ 3607.565635] qdma_pf:xnl_dump_attrs: attr 51, PIPE_GL_MAX, str .
+[ 3607.565724] qdma_fmap_write: func_id=0, qbase=0, qmax=256
+[ 3607.565732] qdma_pf:device_set_qrange: qdma01000-p0000:01:00.0, func id 0, Q 0x0 + 0x100.
+[ 3607.565759] qdma_pf:qdma_queue_add: added qdma01000-MM-0, H2C, qidx 0.
+[ 3607.565764] qdma_pf:xpdev_queue_add: qdma01000 idx 0, st 0, q_type H2C, added, qhndl 0x0.
+[ 3607.566100] qdma_pf:xnl_dump_attrs: snd_seq 0xe52f8901, portid 0x79d8.
+[ 3607.566108] qdma_pf:xnl_dump_attrs: nlhdr: len 60, type 38, flags 0x1, seq 0xe52f8901, pid 31192.
+[ 3607.566114] qdma_pf:xnl_dump_attrs: genlhdr: cmd 0xa Q_STOP, version 0, reserved 0x0.
+[ 3607.566118] qdma_pf:xnl_dump_attrs: attr 2, DEV_IDX, str .
+[ 3607.566122] qdma_pf:xnl_dump_attrs: attr 34, QIDX, str .
+[ 3607.566125] qdma_pf:xnl_dump_attrs: attr 35, NUM_Q, str .
+[ 3607.566127] qdma_pf:xnl_dump_attrs: attr 36, QFLAG, str \x86.
+[ 3607.566130] qdma_pf:xnl_dump_attrs: attr 51, PIPE_GL_MAX, str .
+[ 3607.566240] qdma_pf:desc_ring_alloc: alloc 65544(0x10008)=32*2048+8, 0x000000003d0858a3, bus 0x1877e0000, cmpl status 0x0000000084089bff.
+[ 3607.566260] qdma_pf:qdma_descq_alloc_resource: qdma01000-MM-0: 0/0, rng 2048,0, desc 0x000000003d0858a3, cmpl status 0x0000000000000000.
+[ 3607.566268] qdma_pf:desc_alloc_irq: descq->intr_id = 3 allocated to qidx = 0
+[ 3607.566272] qdma_pf:get_intr_ring_index: func_id = 0, vector_index = 3, ring_index = 0
+[ 3607.566280] eqdma_sw_context_write: pidx=0, irq_arm=1, fnc_id=0
+[ 3607.566285] eqdma_sw_context_write: qen=1, frcd_en=0, wbi_chk=1, wbi_intvl_en=1
+[ 3607.566288] eqdma_sw_context_write: at=0, fetch_max=0, rngsz_idx=0, desc_sz=2
+[ 3607.566291] eqdma_sw_context_write: bypass=0, mm_chn=0, wbk_en=1, irq_en=1
+[ 3607.566295] eqdma_sw_context_write: port_id=0, irq_no_last=0,err=0
+[ 3607.566298] , err_wb_sent=0
+[ 3607.566301] eqdma_sw_context_write: irq_req=0, mrkr_dis=1, is_mm=ff
+[ 3607.566304] eqdma_sw_context_write: vec=0, intr_aggr=1
+[ 3607.566314] qdma_pf:qdma_thread_add_work: qdma01000-MM-0 0x0000000017923249 assigned to cpu 19.
+[ 3607.566499] qdma_pf:xnl_dump_attrs: snd_seq 0x86fc2f01, portid 0x79d8.
+[ 3607.566509] qdma_pf:xnl_dump_attrs: nlhdr: len 60, type 38, flags 0x1, seq 0x86fc2f01, pid 31192.
+[ 3607.566515] qdma_pf:xnl_dump_attrs: genlhdr: cmd 0x9 Q_START, version 0, reserved 0x0.
+[ 3607.566519] qdma_pf:xnl_dump_attrs: attr 2, DEV_IDX, str .
+[ 3607.566523] qdma_pf:xnl_dump_attrs: attr 34, QIDX, str .
+[ 3607.566526] qdma_pf:xnl_dump_attrs: attr 35, NUM_Q, str .
+[ 3607.566528] qdma_pf:xnl_dump_attrs: attr 36, QFLAG, str 
+               .
+[ 3607.566531] qdma_pf:xnl_dump_attrs: attr 51, PIPE_GL_MAX, str .
+[ 3607.566564] qdma_pf:qdma_queue_add: added qdma01000-MM-0, C2H, qidx 0.
+[ 3607.566570] qdma_pf:xpdev_queue_add: qdma01000 idx 0, st 0, q_type C2H, added, qhndl 0x100.
+[ 3607.566616] qdma_pf:xnl_dump_attrs: snd_seq 0xe52f8971, portid 0x79d8.
+[ 3607.566620] qdma_pf:xnl_dump_attrs: nlhdr: len 60, type 38, flags 0x1, seq 0xe52f8971, pid 31192.
+[ 3607.566624] qdma_pf:xnl_dump_attrs: genlhdr: cmd 0xa Q_STOP, version 0, reserved 0x0.
+[ 3607.566627] qdma_pf:xnl_dump_attrs: attr 2, DEV_IDX, str .
+[ 3607.566630] qdma_pf:xnl_dump_attrs: attr 34, QIDX, str .
+[ 3607.566632] qdma_pf:xnl_dump_attrs: attr 35, NUM_Q, str .
+[ 3607.566634] qdma_pf:xnl_dump_attrs: attr 36, QFLAG, str \x8a.
+[ 3607.566636] qdma_pf:xnl_dump_attrs: attr 51, PIPE_GL_MAX, str .
+[ 3607.566686] qdma_pf:desc_ring_alloc: alloc 65544(0x10008)=32*2048+8, 0x0000000058b250a7, bus 0x1784e0000, cmpl status 0x00000000ba300569.
+[ 3607.566695] qdma_pf:qdma_descq_alloc_resource: qdma01000-MM-0: 0/0, rng 2048,0, desc 0x0000000058b250a7, cmpl status 0x0000000000000000.
+[ 3607.566700] qdma_pf:desc_alloc_irq: descq->intr_id = 3 allocated to qidx = 0
+[ 3607.566703] qdma_pf:get_intr_ring_index: func_id = 0, vector_index = 3, ring_index = 0
+[ 3607.566710] eqdma_sw_context_write: pidx=0, irq_arm=1, fnc_id=0
+[ 3607.566713] eqdma_sw_context_write: qen=1, frcd_en=0, wbi_chk=1, wbi_intvl_en=1
+[ 3607.566717] eqdma_sw_context_write: at=0, fetch_max=0, rngsz_idx=0, desc_sz=2
+[ 3607.566720] eqdma_sw_context_write: bypass=0, mm_chn=0, wbk_en=1, irq_en=1
+[ 3607.566722] eqdma_sw_context_write: port_id=0, irq_no_last=0,err=0
+[ 3607.566725] , err_wb_sent=0
+[ 3607.566727] eqdma_sw_context_write: irq_req=0, mrkr_dis=1, is_mm=ff
+[ 3607.566729] eqdma_sw_context_write: vec=0, intr_aggr=1
+[ 3607.566738] qdma_pf:qdma_thread_add_work: qdma01000-MM-0 0x000000000a9a40c0 assigned to cpu 18.
+[ 3607.566838] qdma_pf:cdev_gen_llseek: qdma01000-MM-0: pos=8388608
+
+[ 3607.566844] qdma_pf:cdev_write_iter: w io->iov:0000000086db8eb9, io[0].iov_base:55dfe52f82c0, io->nr_segs:1, io->ki_pos:800000
+[ 3607.566853] qdma_pf:cdev_gen_read_write: qdma01000-MM-0, priv 0x0: buf 0x55dfe52f82c0, size:256, pos 8388608, W 1.
+
+[ 3607.566865] qdma_pf:qdma_request_submit: qdma01000-MM-0 MM-H2C, data len 256, sg cnt 1. ping_pong_en=0
+[ 3607.566872] qdma_pf:qdma_request_submit: qdma01000-MM-0: data len 256, ep 0x800000, sgl 0x00000000593438b9, sgl cnt 1, tm 10000 ms.
+[ 3607.566880] qdma_pf:qdma_request_submit: qdma01000-MM-0: cb 0x00000000087d6046 submitted.
+[ 3607.566885] qdma_pf:descq_mm_n_h2c_cmpl_status: descq 0x0000000017923249, qdma01000-MM-0, pidx 0, cidx 0.
+[ 3607.566890] qdma_pf:descq_mm_n_h2c_cmpl_status: descq qdma01000-MM-0 empty, return.
+[ 3607.566894] qdma_pf:descq_mm_proc_request: qdma01000-MM-0, req 0x00000000087d6046, offset 0/256 -> sg 0, 0x00000000593438b9,0.
+[ 3607.566901] qdma_pf:descq_mm_proc_request: desc 0/2047, sgl 0, len 0,256, offset 0.
+[ 3607.566907] qdma_pf:descq_mm_proc_request: descq qdma01000-MM-0, +1,1, avail 2046, ep_addr 0x800000 + 0x100(256).
+[ 3607.566914] qdma_pf:descq_mm_n_h2c_cmpl_status: descq 0x0000000017923249, qdma01000-MM-0, pidx 1, cidx 0.
+[ 3607.566920] qdma_pf:descq_mm_n_h2c_cmpl_status: descq_mm_n_h2c_cmpl_status descq qdma01000-MM-0, cidx 0x0 -> 0x1, avail 0x7fe + 0x1.
+[ 3607.566927] qdma_pf:descq_mm_n_h2c_cmpl_status: descq_mm_n_h2c_cmpl_status qdma01000-MM-0, 0x0000000017923249, credit 1 + 1.
+[ 3607.566931] qdma_pf:descq_mm_n_h2c_cmpl_status: qdma01000-MM-0, 0x0000000017923249, cb 0x00000000087d6046, desc_nr 1, credit 1.
+[ 3607.566936] qdma_pf:descq_mm_n_h2c_cmpl_status: qdma01000-MM-0, cb 0x00000000087d6046 done, credit 1 > 1.
+[ 3607.566929] qdma_pf:data_intr_handler: qdma-pf: Data IRQ fired on Funtion#00000: index=3, vector=157
+[ 3607.566941] qdma_pf:qdma_sgt_req_done: req 0x00000000087d6046, cb 0x00000000087d6046, wake up.
+[ 3607.566946] qdma_pf:descq_mm_n_h2c_cmpl_status: qdma01000-MM-0, 0x0000000017923249, credit 0.
+[ 3607.566949] qdma_pf:data_intr_aggregate: INTR_COAL: msix[3].vector=157, msix[3].entry=3, rngsize=512, cidx = 0
+[ 3607.566952] qdma_pf:cdev_gen_llseek: qdma01000-MM-0: pos=8388608
+
+
+[ 3607.566957] qdma_pf:cdev_read_iter: r io->iov:0000000029319312, io[0].iov_base:55dfe52f83d0, io->nr_segs:1, io->ki_pos:800000
+[ 3607.566959] qdma_pf:data_intr_aggregate: vidx = 3, dvec_start_idx = 3
+[ 3607.566963] qdma_pf:cdev_gen_read_write: qdma01000-MM-0, priv 0x100: buf 0x55dfe52f83d0, size:256, pos 8388608, W 0.
+
+[ 3607.566965] qdma_pf:data_intr_aggregate: IRQ[157]: IVE[3], Qid = 0, e_color = 1, c_color = 1, intr_type = 0
+[ 3607.566970] qdma_pf:qdma_request_submit: qdma01000-MM-0 MM-C2H, data len 256, sg cnt 1. ping_pong_en=0
+[ 3607.566974] qdma_pf:data_intr_aggregate: IRQ[157]: IVE[3], Qid = 0, e_color = 1, c_color = 1, intr_type = 0
+[ 3607.566975] qdma_pf:qdma_request_submit: qdma01000-MM-0: data len 256, ep 0x800000, sgl 0x00000000593438b9, sgl cnt 1, tm 10000 ms.
+[ 3607.566982] qdma_pf:qdma_request_submit: qdma01000-MM-0: cb 0x00000000a0b12906 submitted.
+[ 3607.566985] qdma_pf:descq_mm_n_h2c_cmpl_status: descq 0x000000000a9a40c0, qdma01000-MM-0, pidx 0, cidx 0.
+[ 3607.566989] qdma_pf:descq_mm_n_h2c_cmpl_status: descq qdma01000-MM-0 empty, return.
+[ 3607.566991] qdma_pf:descq_mm_proc_request: qdma01000-MM-0, req 0x00000000a0b12906, offset 0/256 -> sg 0, 0x00000000593438b9,0.
+[ 3607.566996] qdma_pf:descq_mm_proc_request: desc 0/2047, sgl 0, len 0,256, offset 0.
+[ 3607.567000] qdma_pf:descq_mm_proc_request: descq qdma01000-MM-0, +1,1, avail 2046, ep_addr 0x800000 + 0x100(256).
+[ 3607.567005] qdma_pf:descq_mm_n_h2c_cmpl_status: descq 0x000000000a9a40c0, qdma01000-MM-0, pidx 1, cidx 0.
+[ 3607.567008] qdma_pf:descq_mm_n_h2c_cmpl_status: descq_mm_n_h2c_cmpl_status descq qdma01000-MM-0, cidx 0x0 -> 0x1, avail 0x7fe + 0x1.
+[ 3607.567013] qdma_pf:descq_mm_n_h2c_cmpl_status: descq_mm_n_h2c_cmpl_status qdma01000-MM-0, 0x000000000a9a40c0, credit 1 + 1.
+[ 3607.567015] qdma_pf:data_intr_handler: qdma-pf: Data IRQ fired on Funtion#00000: index=3, vector=157
+[ 3607.567017] qdma_pf:descq_mm_n_h2c_cmpl_status: qdma01000-MM-0, 0x000000000a9a40c0, cb 0x00000000a0b12906, desc_nr 1, credit 1.
+[ 3607.567023] qdma_pf:descq_mm_n_h2c_cmpl_status: qdma01000-MM-0, cb 0x00000000a0b12906 done, credit 1 > 1.
+[ 3607.567025] qdma_pf:data_intr_aggregate: INTR_COAL: msix[3].vector=157, msix[3].entry=3, rngsize=512, cidx = 1
+[ 3607.567027] qdma_pf:qdma_sgt_req_done: req 0x00000000a0b12906, cb 0x00000000a0b12906, wake up.
+[ 3607.567031] qdma_pf:descq_mm_n_h2c_cmpl_status: qdma01000-MM-0, 0x000000000a9a40c0, credit 0.
+[ 3607.567034] qdma_pf:data_intr_aggregate: vidx = 3, dvec_start_idx = 3
+[ 3607.567039] qdma_pf:data_intr_aggregate: IRQ[157]: IVE[3], Qid = 0, e_color = 1, c_color = 1, intr_type = 1
+[ 3607.567046] qdma_pf:data_intr_aggregate: IRQ[157]: IVE[3], Qid = 0, e_color = 1, c_color = 1, intr_type = 1
+[ 3607.567054] qdma_pf:descq_mm_n_h2c_cmpl_status: descq 0x0000000017923249, qdma01000-MM-0, pidx 1, cidx 1.
+[ 3607.567069] qdma_pf:descq_mm_n_h2c_cmpl_status: descq qdma01000-MM-0 empty, return.
+[ 3607.567135] qdma_pf:descq_mm_n_h2c_cmpl_status: descq 0x000000000a9a40c0, qdma01000-MM-0, pidx 1, cidx 1.
+[ 3607.567150] qdma_pf:descq_mm_n_h2c_cmpl_status: descq qdma01000-MM-0 empty, return.
+[ 3607.567530] qdma_pf:xnl_dump_attrs: snd_seq 0x1, portid 0x79d8.
+[ 3607.567534] qdma_pf:xnl_dump_attrs: nlhdr: len 60, type 38, flags 0x1, seq 0x1, pid 31192.
+[ 3607.567538] qdma_pf:xnl_dump_attrs: genlhdr: cmd 0xb Q_DEL, version 0, reserved 0x0.
+[ 3607.567541] qdma_pf:xnl_dump_attrs: attr 2, DEV_IDX, str .
+[ 3607.567544] qdma_pf:xnl_dump_attrs: attr 34, QIDX, str .
+[ 3607.567547] qdma_pf:xnl_dump_attrs: attr 35, NUM_Q, str .
+[ 3607.567549] qdma_pf:xnl_dump_attrs: attr 36, QFLAG, str .
+[ 3607.567551] qdma_pf:xnl_dump_attrs: attr 51, PIPE_GL_MAX, str .
+[ 3607.567555] qdma_pf:qdma_thread_remove_work: qdma01000-MM-0 removing from thread ?, 19.
+[ 3607.567564] qdma_pf:qdma_descq_free_resource: qdma01000-MM-0: desc 0x000000003d0858a3, cmpt 0x0000000000000000.
+[ 3607.567569] qdma_pf:desc_ring_free: free 65544(0x10008)=32*2048+8, 0x000000003d0858a3, bus 0x1877e0000.
+[ 3607.567612] qdma_pf:xnl_dump_attrs: snd_seq 0x3, portid 0x79d8.
+[ 3607.567615] qdma_pf:xnl_dump_attrs: nlhdr: len 60, type 38, flags 0x1, seq 0x3, pid 31192.
+[ 3607.567618] qdma_pf:xnl_dump_attrs: genlhdr: cmd 0xc Q_DUMP, version 0, reserved 0x0.
+[ 3607.567620] qdma_pf:xnl_dump_attrs: attr 2, DEV_IDX, str .
+[ 3607.567623] qdma_pf:xnl_dump_attrs: attr 34, QIDX, str .
+[ 3607.567625] qdma_pf:xnl_dump_attrs: attr 35, NUM_Q, str .
+[ 3607.567627] qdma_pf:xnl_dump_attrs: attr 36, QFLAG, str .
+[ 3607.567629] qdma_pf:xnl_dump_attrs: attr 51, PIPE_GL_MAX, str .
+[ 3607.567648] qdma_pf:qdma_queue_remove: queue qdma01000-MM-0, id 0 deleted.
+[ 3607.567683] qdma_pf:xnl_dump_attrs: snd_seq 0x5, portid 0x79d8.
+[ 3607.567685] qdma_pf:xnl_dump_attrs: nlhdr: len 60, type 38, flags 0x1, seq 0x5, pid 31192.
+[ 3607.567688] qdma_pf:xnl_dump_attrs: genlhdr: cmd 0xb Q_DEL, version 0, reserved 0x0.
+[ 3607.567691] qdma_pf:xnl_dump_attrs: attr 2, DEV_IDX, str .
+[ 3607.567693] qdma_pf:xnl_dump_attrs: attr 34, QIDX, str .
+[ 3607.567695] qdma_pf:xnl_dump_attrs: attr 35, NUM_Q, str .
+[ 3607.567697] qdma_pf:xnl_dump_attrs: attr 36, QFLAG, str 
+               .
+[ 3607.567699] qdma_pf:xnl_dump_attrs: attr 51, PIPE_GL_MAX, str .
+[ 3607.567702] qdma_pf:qdma_thread_remove_work: qdma01000-MM-0 removing from thread ?, 18.
+[ 3607.567709] qdma_pf:qdma_descq_free_resource: qdma01000-MM-0: desc 0x0000000058b250a7, cmpt 0x0000000000000000.
+[ 3607.567712] qdma_pf:desc_ring_free: free 65544(0x10008)=32*2048+8, 0x0000000058b250a7, bus 0x1784e0000.
+[ 3607.567747] qdma_pf:xnl_dump_attrs: snd_seq 0x7, portid 0x79d8.
+[ 3607.567749] qdma_pf:xnl_dump_attrs: nlhdr: len 60, type 38, flags 0x1, seq 0x7, pid 31192.
+[ 3607.567752] qdma_pf:xnl_dump_attrs: genlhdr: cmd 0xc Q_DUMP, version 0, reserved 0x0.
+[ 3607.567754] qdma_pf:xnl_dump_attrs: attr 2, DEV_IDX, str .
+[ 3607.567757] qdma_pf:xnl_dump_attrs: attr 34, QIDX, str .
+[ 3607.567759] qdma_pf:xnl_dump_attrs: attr 35, NUM_Q, str .
+[ 3607.567761] qdma_pf:xnl_dump_attrs: attr 36, QFLAG, str 
+               .
+[ 3607.567763] qdma_pf:xnl_dump_attrs: attr 51, PIPE_GL_MAX, str .
+[ 3607.567766] qdma_pf:qdma_device_get_pair_descq_by_id: qdma01000-p0000:01:00.0, idx 0x0, q 0x0000000017923249 state invalid.
+[ 3607.567786] qdma_pf:qdma_queue_remove: queue qdma01000-MM-0, id 0 deleted.
