@@ -306,10 +306,10 @@ int probe_pl_dma_x86(void)
         cdma_dev->config_mem = NULL;
 
 
-        printk("dma_probe - mem_start : %x\n", mem_start);
-        printk("dma_probe - mem_len : %x\n", mem_len);
-        printk("dma_probe - dma_start : %x\n", dma_start);
-        printk("dma_probe - dma_len : %x\n", dma_len);
+        printk("dma_probe - mem_start : 0x%llx\n", mem_start);
+        printk("dma_probe - mem_len : 0x%llx\n", mem_len);
+        printk("dma_probe - dma_start : 0x%llx\n", dma_start);
+        printk("dma_probe - dma_len : 0x%llx\n", dma_len);
         // printk("dma_probe - pci_start : %x\n", pci_start);
         // printk("dma_probe - pci_len : %x\n", pci_len);
 
@@ -319,12 +319,14 @@ int probe_pl_dma_x86(void)
 //             printk(KERN_INFO "ioremap pci_ctl_reg error.\n");
 //             goto error;
 //         }
-        cdma_dev->dma_ctl_reg = ioremap_nocache(dma_start, dma_len); // ioremap is default nocached - recent version of kernel
+        // cdma_dev->dma_ctl_reg = ioremap_nocache(dma_start, dma_len); // ioremap is default nocached - recent version of kernel
+        cdma_dev->dma_ctl_reg = ioremap_cache(dma_start, dma_len); // ioremap is default nocached - recent version of kernel
         if(cdma_dev->dma_ctl_reg == NULL) {
             printk(KERN_ERR " PL_DMA] ioremap dma_ctl_reg error.\n");
             goto error;
         }
-        cdma_dev->config_reg = ioremap_nocache(mem_start + CONF_REG_OFFSET, CONF_REG_LEN); 
+        // cdma_dev->config_reg = ioremap_nocache(mem_start + CONF_REG_OFFSET, CONF_REG_LEN); 
+        cdma_dev->config_reg = ioremap_cache(mem_start + CONF_REG_OFFSET, CONF_REG_LEN); 
         if (!cdma_dev->config_reg) {
             printk(KERN_ERR " PL_DMA] Could not allocate PIM conf_reg %llx - %x", mem_start + CONF_REG_OFFSET, CONF_REG_LEN);
             goto error;
@@ -334,7 +336,8 @@ int probe_pl_dma_x86(void)
             printk(KERN_ERR " PL_DMA] Could not allocate PIM desc_mem %llx - %llx", mem_start + DESC_MEM_OFFSET, mem_start + DESC_MEM_OFFSET + DESC_MEM_LEN - 1);
             goto error;
         }
-        cdma_dev->config_mem = ioremap_nocache(mem_start + CONF_MEM_OFFSET, CONF_MEM_LEN);
+        // cdma_dev->config_mem = ioremap_nocache(mem_start + CONF_MEM_OFFSET, CONF_MEM_LEN);
+        cdma_dev->config_mem = ioremap_cache(mem_start + CONF_MEM_OFFSET, CONF_MEM_LEN);
         if (!cdma_dev->config_mem) {
             printk(KERN_ERR " PL_DMA] Could not allocate PIM conf_mem %llx - %llx", mem_start + CONF_MEM_OFFSET, mem_start + CONF_MEM_OFFSET + CONF_MEM_LEN - 1);        
             goto error;
@@ -344,9 +347,9 @@ int probe_pl_dma_x86(void)
         cdma_dev->conf_mem_base = mem_start + CONF_MEM_OFFSET - mem_start;
         cdma_dev->desc_mem_base = mem_start + DESC_MEM_OFFSET - mem_start;
 
-        printk(" PL_DMA] IOREMAP - CONFIG_REG: %llx - %llx (%llx)", mem_start + CONF_REG_OFFSET, mem_start + CONF_REG_OFFSET + CONF_REG_LEN - 1, mem_start + CONF_REG_OFFSET);
-        printk(" PL_DMA] IOREMAP - CONFIG_MEM: %llx - %llx (%x)", mem_start + CONF_MEM_OFFSET, mem_start + CONF_MEM_OFFSET + CONF_MEM_LEN - 1, cdma_dev->conf_mem_base);
-        printk(" PL_DMA] IOREMAP - DMA_DESC  : %llx - %llx (%llx)", mem_start + DESC_MEM_OFFSET, mem_start + DESC_MEM_OFFSET + DESC_MEM_LEN - 1, cdma_dev->desc_mem_base);
+        printk(" PL_DMA] IOREMAP - CONFIG_REG: 0x%llx - 0x%llx (%llx)", mem_start + CONF_REG_OFFSET, mem_start + CONF_REG_OFFSET + CONF_REG_LEN - 1, mem_start + CONF_REG_OFFSET);
+        printk(" PL_DMA] IOREMAP - CONFIG_MEM: 0x%llx - 0x%llx (%llx)", mem_start + CONF_MEM_OFFSET, mem_start + CONF_MEM_OFFSET + CONF_MEM_LEN - 1, cdma_dev->conf_mem_base);
+        printk(" PL_DMA] IOREMAP - DMA_DESC  : 0x%llx - 0x%llx (%llx)", mem_start + DESC_MEM_OFFSET, mem_start + DESC_MEM_OFFSET + DESC_MEM_LEN - 1, cdma_dev->desc_mem_base);
 
         /* 
         * Initialization Xilinx CDMA 

@@ -52,16 +52,17 @@ fi
 
 # Check to see if the xdma devices were recognized
 echo ""
-cat /proc/devices | grep xdma > /dev/null
-returnVal=$?
-echo "returnVal: $returnVal"
-if [ $returnVal == 0 ]; then
-	# Installed devices were recognized.
-	echo "The Kernel module installed correctly and the xdma devices were recognized."
-else
-	# No devices were installed.
-	echo "Error: The Kernel module installed correctly, but no devices were recognized."
-	echo " FAILED"
-	exit 1
-fi
+# cat /proc/devices | grep xdma > /dev/null
+# returnVal=$?
+# echo "returnVal: $returnVal"
+# if [ $returnVal == 0 ]; then
+# 	# Installed devices were recognized.
+# 	echo "The Kernel module installed correctly and the xdma devices were recognized."
+# else
+# 	# No devices were installed.
+# 	echo "Error: The Kernel module installed correctly, but no devices were recognized."
+# 	echo " FAILED"
+# 	exit 1
+# fi
+
 echo "DONE"

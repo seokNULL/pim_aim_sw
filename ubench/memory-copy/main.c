@@ -21,6 +21,7 @@
 #include "qdma_nl.h"
 #include "dmaxfer.h"
 
+#include <pim.h>
 /*
 #include "dma_xfer_utils.c"
 #define DEVICE_NAME_DEFAULT "/dev/qdma01000-MM-0"
@@ -40,15 +41,24 @@
 #define USE_MMAP     (0)
 #define USE_QDMA_H2C (1)
 #define USE_QDMA_C2H (2)
-#define USE_QDMA_C2C (3`)
+#define USE_QDMA_C2C (3)
+#define USE_CDMA 	 (4)
+
 
 #define AIM_RESERVED_OFFSET 0x00800000 //8 MB
-// #define AIM_RESERVED_OFFSET 0x00000000 //8 MB
 
 /*Device 0's base memory address need to be checked before progrma execution*/
 #define DEV0_MEM_BASE 0x6000000000 //Device 0 - 8GB assumed 
 #define DEVICE_NAME_DEFAULT "cpu"
 #define SIZE_DEFAULT (32) //elements
+
+#define DEV0_CDMA 0
+
+static unsigned int pci_bus = 0x01;
+static unsigned int pci_dev = 0x00;
+static int fun_id = 0x0;
+static unsigned int num_q = 1; //Board number
+static int is_vf = 0;
 
 /*QDMA related information*/
 #define QDMA_Q_NAME_LEN     100
@@ -75,13 +85,6 @@ struct queue_info {
 
 enum qdma_q_mode mode = QDMA_Q_MODE_MM;
 enum qdma_q_dir dir = QDMA_Q_DIR_BIDI;
-
-static unsigned int pci_bus = 01;
-static unsigned int pci_dev = 00;
-static int fun_id = 0;
-static unsigned int num_q = 1; //Board number
-static int is_vf = 0;
-
 
 float* AllocMat(long long size);
 void InitMat(float* mat, long long size);
@@ -536,9 +539,6 @@ int qdma_prepare_q_stop(struct xcmd_info *xcmd, enum qdmautils_io_dir dir, int q
 }
 
 
-
-
-
 int main(int argc, char *argv[]) {
 	int cmd_opt;
 	char *device = DEVICE_NAME_DEFAULT;
@@ -622,7 +622,7 @@ int main(int argc, char *argv[]) {
         }
         close(mem_fd);
     }
-    // Case 1: USE_QDMA
+    // Case 1: USE_QDMA USE_QDMA_H2C || USE_QDMA_C2H
    else if (strcmp(device, "qdma") == 0){
 	    ssize_t ret;
     	ret = qdma_validate_qrange();
@@ -667,7 +667,54 @@ int main(int argc, char *argv[]) {
 		out:
 			close(fpga_fd);			
     }
-	
+	// Case 2: USE_CDMA 
+	else if(strcmp(device, "cdma") == 0){
+		int cdma_fd = 0;
+		init_pim_drv();
+		if(cdma_fd = open(PL_DMA_DRV, O_RDWR|O_SYNC) < 0){
+			perror("CDMA driver open failed");
+			exit(-1);
+		}
+
+		if(verbose) printf("Allocating PIM memory\n");
+		float *FpgaSrc = (float*) pim_malloc(size*sizeof(float), DEV0_CDMA);
+		float *FpgaDst = (float*) pim_malloc(size*sizeof(float), DEV0_CDMA);
+		if((FpgaSrc == MAP_FAILED)||(FpgaDst == MAP_FAILED)){
+			printf("FPGA alloc failed\n");
+			return -1;
+		} 
+		uint64_t SrcPa = VA2PA((uint64_t)&FpgaSrc[0]);
+		uint64_t DstPa = VA2PA((uint64_t)&FpgaDst[0]);
+    	if(verbose){
+			printf("Source PA:0x%llx \n", SrcPa);
+    		printf("Destination PA:0x%llx \n", DstPa);
+		}
+		ZeroMat(FpgaSrc,size);
+		ZeroMat(FpgaDst,size);
+		InitMat(FpgaSrc,size);
+
+		pim_args *pim_code;
+    	int code_size = sizeof(pim_args);
+    	pim_code = (pim_args *)malloc(1024*1024*code_size);
+		if(internalMemcpy(FpgaDst, FpgaSrc, size*sizeof(float), DEV0_CDMA)<0){
+			return -1;
+		};
+
+        if (verbose){
+            printf("Copy Source Matrix:\n");
+            PrintMatrixElem(FpgaSrc, size);
+            printf("\n==================================================\n");
+            PrintMatrixHexa(FpgaSrc, size);
+            
+			printf("Copy Destination Matrix:\n");
+            PrintMatrixElem(FpgaDst, size);
+            printf("\n==================================================\n");
+            PrintMatrixHexa(FpgaDst, size);          			            
+        }
+	}
+
+
+
     free(SrcIn);
     free(DstOut);
     free(Ans);

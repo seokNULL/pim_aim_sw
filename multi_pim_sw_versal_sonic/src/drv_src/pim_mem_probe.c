@@ -301,9 +301,9 @@ int probe_pim_mem_x86(void)
         printk("---------------------------");
         printk("PIM_MEM_%d] PIM DMA/PCIe control driver", node->fpga_id);
         
-        printk("PIM_MEM_%d] BAR #%d - DRAM    : %llx - %llx (LEN: %llx) \n", node->fpga_id, MEMORY_NUM, pci_resource_start(pciem_dev, MEMORY_NUM) + RESERVED,  pci_resource_end(pciem_dev, MEMORY_NUM), pci_resource_len(pciem_dev, MEMORY_NUM) - RESERVED);
-        printk("PIM_MEM_%d] BAR #%d - DMA     : %llx - %llx (LEN: %llx) \n", node->fpga_id, DMA_CONF_NUM, pci_resource_start(pciem_dev, DMA_CONF_NUM),  pci_resource_end(pciem_dev, DMA_CONF_NUM), pci_resource_len(pciem_dev, DMA_CONF_NUM));
-        printk("PIM_MEM_%d] BAR #%d - PCIE_OUT: %llx - %llx (LEN: %llx) \n", node->fpga_id, PCI_CONF_NUM, pci_resource_start(pciem_dev, PCI_CONF_NUM),  pci_resource_end(pciem_dev, PCI_CONF_NUM), pci_resource_len(pciem_dev, PCI_CONF_NUM));
+        printk("PIM_MEM_%d] BAR #%d - DRAM    : 0x%llx - 0x%llx (LEN: %llx) \n", node->fpga_id, MEMORY_NUM, pci_resource_start(pciem_dev, MEMORY_NUM) + RESERVED,  pci_resource_end(pciem_dev, MEMORY_NUM), pci_resource_len(pciem_dev, MEMORY_NUM) - RESERVED);
+        printk("PIM_MEM_%d] BAR #%d - DMA     : 0x%llx - 0x%llx (LEN: %llx) \n", node->fpga_id, DMA_CONF_NUM, pci_resource_start(pciem_dev, DMA_CONF_NUM),  pci_resource_end(pciem_dev, DMA_CONF_NUM), pci_resource_len(pciem_dev, DMA_CONF_NUM));
+        printk("PIM_MEM_%d] BAR #%d - PCIE_OUT: 0x%llx - 0x%llx (LEN: %llx) \n", node->fpga_id, PCI_CONF_NUM, pci_resource_start(pciem_dev, PCI_CONF_NUM),  pci_resource_end(pciem_dev, PCI_CONF_NUM), pci_resource_len(pciem_dev, PCI_CONF_NUM));
 
         
         
@@ -335,7 +335,8 @@ int probe_pim_mem_x86(void)
         /* FPGA BAR */
         mem_start = pci_resource_start(pciem_dev, MEMORY_NUM) + RESERVED;
         mem_len = pci_resource_len(pciem_dev, MEMORY_NUM) - RESERVED;
-        pim_mem_reg = ioremap_nocache(mem_start, mem_len);
+        // pim_mem_reg = ioremap_nocache(mem_start, mem_len);
+        pim_mem_reg = ioremap_cache(mem_start, mem_len);
 
         printk("PIM_MEM_PROBE - pim_mem_reg: %p\n", pim_mem_reg);
         printk("PIM_MEM_PROBE - pim_mem_reg: %llx\n", pim_mem_reg);

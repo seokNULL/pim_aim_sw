@@ -373,21 +373,6 @@ int main(int argc, char *argv[])
     union converter a;
     union converter b;
 
-    // printf("\nOperand A check!\n");
-    // for(int i=0; i<srcA_size; i++){ 
-
-    //     printf("idx[%4d] ", i);
-    //     printf("0x%x ", PL_srcA_buf[i]);
-    //     printf("\n");   
-    // }
-
-    // printf("\nOperand B check!\n");
-    // for(int i=0; i<srcB_size; i++){ 
-
-    //     printf("idx[%4d] ", i);
-    //     printf("0x%x ", PL_srcB_buf[i]);
-    //     printf("\n");   
-    // }
 
     printf("Correctness check!\n\n");
     printf("            CPU       |    PIM\n");
@@ -411,29 +396,7 @@ int main(int argc, char *argv[])
         //if (i == 32) // Only Bank 0
         //    break;        
     }
-    //// from ubench
-    // printf("Correctness check!\n\n");
-    // printf("            CPU       |    PIM\n");
-    // for(int i=0; i<dstC_size; i++){ 
-    //     a.f_val = dst_C_DRAM[i];
 
-    //     #ifdef DUMP_BANK0_ONLY
-    //     if ((i%256)==0){ // Only Bank 0
-    //       for(int j=0; j<16; j++){
-    //         a.f_val = dst_C_DRAM[i+j];
-    //         printf("idx[%4d] %+.3f  |  ", i, dst_C_DRAM[i]);
-    //         printf("0x%x ", PL_dstC_buf[i+j]);
-    //         printf("\n");
-    //       }
-    //     }
-    //     #else
-    //     printf("idx[%4d] %+.3f  |  ", i, dst_C_DRAM[i]);
-    //     printf("%+.3f  ", short_to_float(PL_dstC_buf[i]));
-    //     printf("\n");
-    //     #endif
-    //     //if (i == 32) // Only Bank 0
-    //     //    break;        
-    // }
     printf("\n");
     pim_free(PL_srcA_buf, fpga_id);
     pim_free(PL_srcB_buf, fpga_id);

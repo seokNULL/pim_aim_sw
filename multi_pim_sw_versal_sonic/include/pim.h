@@ -13,7 +13,7 @@
 // #define x86_PIM_PERF /* For time measurement in x86*/
 
 /* For debugging */
-// #define DEBUG_PL_DMA /* Xilinx CDMA debugging */
+#define DEBUG_PL_DMA /* Xilinx CDMA debugging */
 // #define DEBUG_HOST_DMA /* X86 HOST debugging */
 // #define DEBUG_PIM_MEM /* PIM MemPool debugging */
 // #define DEBUG_PIM_MATH /* PIM Math library debugging */
@@ -28,7 +28,8 @@
 #ifdef __aarch64__
     #define HIGH_ADDR   0x00000004 /* PL DDR address is 0x40000_0000 ~ in ARM platform */
 #elif defined __x86_64__
-    #define HIGH_ADDR   0x00000208 /* PL DDR address is always 32 bits in x86 platform*/
+    // #define HIGH_ADDR   0x00000208 /* PL DDR address is always 32 bits in x86 platform*/ /*Versal*/
+	#define HIGH_ADDR   0x00000000 /* PL DDR address is always 32 bits in x86 platform*/ /*AiMX*/
 
 #endif
 

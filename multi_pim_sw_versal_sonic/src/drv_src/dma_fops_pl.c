@@ -197,6 +197,7 @@ int dma_single_tx(u32 src_low, u32 src_high, u32 dst_low, u32 dst_high, u32 copy
     PL_DMA_LOG("SRC_H: %x", src_high);
     PL_DMA_LOG("DST_L: %x", dst_low);
     PL_DMA_LOG("DST_H: %x", dst_high);
+    PL_DMA_LOG("SIZE: %x", copy_len)
     dma_ctrl_write(CDMA_REG_SR, CDMA_REG_SR_IOCIRQ, cdma_dev);
     // PL_DMA_LOG("CR: %x \n", dma_ctrl_read(CDMA_REG_CR, cdma_dev));
     // PL_DMA_LOG("SR: %x \n", dma_ctrl_read(CDMA_REG_SR, cdma_dev));

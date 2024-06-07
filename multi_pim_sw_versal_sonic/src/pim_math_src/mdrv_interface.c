@@ -78,7 +78,7 @@ int init_mpim_drv(void) {
         }
         atexit(close_mpim_drv);
     }
-    init_xdma_drv(); //added
+    // init_xdma_drv(); //added
     return totalDevNum;
     // return 0;
 }

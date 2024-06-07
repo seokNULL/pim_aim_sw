@@ -1,0 +1,1 @@
+cmd_/home/sy/work/pim_aimx_sw/multi_pim_sw_versal_sonic/src/drv_src/Module.symvers := sed 's/\.ko$$/\.o/' /home/sy/work/pim_aimx_sw/multi_pim_sw_versal_sonic/src/drv_src/modules.order | scripts/mod/modpost -m -a  -o /home/sy/work/pim_aimx_sw/multi_pim_sw_versal_sonic/src/drv_src/Module.symvers -e -i Module.symvers   -T -

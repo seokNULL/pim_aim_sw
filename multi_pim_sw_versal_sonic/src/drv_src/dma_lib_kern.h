@@ -10,10 +10,16 @@
 //#define DMA_CONF_NUM 1
 //#define PCI_CONF_NUM 3 // PCI DMA (DO NOT USE)
 
+//Versal platform BAR configuration
+// #define MEMORY_NUM 2
+// #define DMA_CONF_NUM 4
+// #define PCI_CONF_NUM 0 // PCI DMA (DO NOT USE)
 
-#define MEMORY_NUM 2
-#define DMA_CONF_NUM 4
+//AiMX platform BAR configuration
+#define MEMORY_NUM 4
+#define DMA_CONF_NUM 2
 #define PCI_CONF_NUM 0 // PCI DMA (DO NOT USE)
+
 
 /* For host DMA */
 #define DMA_COHERENT
