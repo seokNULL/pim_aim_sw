@@ -1,0 +1,96 @@
+seq 1
+CPU matmul latency 524490 ns at iter #0	524490
+CPU matmul latency 487462 ns at iter #1	487462
+CPU matmul latency 491332 ns at iter #2	491332
+CPU matmul latency 486043 ns at iter #3	486043
+CPU matmul latency 509411 ns at iter #4	509411
+CPU matmul latency 488283 ns at iter #5	488283
+CPU matmul latency 496882 ns at iter #6	496882
+CPU matmul latency 493373 ns at iter #7	493373
+CPU matmul latency 486862 ns at iter #8	486862
+CPU matmul latency 489293 ns at iter #9	489293
+CPU average matmul latency 495343 ns 1 512 512	495343
+PIM matmul latency 644340 ns at iter #0	644340
+PIM matmul latency 636292 ns at iter #1	636292
+PIM matmul latency 636931 ns at iter #2	636931
+PIM matmul latency 636681 ns at iter #3	636681
+PIM matmul latency 636681 ns at iter #4	636681
+PIM matmul latency 636681 ns at iter #5	636681
+PIM matmul latency 636692 ns at iter #6	636692
+PIM matmul latency 636711 ns at iter #7	636711
+PIM matmul latency 638371 ns at iter #8	638371
+PIM matmul latency 636791 ns at iter #9	636791
+PIM average matmul latency 637617 ns 1 512 512	637617
+
+seq 4
+CPU matmul latency 2463031 ns at iter #0	2463031
+CPU matmul latency 2164895 ns at iter #1	2164895
+CPU matmul latency 2072601 ns at iter #2	2072601
+CPU matmul latency 2155825 ns at iter #3	2155825
+CPU matmul latency 2469910 ns at iter #4	2469910
+CPU matmul latency 2227530 ns at iter #5	2227530
+CPU matmul latency 2365969 ns at iter #6	2365969
+CPU matmul latency 2374388 ns at iter #7	2374388
+CPU matmul latency 2235318 ns at iter #8	2235318
+CPU matmul latency 2476411 ns at iter #9	2476411
+CPU average matmul latency 2300587 ns 4 512 512	2300587
+PIM matmul latency 2539825 ns at iter #0	2539825
+PIM matmul latency 2529886 ns at iter #1	2529886
+PIM matmul latency 2531636 ns at iter #2	2531636
+PIM matmul latency 2530626 ns at iter #3	2530626
+PIM matmul latency 2529637 ns at iter #4	2529637
+PIM matmul latency 2531426 ns at iter #5	2531426
+PIM matmul latency 2529376 ns at iter #6	2529376
+PIM matmul latency 2528316 ns at iter #7	2528316
+PIM matmul latency 2532786 ns at iter #8	2532786
+PIM matmul latency 2529287 ns at iter #9	2529287
+PIM average matmul latency 2531280 ns 4 512 512	2531280
+
+seq 16
+CPU matmul latency 8238169 ns at iter #0	8238169
+CPU matmul latency 8195391 ns at iter #1	8195391
+CPU matmul latency 8211601 ns at iter #2	8211601
+CPU matmul latency 7738667 ns at iter #3	7738667
+CPU matmul latency 7779635 ns at iter #4	7779635
+CPU matmul latency 7662924 ns at iter #5	7662924
+CPU matmul latency 7775794 ns at iter #6	7775794
+CPU matmul latency 7685121 ns at iter #7	7685121
+CPU matmul latency 7633126 ns at iter #8	7633126
+CPU matmul latency 7675583 ns at iter #9	7675583
+CPU average matmul latency 7859601 ns 16 512 512	7859601
+PIM matmul latency 10157232 ns at iter #0	10157232
+PIM matmul latency 10125535 ns at iter #1	10125535
+PIM matmul latency 10123604 ns at iter #2	10123604
+PIM matmul latency 10128235 ns at iter #3	10128235
+PIM matmul latency 10125895 ns at iter #4	10125895
+PIM matmul latency 10134554 ns at iter #5	10134554
+PIM matmul latency 10130274 ns at iter #6	10130274
+PIM matmul latency 10153213 ns at iter #7	10153213
+PIM matmul latency 10141724 ns at iter #8	10141724
+PIM matmul latency 10161423 ns at iter #9	10161423
+PIM average matmul latency 10138168 ns 16 512 512	10138168
+
+seq 64
+CPU matmul latency 35467224 ns at iter #0	35467224
+CPU matmul latency 36421371 ns at iter #1	36421371
+CPU matmul latency 34927246 ns at iter #2	34927246
+CPU matmul latency 34862511 ns at iter #3	34862511
+CPU matmul latency 36535362 ns at iter #4	36535362
+CPU matmul latency 34598522 ns at iter #5	34598522
+CPU matmul latency 34613562 ns at iter #6	34613562
+CPU matmul latency 34593853 ns at iter #7	34593853
+CPU matmul latency 34628870 ns at iter #8	34628870
+CPU matmul latency 34564085 ns at iter #9	34564085
+CPU average matmul latency 35121260 ns 64 512 512	35121260
+PIM matmul latency 40605723 ns at iter #0	40605723
+PIM matmul latency 40519999 ns at iter #1	40519999
+PIM matmul latency 40546238 ns at iter #2	40546238
+PIM matmul latency 40623122 ns at iter #3	40623122
+PIM matmul latency 40588114 ns at iter #4	40588114
+PIM matmul latency 40599323 ns at iter #5	40599323
+PIM matmul latency 40597994 ns at iter #6	40597994
+PIM matmul latency 40590264 ns at iter #7	40590264
+PIM matmul latency 40605243 ns at iter #8	40605243
+PIM matmul latency 40592004 ns at iter #9	40592004
+PIM average matmul latency 40586802 ns 64 512 512	40586802
+

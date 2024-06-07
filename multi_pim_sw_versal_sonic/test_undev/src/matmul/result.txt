@@ -1,0 +1,136 @@
+seq 1
+Complete pim_malloc
+A_va:7fb187ebd000 
+B_va:7fb187ebf000 
+C_va:7fb187f3f000 
+A_pa:1000000 
+B_pa:1002000 
+C_pa:1082000 
+srcA init
+srcB init (262144)
+dstC init
+CPU execution time 2182080 ns at iter #0
+CPU execution time 2189609 ns at iter #1
+CPU execution time 2171611 ns at iter #2
+CPU execution time 2156752 ns at iter #3
+CPU execution time 2161251 ns at iter #4
+CPU execution time 2157701 ns at iter #5
+CPU execution time 2180050 ns at iter #6
+CPU execution time 2159352 ns at iter #7
+CPU execution time 2156031 ns at iter #8
+CPU execution time 2241027 ns at iter #9
+CPU average execution time 2175546 ns 1 512 512
+PIM execution time 645864 ns at iter #0
+PIM execution time 638475 ns at iter #1
+PIM execution time 638375 ns at iter #2
+PIM execution time 636695 ns at iter #3
+PIM execution time 636755 ns at iter #4
+PIM execution time 636735 ns at iter #5
+PIM execution time 636735 ns at iter #6
+PIM execution time 636745 ns at iter #7
+PIM execution time 636755 ns at iter #8
+PIM execution time 636755 ns at iter #9
+PIM average execution time 637988 ns 1 512 512
+
+seq 4
+Complete pim_malloc
+A_va:7f623a1cb000 
+B_va:7f623a1cc000 
+C_va:7f623a24c000 
+A_pa:1000000 
+B_pa:1001000 
+C_pa:1081000 
+srcA init
+srcB init (262144)
+dstC init
+CPU execution time 8787687 ns at iter #0
+CPU execution time 8865024 ns at iter #1
+CPU execution time 9008835 ns at iter #2
+CPU execution time 8890681 ns at iter #3
+CPU execution time 8821245 ns at iter #4
+CPU execution time 8846454 ns at iter #5
+CPU execution time 9116769 ns at iter #6
+CPU execution time 8496313 ns at iter #7
+CPU execution time 8474475 ns at iter #8
+CPU execution time 8798747 ns at iter #9
+CPU average execution time 8810623 ns 4 512 512
+PIM execution time 2548409 ns at iter #0
+PIM execution time 2528311 ns at iter #1
+PIM execution time 2530321 ns at iter #2
+PIM execution time 2528421 ns at iter #3
+PIM execution time 2528411 ns at iter #4
+PIM execution time 2529981 ns at iter #5
+PIM execution time 2528811 ns at iter #6
+PIM execution time 2530181 ns at iter #7
+PIM execution time 2528421 ns at iter #8
+PIM execution time 2530041 ns at iter #9
+PIM average execution time 2531130 ns 4 512 512
+
+seq 16
+Complete pim_malloc
+A_va:7f77ef13a000 
+B_va:7f77ef13e000 
+C_va:7f77ef1be000 
+A_pa:1000000 
+B_pa:1004000 
+C_pa:1084000 
+srcA init
+srcB init (262144)
+dstC init
+CPU execution time 33854090 ns at iter #0
+CPU execution time 34391420 ns at iter #1
+CPU execution time 35328930 ns at iter #2
+CPU execution time 35086882 ns at iter #3
+CPU execution time 34112446 ns at iter #4
+CPU execution time 35107181 ns at iter #5
+CPU execution time 34515483 ns at iter #6
+CPU execution time 33835472 ns at iter #7
+CPU execution time 33853899 ns at iter #8
+CPU execution time 35360167 ns at iter #9
+CPU average execution time 34544597 ns 16 512 512
+PIM execution time 10163212 ns at iter #0
+PIM execution time 10134343 ns at iter #1
+PIM execution time 10131004 ns at iter #2
+PIM execution time 10128193 ns at iter #3
+PIM execution time 10126333 ns at iter #4
+PIM execution time 10131324 ns at iter #5
+PIM execution time 10129133 ns at iter #6
+PIM execution time 10127383 ns at iter #7
+PIM execution time 10134184 ns at iter #8
+PIM execution time 10130643 ns at iter #9
+PIM average execution time 10133575 ns 16 512 512
+
+seq 64
+Complete pim_malloc
+A_va:7f2952c9a000 
+B_va:7f2952caa000 
+C_va:7f2952d2a000 
+A_pa:1000000 
+B_pa:1010000 
+C_pa:1090000 
+srcA init
+srcB init (262144)
+dstC init
+CPU execution time 147783471 ns at iter #0
+CPU execution time 144507680 ns at iter #1
+CPU execution time 144257354 ns at iter #2
+CPU execution time 146889500 ns at iter #3
+CPU execution time 143695555 ns at iter #4
+CPU execution time 141772731 ns at iter #5
+CPU execution time 143971140 ns at iter #6
+CPU execution time 148019338 ns at iter #7
+CPU execution time 142682751 ns at iter #8
+CPU execution time 144810854 ns at iter #9
+CPU average execution time 144839037 ns 64 512 512
+PIM execution time 40618299 ns at iter #0
+PIM execution time 40528303 ns at iter #1
+PIM execution time 40610429 ns at iter #2
+PIM execution time 40582671 ns at iter #3
+PIM execution time 40536933 ns at iter #4
+PIM execution time 40697684 ns at iter #5
+PIM execution time 40648437 ns at iter #6
+PIM execution time 40601889 ns at iter #7
+PIM execution time 40621788 ns at iter #8
+PIM execution time 40595340 ns at iter #9
+PIM average execution time 40604177 ns 64 512 512
+

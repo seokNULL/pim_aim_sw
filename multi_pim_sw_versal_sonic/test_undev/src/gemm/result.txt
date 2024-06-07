@@ -1,0 +1,112 @@
+seq 1
+srcA init
+srcB init (262144)
+Bias init
+dstC init
+CPU gemm latency 2022059 ns at iter #0
+CPU gemm latency 2255417 ns at iter #1
+CPU gemm latency 2196700 ns at iter #2
+CPU gemm latency 2022980 ns at iter #3
+CPU gemm latency 2020290 ns at iter #4
+CPU gemm latency 2358101 ns at iter #5
+CPU gemm latency 2079927 ns at iter #6
+CPU gemm latency 2014520 ns at iter #7
+CPU gemm latency 2016140 ns at iter #8
+CPU gemm latency 2017710 ns at iter #9
+CPU average gemm latency 2100384 ns 1 512 512
+PIM gemm latency 647374 ns at iter #0
+PIM gemm latency 640346 ns at iter #1
+PIM gemm latency 639755 ns at iter #2
+PIM gemm latency 639365 ns at iter #3
+PIM gemm latency 638645 ns at iter #4
+PIM gemm latency 638245 ns at iter #5
+PIM gemm latency 639065 ns at iter #6
+PIM gemm latency 638235 ns at iter #7
+PIM gemm latency 639055 ns at iter #8
+PIM gemm latency 640515 ns at iter #9
+PIM average gemm latency 640060 ns 1 512 512
+
+seq 4
+srcA init
+srcB init (262144)
+Bias init
+dstC init
+CPU gemm latency 8489637 ns at iter #0
+CPU gemm latency 8101238 ns at iter #1
+CPU gemm latency 8108398 ns at iter #2
+CPU gemm latency 8090879 ns at iter #3
+CPU gemm latency 8127836 ns at iter #4
+CPU gemm latency 8499437 ns at iter #5
+CPU gemm latency 8097198 ns at iter #6
+CPU gemm latency 8479667 ns at iter #7
+CPU gemm latency 8109098 ns at iter #8
+CPU gemm latency 8102488 ns at iter #9
+CPU average gemm latency 8220587 ns 4 512 512
+PIM gemm latency 2551551 ns at iter #0
+PIM gemm latency 2539411 ns at iter #1
+PIM gemm latency 2538142 ns at iter #2
+PIM gemm latency 2537951 ns at iter #3
+PIM gemm latency 2539362 ns at iter #4
+PIM gemm latency 2536712 ns at iter #5
+PIM gemm latency 2536061 ns at iter #6
+PIM gemm latency 2537922 ns at iter #7
+PIM gemm latency 2537682 ns at iter #8
+PIM gemm latency 2539052 ns at iter #9
+PIM average gemm latency 2539384 ns 4 512 512
+
+seq 16
+srcA init
+srcB init (262144)
+Bias init
+dstC init
+CPU gemm latency 33199159 ns at iter #0
+CPU gemm latency 33602607 ns at iter #1
+CPU gemm latency 33961257 ns at iter #2
+CPU gemm latency 32774373 ns at iter #3
+CPU gemm latency 32433111 ns at iter #4
+CPU gemm latency 32370234 ns at iter #5
+CPU gemm latency 33156462 ns at iter #6
+CPU gemm latency 32508277 ns at iter #7
+CPU gemm latency 32757843 ns at iter #8
+CPU gemm latency 33330042 ns at iter #9
+CPU average gemm latency 33009336 ns 16 512 512
+PIM gemm latency 10170486 ns at iter #0
+PIM gemm latency 10133487 ns at iter #1
+PIM gemm latency 10142717 ns at iter #2
+PIM gemm latency 10135556 ns at iter #3
+PIM gemm latency 10140837 ns at iter #4
+PIM gemm latency 10269620 ns at iter #5
+PIM gemm latency 10164716 ns at iter #6
+PIM gemm latency 10166765 ns at iter #7
+PIM gemm latency 10183755 ns at iter #8
+PIM gemm latency 10276510 ns at iter #9
+PIM average gemm latency 10178444 ns 16 512 512
+
+seq 64
+srcA init
+srcB init (262144)
+Bias init
+dstC init
+CPU gemm latency 132044409 ns at iter #0
+CPU gemm latency 136095317 ns at iter #1
+CPU gemm latency 129937323 ns at iter #2
+CPU gemm latency 129663168 ns at iter #3
+CPU gemm latency 129962792 ns at iter #4
+CPU gemm latency 132526092 ns at iter #5
+CPU gemm latency 129931573 ns at iter #6
+CPU gemm latency 130049888 ns at iter #7
+CPU gemm latency 134889353 ns at iter #8
+CPU gemm latency 129798111 ns at iter #9
+CPU average gemm latency 131489802 ns 64 512 512
+PIM gemm latency 40672673 ns at iter #0
+PIM gemm latency 40687401 ns at iter #1
+PIM gemm latency 40615295 ns at iter #2
+PIM gemm latency 40644133 ns at iter #3
+PIM gemm latency 40646513 ns at iter #4
+PIM gemm latency 40639773 ns at iter #5
+PIM gemm latency 40648294 ns at iter #6
+PIM gemm latency 40657522 ns at iter #7
+PIM gemm latency 40659152 ns at iter #8
+PIM gemm latency 40643123 ns at iter #9
+PIM average gemm latency 40651387 ns 64 512 512
+

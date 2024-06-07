@@ -1,0 +1,100 @@
+Complete pim_malloc
+A:1000000 
+B:1080000 
+C:1100000 
+srcA init
+srcB init
+dstC init
+check cpu elewise
+PIM] execution time 4461729 nanoseconds
+CPU] execution time 804598 nanoseconds
+Complete pim_malloc
+A:1000000 
+B:1080000 
+C:1100000 
+srcA init
+srcB init
+dstC init
+check cpu elewise
+PIM] execution time 4342755 nanoseconds
+CPU] execution time 827297 nanoseconds
+Complete pim_malloc
+A:1000000 
+B:1080000 
+C:1100000 
+srcA init
+srcB init
+dstC init
+check cpu elewise
+PIM] execution time 4432660 nanoseconds
+CPU] execution time 850696 nanoseconds
+Complete pim_malloc
+A:1000000 
+B:1080000 
+C:1100000 
+srcA init
+srcB init
+dstC init
+check cpu elewise
+PIM] execution time 4348864 nanoseconds
+CPU] execution time 925022 nanoseconds
+Complete pim_malloc
+A:1000000 
+B:1080000 
+C:1100000 
+srcA init
+srcB init
+dstC init
+check cpu elewise
+PIM] execution time 4326455 nanoseconds
+CPU] execution time 752581 nanoseconds
+Complete pim_malloc
+A:1000000 
+B:1080000 
+C:1100000 
+srcA init
+srcB init
+dstC init
+check cpu elewise
+PIM] execution time 4356774 nanoseconds
+CPU] execution time 813208 nanoseconds
+Complete pim_malloc
+A:1000000 
+B:1080000 
+C:1100000 
+srcA init
+srcB init
+dstC init
+check cpu elewise
+PIM] execution time 4344555 nanoseconds
+CPU] execution time 837536 nanoseconds
+Complete pim_malloc
+A:1000000 
+B:1080000 
+C:1100000 
+srcA init
+srcB init
+dstC init
+check cpu elewise
+PIM] execution time 4353534 nanoseconds
+CPU] execution time 895004 nanoseconds
+Complete pim_malloc
+A:1000000 
+B:1080000 
+C:1100000 
+srcA init
+srcB init
+dstC init
+check cpu elewise
+PIM] execution time 4264579 nanoseconds
+CPU] execution time 753931 nanoseconds
+Complete pim_malloc
+A:1000000 
+B:1080000 
+C:1100000 
+srcA init
+srcB init
+dstC init
+check cpu elewise
+PIM] execution time 4277318 nanoseconds
+CPU] execution time 754161 nanoseconds

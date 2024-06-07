@@ -1,0 +1,25 @@
+Add
+256x256
+CPU(system memory) elewise add latency 10279 ns at iter #0	10279
+CPU average elewise add latency 10279 ns 256 256	10279
+PIM elewise add latency 1063842 ns at iter #0	1063842
+PIM average elewise add latency 1063842 ns 256 256	1063842
+
+512x512
+CPU(system memory) elewise add latency 122385 ns at iter #0	122385
+CPU average elewise add latency 122385 ns 512 512	122385
+PIM elewise add latency 4249859 ns at iter #0	4249859
+PIM average elewise add latency 4249859 ns 512 512	4249859
+
+1024x1024
+CPU(system memory) elewise add latency 706538 ns at iter #0	706538
+CPU average elewise add latency 706538 ns 1024 1024	706538
+PIM elewise add latency 16951224 ns at iter #0	16951224
+PIM average elewise add latency 16951224 ns 1024 1024	16951224
+
+2048x2048
+CPU(system memory) elewise add latency 2782887 ns at iter #0	2782887
+CPU average elewise add latency 2782887 ns 2048 2048	2782887
+PIM elewise add latency 67765007 ns at iter #0	67765007
+PIM average elewise add latency 67765007 ns 2048 2048	67765007
+

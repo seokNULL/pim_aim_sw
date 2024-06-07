@@ -1,0 +1,36 @@
+{
+    "files.watcherExclude": {
+        "**/target": true
+    },
+    "files.associations": {
+        "pim_mem.h": "c",
+        "pim_math.h": "c",
+        "dma_lib_kern.h": "c",
+        "vector": "c",
+        "pim_mem_lib_kern.h": "c",
+        "pim.h": "c",
+        "stdbool.h": "c",
+        "multi-pim.h": "c",
+        "mpim_mem.h": "c",
+        "type_traits": "c",
+        "multi_dev_drv.h": "c",
+        "multi_dev_lib_kern.h": "c",
+        "pim_mem_lib_user.h": "c",
+        "mpim_math.h": "c",
+<<<<<<< HEAD
+        "multi_dev_lib_user.h": "c",
+        "array": "cpp",
+        "bitset": "cpp",
+        "string_view": "cpp",
+        "initializer_list": "cpp",
+        "utility": "cpp",
+        "stdint.h": "c",
+        "istream": "c",
+        "ostream": "c",
+        "tuple": "c"
+=======
+        "multi_dev_lib_user.h": "c"
+>>>>>>> parent of 2700a30... commit before removing single fpga setting
+    },
+    "C_Cpp.dimInactiveRegions": false
+}

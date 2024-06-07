@@ -1,0 +1,8 @@
+seq 1
+
+seq 4
+
+seq 16
+
+seq 64
+
