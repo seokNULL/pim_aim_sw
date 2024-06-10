@@ -47,7 +47,8 @@ extern struct dentry *qdma_debugfs_root;
 /**
  * QDMA config bar size - 64MB
  */
-#define QDMA_MAX_BAR_LEN_MAPPED		0x4000000
+// #define QDMA_MAX_BAR_LEN_MAPPED		0x04000000
+#define QDMA_MAX_BAR_LEN_MAPPED		0x04000000
 /**
  * Min QDMA config bar size - 16K
  */

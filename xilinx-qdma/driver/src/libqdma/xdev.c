@@ -531,63 +531,76 @@ static int xdev_identify_bars(struct xlnx_dma_dev *xdev, struct pci_dev *pdev)
 	int bar_id_list[QDMA_BAR_NUM];
 	int bar_id_idx = 0;
 
+	resource_size_t mem_len = 0;
+
 	/* Find out the number of bars present in the design */
 	for (bar_idx = 0; bar_idx < QDMA_BAR_NUM; bar_idx++) {
-		int map_len = 0;
+		// int map_len = 0;
+		mem_len = pci_resource_len(pdev, bar_idx);
+		
+		pr_info("BAR index:%d, Length:%llx.\n", bar_idx, mem_len);
 
-		map_len = pci_resource_len(pdev, bar_idx);
-		if (!map_len)
+		if (!mem_len)
 			continue;
 
 		bar_id_list[bar_id_idx] = bar_idx;
 		bar_id_idx++;
 		num_bars_present++;
 	}
+	pr_info("Total bar present:%d\n", num_bars_present);
 
-	if (num_bars_present > 1) {
-		int rv = 0;
+//************************************************************************//
+// BAR 2 and 4 identification won't necessary for sPIM and QDMA transaction
+// AXI Lite Master (BAR 2) removed on sPIM H/W design, so to create xdev:qdma
+// we removed BAR 2 identification
+// Also removed BAR 4 identification as it cause overflow w/ 8GB memory size
+//************************************************************************//
 
-		/* AXI Master Lite BAR IDENTIFICATION */
-		if (xdev->version_info.ip_type == QDMA_VERSAL_HARD_IP)
-			xdev->conf.bar_num_user = DEFAULT_USER_BAR;
-		else {
-#ifndef __QDMA_VF__
-			rv = xdev->hw.qdma_get_user_bar(xdev, 0,
-					xdev->func_id,
-					(uint8_t *)&xdev->conf.bar_num_user);
-#else
-			rv = xdev->hw.qdma_get_user_bar(xdev, 1,
-					xdev->func_id_parent,
-					(uint8_t *)&xdev->conf.bar_num_user);
-#endif
-		}
+// 	if (num_bars_present > 1) {
+// 		int rv = 0;
 
-		if (rv < 0) {
-			pr_err("get AXI Master Lite bar failed with error = %d",
-					rv);
-			return xdev->hw.qdma_get_error_code(rv);
-		}
+// 		/* AXI Master Lite BAR IDENTIFICATION */
+// 		if (xdev->version_info.ip_type == QDMA_VERSAL_HARD_IP)
+// 			xdev->conf.bar_num_user = DEFAULT_USER_BAR;
+// 		else {
+// #ifndef __QDMA_VF__
+// 			pr_info("func: qdma_get_user_bar: line 556\n");
+// 			rv = xdev->hw.qdma_get_user_bar(xdev, 0,
+// 					xdev->func_id,
+// 					(uint8_t *)&xdev->conf.bar_num_user);
+// #else
+// 			rv = xdev->hw.qdma_get_user_bar(xdev, 1,
+// 					xdev->func_id_parent,
+// 					(uint8_t *)&xdev->conf.bar_num_user);
+// #endif
+// 		}
 
-		pr_info("AXI Master Lite BAR %d.\n",
-				xdev->conf.bar_num_user);
+// 		if (rv < 0) {
+// 			pr_err("get AXI Master Lite bar failed with error = %d",
+// 					rv);
+// 			return xdev->hw.qdma_get_error_code(rv);
+// 		}
 
-		/* AXI Bridge Master BAR IDENTIFICATION */
-		if (num_bars_present > 2) {
-			for (bar_idx = 0; bar_idx < num_bars_present;
-								bar_idx++) {
-				if ((bar_id_list[bar_idx] !=
-						xdev->conf.bar_num_user) &&
-						(bar_id_list[bar_idx] !=
-						xdev->conf.bar_num_config)) {
-					xdev->conf.bar_num_bypass =
-						bar_id_list[bar_idx];
-					pr_info("AXI Bridge Master BAR %d.\n",
-						xdev->conf.bar_num_bypass);
-					break;
-				}
-			}
-		}
-	}
+// 		pr_info("AXI Master Lite BAR %d.\n",
+// 				xdev->conf.bar_num_user);
+
+// 		/* AXI Bridge Master BAR IDENTIFICATION */
+// 		if (num_bars_present > 2) {
+// 			for (bar_idx = 0; bar_idx < num_bars_present;
+// 								bar_idx++) {
+// 				if ((bar_id_list[bar_idx] !=
+// 						xdev->conf.bar_num_user) &&
+// 						(bar_id_list[bar_idx] !=
+// 						xdev->conf.bar_num_config)) {
+// 					xdev->conf.bar_num_bypass =
+// 						bar_id_list[bar_idx];
+// 					pr_info("AXI Bridge Master BAR %d.\n",
+// 						xdev->conf.bar_num_bypass);
+// 					break;
+// 				}
+// 			}
+// 		}
+// 	}
 	return 0;
 }
 

@@ -39,6 +39,7 @@ static spinlock_t legacy_q_add_lock;
 static unsigned long legacy_intr_flags = IRQF_SHARED;
 #endif
 
+// #define MBOX_INTERRUPT_DISABLE
 
 #ifndef __QDMA_VF__
 #ifdef DUMP_ON_ERROR_INTERRUPT

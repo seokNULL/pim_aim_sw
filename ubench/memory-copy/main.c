@@ -595,8 +595,7 @@ int main(int argc, char *argv[]) {
             return 1;
         }
         uint64_t offset = DEV0_MEM_BASE + AIM_RESERVED_OFFSET;
-        // void* FpgaMem = mmap(NULL, size, PROT_READ | PROT_WRITE, MAP_SHARED, mem_fd, offset);
-        void* FpgaMem = mmap(NULL, size, PROT_READ | PROT_WRITE, MAP_PRIVATE, mem_fd, offset);
+        void* FpgaMem = mmap(NULL, size, PROT_READ | PROT_WRITE, MAP_SHARED, mem_fd, offset);
         if (FpgaMem == MAP_FAILED) {
             printf("Failed to mmap /dev/mem\n");
             close(mem_fd);

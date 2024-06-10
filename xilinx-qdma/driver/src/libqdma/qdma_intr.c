@@ -40,6 +40,8 @@ static unsigned long legacy_intr_flags = IRQF_SHARED;
 #endif
 
 
+// #define MBOX_INTERRUPT_DISABLE
+
 #ifndef __QDMA_VF__
 #ifdef DUMP_ON_ERROR_INTERRUPT
 #define REG_BANNER_LEN (81 * 5)
@@ -563,7 +565,7 @@ int intr_setup(struct xlnx_dma_dev *xdev)
 	num_vecs = pci_msix_vec_count(xdev->conf.pdev);
 	pr_debug("dev %s, xdev->num_vecs = %d\n",
 			dev_name(&xdev->conf.pdev->dev), xdev->num_vecs);
-
+	
 	if (num_vecs == 0) {
 		pr_warn("MSI-X not supported, running in polled mode\n");
 		return 0;

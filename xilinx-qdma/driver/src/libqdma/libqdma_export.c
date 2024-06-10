@@ -56,6 +56,10 @@ struct drv_mode_name mode_name_list[] = {
 	{ DIRECT_INTR_MODE,		"direct interrupt"},
 	{ INDIRECT_INTR_MODE,	"indirect interrupt"},
 	{ LEGACY_INTR_MODE,		"legacy interrupt"}
+
+	
+	// { POLL_MODE,			"poll"}
+		
 };
 
 

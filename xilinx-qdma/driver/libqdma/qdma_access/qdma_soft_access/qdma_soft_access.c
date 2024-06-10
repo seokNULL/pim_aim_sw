@@ -4077,10 +4077,13 @@ int qdma_get_user_bar(void *dev_hndl, uint8_t is_vf,
 
 	user_bar_id = qdma_reg_read(dev_hndl, reg_addr);
 
+	pr_info("User BAR id(line 4080):%d\n", user_bar_id);
+
 	if (!is_vf)
 		user_bar_id = (user_bar_id >> (6 * func_id)) & 0x3F;
 	else
 		user_bar_id = user_bar_id & 0x3F;
+	pr_info("User BAR id(line 4086):%d\n", user_bar_id);
 
 	for (bar_idx = 0; bar_idx < QDMA_BAR_NUM; bar_idx++) {
 		if (user_bar_id & (1 << bar_idx)) {
