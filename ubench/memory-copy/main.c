@@ -86,6 +86,12 @@ struct queue_info {
 enum qdma_q_mode mode = QDMA_Q_MODE_MM;
 enum qdma_q_dir dir = QDMA_Q_DIR_BIDI;
 
+struct timespec statrt_cpu, end_cpu;
+struct timespec statrt_qdma, end_qdma;
+struct timespec statrt_cdma, end_cdma;
+
+uint64_t dur_cpu, dur_qdma, dur_cdma;
+
 float* AllocMat(long long size);
 void InitMat(float* mat, long long size);
 void ZeroMat(float* mat, long long size);
@@ -585,7 +591,7 @@ int main(int argc, char *argv[]) {
     memcpy(Ans, SrcIn, size * sizeof(float));
 	printf("Matrix Src Address(VA): %p\n", (void*)SrcIn);
 	printf("Matrix Dst Address(VA): %p\n", (void*)DstOut);
-	printf("Size: %llu(elemets), %llu(bytes)\n", size, size*sizeof(float));
+	printf("Size: %lu(elemets), %lu(bytes)\n", size, size*sizeof(float));
 
     // Case 0: USE_MMAP
     if (strcmp(device, "cpu") == 0){    
@@ -602,8 +608,13 @@ int main(int argc, char *argv[]) {
             return 1;
         }
         memset(FpgaMem, 0, size);
+		
+		clock_gettime(CLOCK_MONOTONIC, &statrt_cpu);
         WriteToMmap(FpgaMem, SrcIn, size);   /*Host -> Card*/ 
         ReadFromMmap(DstOut, FpgaMem, size); /*Card -> Host*/ 
+		clock_gettime(CLOCK_MONOTONIC, &end_cpu);
+		dur_cpu = BILLION * (end_cpu.tv_sec - statrt_cpu.tv_sec) + (end_cpu.tv_nsec - statrt_cpu.tv_nsec);
+		printf("CPU Memcpy time: %lu nanoseconds \n", dur_cpu);
 
         if (verbose){
             printf("Answer:\n");
@@ -685,8 +696,8 @@ int main(int argc, char *argv[]) {
 		uint64_t SrcPa = VA2PA((uint64_t)&FpgaSrc[0]);
 		uint64_t DstPa = VA2PA((uint64_t)&FpgaDst[0]);
     	if(verbose){
-			printf("Source PA:0x%llx \n", SrcPa);
-    		printf("Destination PA:0x%llx \n", DstPa);
+			printf("Source PA:0x%lx \n", SrcPa);
+    		printf("Destination PA:0x%lx \n", DstPa);
 		}
 		ZeroMat(FpgaSrc,size);
 		ZeroMat(FpgaDst,size);
@@ -695,9 +706,15 @@ int main(int argc, char *argv[]) {
 		pim_args *pim_code;
     	int code_size = sizeof(pim_args);
     	pim_code = (pim_args *)malloc(1024*1024*code_size);
+
+		
+		clock_gettime(CLOCK_MONOTONIC, &statrt_cdma);
 		if(internalMemcpy(FpgaDst, FpgaSrc, size*sizeof(float), DEV0_CDMA)<0){
 			return -1;
 		};
+		clock_gettime(CLOCK_MONOTONIC, &end_cdma);
+		dur_cdma = BILLION * (end_cdma.tv_sec - statrt_cdma.tv_sec) + (end_cdma.tv_nsec - statrt_cdma.tv_nsec);
+		printf("CDMA Memcpy time: %lu nanoseconds \n", dur_cdma);
 
         if (verbose){
             printf("Copy Source Matrix:\n");
