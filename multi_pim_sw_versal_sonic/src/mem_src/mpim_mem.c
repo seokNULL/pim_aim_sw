@@ -2,7 +2,7 @@
 
 void _multi_real_free(void);
 
-#define MEM_USE_TRACK
+// #define MEM_USE_TRACK
 #ifdef MEM_USE_TRACK
 static size_t total_size[2] = {0, 0}; // can set dynamically using totaldevnum
 #endif
@@ -237,7 +237,7 @@ void *mpim_malloc(size_t size, int fpga_id)
     // pthread_mutex_lock(&mutex); // TODO: pim_malloc should be called before thread invoke?
     if (mem_pool_list == NULL) {
         // Initialization PIM driver
-        printf("\nPIM MALLOC NULL CHECK\n\n");
+        // printf("\nPIM MALLOC NULL CHECK\n\n");
         __init_mpim_drv();
         mem_pool_list = (_pim_mem*)malloc(sizeof(_pim_mem)*totalDevNum);
         atexit(_multi_real_free);

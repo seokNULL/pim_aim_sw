@@ -13,10 +13,10 @@
 // #define x86_PIM_PERF /* For time measurement in x86*/
 
 /* For debugging */
-#define DEBUG_PL_DMA /* Xilinx CDMA debugging */
+// #define DEBUG_PL_DMA /* Xilinx CDMA debugging */
 // #define DEBUG_HOST_DMA /* X86 HOST debugging */
 // #define DEBUG_PIM_MEM /* PIM MemPool debugging */
-// #define DEBUG_PIM_MATH /* PIM Math library debugging */
+#define DEBUG_PIM_MATH /* PIM Math library debugging */
 
 /* For Multi-PIM */
 #define IRQ_NUM 8

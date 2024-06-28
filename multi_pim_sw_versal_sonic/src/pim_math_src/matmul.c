@@ -105,7 +105,7 @@ int _matmul_silent(pim_args *pim_args, int fpga_id)
     B_base = 0x0ULL;
     C_base = 0x0ULL;
     // B_iter = 0;
-
+    
     // PIM_MATH_LOG("%s: p:%d, q:%d, r:%d\n", __func__, p_size, q_size, r_size);
     PIM_MATH_LOG("%s: p:%d, q:%d, r:%d fpga ID: %d\n", __func__, p_size, q_size, r_size, fpga_id);
     for (p = 0; p < p_size; p++) {

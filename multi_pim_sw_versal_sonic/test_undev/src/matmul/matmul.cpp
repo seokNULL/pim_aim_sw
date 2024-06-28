@@ -31,65 +31,6 @@ uint64_t diff_PIM;
 uint64_t diff_CPU;
 int iter;
 
-// #ifdef DECOUP
-
-// void matmul_decoupled_pim_initialize(float *A, float *B, short *pim_A, short *pim_B, size_t M, size_t K, size_t N) {
-//   int p_size = M;
-//   int q_size = K;
-//   int r_size = N;
-//   if(p_size <16){
-//     perror("Tiling factor of decoupled-PIM is p_size>16");
-//   }
-
-//   int A_ROW = p_size;
-//   int A_COL = q_size;
-//   int B_COL = r_size;
-//   int A_ROW_PAD, A_COL_PAD, B_COL_PAD;
-//   A_ROW_PAD = (A_ROW + REG_SIZE - 1) / REG_SIZE * REG_SIZE;
-//   A_COL_PAD = (A_COL + REG_SIZE - 1) / REG_SIZE * REG_SIZE;
-//   B_COL_PAD = (B_COL + NUM_BANK - 1) / NUM_BANK * NUM_BANK;
-//   int cnt = 0;
-//   size_t idx = 0;
-
-//  //Input matrix A tiling
-//     for (size_t io = 0; io < A_ROW_PAD; io += REG_SIZE) {
-//       for (size_t k = 0; k < A_COL_PAD; k++) {
-//         for (size_t ii = 0; ii < REG_SIZE; ii++) {
-//             float tmp =A[(io + ii) * A_COL + k];
-//             short tmp0 = float_to_short(tmp);
-//               if (io + ii < A_ROW && k < A_COL) {
-//                 pim_A[idx] = tmp0;
-//               }
-//               else {
-//                 pim_A[idx] = 0;
-//               }
-//             cnt += 1;
-//             idx += 1;
-//         }
-//       }
-//     }
-// //Weight matrix B tiling
-//     cnt = 0;
-//     for (size_t jo = 0; jo < B_COL_PAD; jo += NUM_BANK) {
-//       for (size_t ko = 0; ko < A_COL_PAD; ko += NUM_BANK) {
-//         for (size_t ji = 0; ji < REG_SIZE; ji++) {
-//           for (size_t ki = 0; ki < REG_SIZE; ki++) {
-//             float tmp = B[(ko + ki) * B_COL + (jo + ji)];
-//             short tmp0 = float_to_short(tmp);
-//               if (ko + ki < A_COL && jo + ji < B_COL) {
-//                   pim_B[cnt] = tmp0;
-//               }
-//               else {
-//                   pim_B[cnt] = 0;
-//               }
-//             cnt += 1;
-//           }
-//         }
-//       }
-//     }
-// }
-// #endif
-
 void mat_mul_CPU(float *src_A_DRAM, float * src_B_DRAM, float * dst_C_DRAM, int p_size, int q_size, int r_size)
 {
   
@@ -143,7 +84,6 @@ void mat_mul_CPU(float *src_A_DRAM, float * src_B_DRAM, float * dst_C_DRAM, int 
   //   }
   // }
 }
-
 void pim_align_chunk(const short *src, short *dst, int row_dim, int col_dim) {
     int CHUNK = 256;
     int col_chunk_num = 0;
@@ -189,8 +129,6 @@ void pim_align_chunk(const short *src, short *dst, int row_dim, int col_dim) {
         printf("NOT SUPPORTED, NEED ALIGNMENT");
     }
 }
-
-
 int main(int argc, char *argv[])
 {
 
@@ -208,8 +146,6 @@ int main(int argc, char *argv[])
     int fpga_id=atoi(argv[4]);
     // const int fpga_id = 0;
 
-    int tmp=0;
-    // int fd_dma=0;
     bool is_need_align=false;
     printf("TEST FPGA NUM: %d\n", fpga_id);
     init_pim_drv();
@@ -275,30 +211,21 @@ int main(int argc, char *argv[])
       PL_dstC_buf[i]=0;
     }
 
-    // printf("srcA init\n");
-    float temp0 = 0.05;
-      // short tmp0 = float_to_short(temp0);
     for(size_t i=0; i<srcA_size; i++){
-      temp0  = generate_random()/10;
-      // temp0  = 0.05; // testbench
-      // if (i%16 == 0) temp0 += 0.001;
-      short tmp0 = float_to_short(temp0);
+      // float tmp = generate_random()/10;
+      float tmp = 0.5;
+      short tmp0 = float_to_short(tmp);
       PL_srcA_buf[i] = tmp0;
-      src_A_DRAM[i] = temp0;
-      // src_A_DRAM[i] = short_to_float(tmp0);
+      src_A_DRAM[i] = short_to_float(tmp0);
     }
 
-    // printf("srcB init (%d)\n", srcB_size);
-    float temp1  = 0.03125; // testbench
+
     for(size_t i=0; i<srcB_size; i++){
-      float temp1  = generate_random()/10;
-      // float temp1  = generate_random_255();
-    // float temp1  = 0.03125; // testbench
-      // temp1  += 1;
-      short tmp0 = float_to_short(temp1);
+      // float tmp = generate_random_255()/10;
+      float tmp = 0.03125;
+      short tmp0 = float_to_short(tmp);
       PL_srcB_buf[i]=tmp0;
-      src_B_DRAM[i] = temp1;
-      // src_B_DRAM[i] = short_to_float(tmp0);
+      src_B_DRAM[i] = short_to_float(tmp0);
     }    
     
     // printf("dstC init\n");

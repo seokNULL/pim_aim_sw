@@ -53,6 +53,7 @@
 #define SIZE_DEFAULT (32) //elements
 
 #define DEV0_CDMA 0
+#define PERF
 
 static unsigned int pci_bus = 0x01;
 static unsigned int pci_dev = 0x00;
@@ -123,6 +124,8 @@ void InitMat(float* mat, long long size) {
     srand(time(NULL));
     for (long long i = 0; i < size; ++i) {
         mat[i] = (float)rand() / (float)RAND_MAX;
+		// mat[i] = (float)1.0;
+		// mat[i] = (float)i;
     }
 }
 void ZeroMat(float* mat, long long size) {
@@ -198,7 +201,7 @@ void PrintMatrixHexa(float* matrix, long long size) {
     for (long long i = 0; i < size * sizeof(float); i += 16) {
         printf(BLUE"0x%08llx: "RESET, (unsigned long long)(byte_ptr + i));
 
-        for (long long j = 0; j < 16; j += 4) {
+        for (long long j = 0; j < 16; j += 2) {
             if (i + j < size * sizeof(float)) {
                 float* float_ptr = (float*)(byte_ptr + i + j);
                 printf(GREEN"%08X "RESET, *(unsigned int*)float_ptr);
@@ -210,10 +213,10 @@ void PrintMatrixHexa(float* matrix, long long size) {
     }
 }
 void PrintMatrixElem(float* matrix, long long size) {
-    for (long long i = 0; i < size; i += 4) {
+    for (long long i = 0; i < size; i += 8) {
         printf(BLUE"0x%08llx: "RESET, (unsigned long long)(matrix + i));
 
-        for (long long j = 0; j < 4; ++j) {
+        for (long long j = 0; j < 8; ++j) {
             if (i + j < size) {
                 printf(GREEN"%f "RESET, matrix[i + j]);
             } else {
@@ -607,25 +610,47 @@ int main(int argc, char *argv[]) {
             close(mem_fd);
             return 1;
         }
+
+        float* FpgaMemSrc = mmap(NULL, size, PROT_READ | PROT_WRITE, MAP_SHARED, mem_fd, offset);
+        if (FpgaMem == MAP_FAILED) {
+            printf("Failed to mmap /dev/mem\n");
+            close(mem_fd);
+            return 1;
+        }
+
+        float* FpgaMemDst = mmap(NULL, size, PROT_READ | PROT_WRITE, MAP_SHARED, mem_fd, offset);
+        if (FpgaMem == MAP_FAILED) {
+            printf("Failed to mmap /dev/mem\n");
+            close(mem_fd);
+            return 1;
+        }
         memset(FpgaMem, 0, size);
+		memset(FpgaMemSrc, 0, size);
+		memset(FpgaMemDst, 0, size);
 		
 		clock_gettime(CLOCK_MONOTONIC, &statrt_cpu);
-        WriteToMmap(FpgaMem, SrcIn, size);   /*Host -> Card*/ 
+        //Buffered copy
+		WriteToMmap(FpgaMem, SrcIn, size);   /*Host -> Card*/ 
         ReadFromMmap(DstOut, FpgaMem, size); /*Card -> Host*/ 
+		// //Direct copy
+		// for(int i=0; i<size; i++){
+		// 	FpgaMemDst[i] = FpgaMemSrc[i];
+		// }
 		clock_gettime(CLOCK_MONOTONIC, &end_cpu);
+	#ifdef PERF
 		dur_cpu = BILLION * (end_cpu.tv_sec - statrt_cpu.tv_sec) + (end_cpu.tv_nsec - statrt_cpu.tv_nsec);
 		printf("CPU Memcpy time: %lu nanoseconds \n", dur_cpu);
-
+	#endif
         if (verbose){
-            printf("Answer:\n");
+            printf("Copy source matrix:\n");
             PrintMatrixElem(Ans, size);
             printf("\n==================================================\n");
-            PrintMatrixHexa(Ans, size);
+            // PrintMatrixHexa(Ans, size);
             // CompareMatrices(Ans, DstOut, size);
-            printf("Fpga Memory:\n");
+            printf("Copy destination matrix:\n");
             PrintMatrixElem(FpgaMem, size);
             printf("\n==================================================\n");
-            PrintMatrixHexa(FpgaMem, size);            
+            // PrintMatrixHexa(FpgaMem, size);            
         }
         if (munmap(FpgaMem, size) == -1) {
             printf("Failed to munmap /dev/mem\n");
@@ -652,22 +677,28 @@ int main(int argc, char *argv[]) {
 
 		/*First, H2C & C2H check*/
 		char* devname = q_info->q_name;
-		int fpga_fd = open(devname, O_RDWR);
-		ret = write_from_buffer(devname, fpga_fd, SrcIn, sizeof(float)*size, AIM_RESERVED_OFFSET); /*Host -> Card*/
+		int qdma_fd = open(devname, O_RDWR);
+		
+		clock_gettime(CLOCK_MONOTONIC, &statrt_qdma);			
+		ret = write_from_buffer(devname, qdma_fd, SrcIn, sizeof(float)*size, AIM_RESERVED_OFFSET); /*Host -> Card*/		
 			if(ret < 0) goto out;
-		ret = read_to_buffer(devname, fpga_fd, DstOut, sizeof(float)*size, AIM_RESERVED_OFFSET); /*Host -> Card*/
+		ret = read_to_buffer(devname, qdma_fd, DstOut, sizeof(float)*size, AIM_RESERVED_OFFSET); /*Host -> Card*/
+		clock_gettime(CLOCK_MONOTONIC, &end_qdma);
 			if(ret < 0) goto out;
-
+	#ifdef PERF
+		dur_qdma = BILLION * (end_qdma.tv_sec - statrt_qdma.tv_sec) + (end_qdma.tv_nsec - statrt_qdma.tv_nsec);
+		printf("QDMA Memcpy time: %lu nanoseconds \n", dur_qdma);
+	#endif
         if (verbose){
-            printf("Answer:\n");
+            printf("Copy source matrix:\n");
             PrintMatrixElem(Ans, size);
             printf("\n==================================================\n");
-            PrintMatrixHexa(Ans, size);
+            // PrintMatrixHexa(Ans, size);
             // CompareMatrices(Ans, DstOut, size);
             printf("Copy destination matrix:\n");
             PrintMatrixElem(DstOut, size);
             printf("\n==================================================\n");
-            PrintMatrixHexa(DstOut, size);            
+            // PrintMatrixHexa(DstOut, size);            
         }
 		
 		atexit(qdma_env_cleanup);
@@ -675,7 +706,7 @@ int main(int argc, char *argv[]) {
     	if (ret < 0)
     		return ret;
 		out:
-			close(fpga_fd);			
+			close(qdma_fd);			
     }
 	// Case 2: USE_CDMA 
 	else if(strcmp(device, "cdma") == 0){
@@ -686,7 +717,7 @@ int main(int argc, char *argv[]) {
 			exit(-1);
 		}
 
-		if(verbose) printf("Allocating PIM memory\n");
+		// if(verbose) printf("Allocating PIM memory\n");
 		float *FpgaSrc = (float*) pim_malloc(size*sizeof(float), DEV0_CDMA);
 		float *FpgaDst = (float*) pim_malloc(size*sizeof(float), DEV0_CDMA);
 		if((FpgaSrc == MAP_FAILED)||(FpgaDst == MAP_FAILED)){
@@ -695,10 +726,10 @@ int main(int argc, char *argv[]) {
 		} 
 		uint64_t SrcPa = VA2PA((uint64_t)&FpgaSrc[0]);
 		uint64_t DstPa = VA2PA((uint64_t)&FpgaDst[0]);
-    	if(verbose){
+    	// if(verbose){
 			printf("Source PA:0x%lx \n", SrcPa);
     		printf("Destination PA:0x%lx \n", DstPa);
-		}
+		// }
 		ZeroMat(FpgaSrc,size);
 		ZeroMat(FpgaDst,size);
 		InitMat(FpgaSrc,size);
@@ -713,19 +744,20 @@ int main(int argc, char *argv[]) {
 			return -1;
 		};
 		clock_gettime(CLOCK_MONOTONIC, &end_cdma);
+	#ifdef PERF
 		dur_cdma = BILLION * (end_cdma.tv_sec - statrt_cdma.tv_sec) + (end_cdma.tv_nsec - statrt_cdma.tv_nsec);
 		printf("CDMA Memcpy time: %lu nanoseconds \n", dur_cdma);
-
+	#endif
         if (verbose){
-            printf("Copy Source Matrix:\n");
+            printf("Copy source matrix:\n");
             PrintMatrixElem(FpgaSrc, size);
             printf("\n==================================================\n");
-            PrintMatrixHexa(FpgaSrc, size);
-            
-			printf("Copy Destination Matrix:\n");
+            // PrintMatrixHexa(FpgaSrc, size);
+            // printf("\n==================================================\n");
+			printf("Copy destination matrix:\n");
             PrintMatrixElem(FpgaDst, size);
             printf("\n==================================================\n");
-            PrintMatrixHexa(FpgaDst, size);          			            
+            // PrintMatrixHexa(FpgaDst, size);          			            
         }
 	}
 
