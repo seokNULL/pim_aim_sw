@@ -1,0 +1,243 @@
+TEST FPGA NUM: 0
+totalDevNum : 1
+init_mpim_drv: desc_base: 800000, dram_base: 4200000000 
+CPU matmul latency 2570868 ns at iter #0	2570868
+CPU average matmul latency 2570868 ns 1 512 512	2570868
+A_pa:1000000 
+B_pa:1002000 
+B_aligned_pa:1084000 
+C_pa:1082000 
+_matmul_silent: p:1, q:512, r:512 fpga ID: 0
+[p:0, q:0, r:0] 
+    PIM_ISA[idx:  0] next:800040 | src:   1000000 | dst:  d0000000 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx:  1] next:800080 | src:   1084000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:16, r:0] 
+    PIM_ISA[idx:  2] next:8000c0 | src:   1000020 | dst:  d0000020 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx:  3] next:800100 | src:   1086000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:32, r:0] 
+    PIM_ISA[idx:  4] next:800140 | src:   1000040 | dst:  d0000000 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx:  5] next:800180 | src:   1088000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:48, r:0] 
+    PIM_ISA[idx:  6] next:8001c0 | src:   1000060 | dst:  d0000020 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx:  7] next:800200 | src:   108a000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:64, r:0] 
+    PIM_ISA[idx:  8] next:800240 | src:   1000080 | dst:  d0000000 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx:  9] next:800280 | src:   108c000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:80, r:0] 
+    PIM_ISA[idx: 10] next:8002c0 | src:   10000a0 | dst:  d0000020 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx: 11] next:800300 | src:   108e000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:96, r:0] 
+    PIM_ISA[idx: 12] next:800340 | src:   10000c0 | dst:  d0000000 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx: 13] next:800380 | src:   1090000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:112, r:0] 
+    PIM_ISA[idx: 14] next:8003c0 | src:   10000e0 | dst:  d0000020 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx: 15] next:800400 | src:   1092000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:128, r:0] 
+    PIM_ISA[idx: 16] next:800440 | src:   1000100 | dst:  d0000000 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx: 17] next:800480 | src:   1094000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:144, r:0] 
+    PIM_ISA[idx: 18] next:8004c0 | src:   1000120 | dst:  d0000020 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx: 19] next:800500 | src:   1096000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:160, r:0] 
+    PIM_ISA[idx: 20] next:800540 | src:   1000140 | dst:  d0000000 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx: 21] next:800580 | src:   1098000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:176, r:0] 
+    PIM_ISA[idx: 22] next:8005c0 | src:   1000160 | dst:  d0000020 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx: 23] next:800600 | src:   109a000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:192, r:0] 
+    PIM_ISA[idx: 24] next:800640 | src:   1000180 | dst:  d0000000 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx: 25] next:800680 | src:   109c000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:208, r:0] 
+    PIM_ISA[idx: 26] next:8006c0 | src:   10001a0 | dst:  d0000020 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx: 27] next:800700 | src:   109e000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:224, r:0] 
+    PIM_ISA[idx: 28] next:800740 | src:   10001c0 | dst:  d0000000 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx: 29] next:800780 | src:   10a0000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:240, r:0] 
+    PIM_ISA[idx: 30] next:8007c0 | src:   10001e0 | dst:  d0000020 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx: 31] next:800800 | src:   10a2000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:256, r:0] 
+    PIM_ISA[idx: 32] next:800840 | src:   1000200 | dst:  d0000000 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx: 33] next:800880 | src:   10a4000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:272, r:0] 
+    PIM_ISA[idx: 34] next:8008c0 | src:   1000220 | dst:  d0000020 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx: 35] next:800900 | src:   10a6000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:288, r:0] 
+    PIM_ISA[idx: 36] next:800940 | src:   1000240 | dst:  d0000000 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx: 37] next:800980 | src:   10a8000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:304, r:0] 
+    PIM_ISA[idx: 38] next:8009c0 | src:   1000260 | dst:  d0000020 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx: 39] next:800a00 | src:   10aa000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:320, r:0] 
+    PIM_ISA[idx: 40] next:800a40 | src:   1000280 | dst:  d0000000 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx: 41] next:800a80 | src:   10ac000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:336, r:0] 
+    PIM_ISA[idx: 42] next:800ac0 | src:   10002a0 | dst:  d0000020 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx: 43] next:800b00 | src:   10ae000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:352, r:0] 
+    PIM_ISA[idx: 44] next:800b40 | src:   10002c0 | dst:  d0000000 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx: 45] next:800b80 | src:   10b0000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:368, r:0] 
+    PIM_ISA[idx: 46] next:800bc0 | src:   10002e0 | dst:  d0000020 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx: 47] next:800c00 | src:   10b2000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:384, r:0] 
+    PIM_ISA[idx: 48] next:800c40 | src:   1000300 | dst:  d0000000 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx: 49] next:800c80 | src:   10b4000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:400, r:0] 
+    PIM_ISA[idx: 50] next:800cc0 | src:   1000320 | dst:  d0000020 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx: 51] next:800d00 | src:   10b6000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:416, r:0] 
+    PIM_ISA[idx: 52] next:800d40 | src:   1000340 | dst:  d0000000 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx: 53] next:800d80 | src:   10b8000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:432, r:0] 
+    PIM_ISA[idx: 54] next:800dc0 | src:   1000360 | dst:  d0000020 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx: 55] next:800e00 | src:   10ba000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:448, r:0] 
+    PIM_ISA[idx: 56] next:800e40 | src:   1000380 | dst:  d0000000 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx: 57] next:800e80 | src:   10bc000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:464, r:0] 
+    PIM_ISA[idx: 58] next:800ec0 | src:   10003a0 | dst:  d0000020 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx: 59] next:800f00 | src:   10be000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:480, r:0] 
+    PIM_ISA[idx: 60] next:800f40 | src:   10003c0 | dst:  d0000000 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx: 61] next:800f80 | src:   10c0000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:496, r:0] 
+    PIM_ISA[idx: 62] next:800fc0 | src:   10003e0 | dst:  d0000020 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx: 63] next:801000 | src:   10c2000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+    PIM_ISA[idx: 64] next:801040 | src:  d0000000 | dst:   1082000 | length:    200 | opcode: MAT_MUL_SILENT_WR_C
+[p:0, q:0, r:1] 
+    PIM_ISA[idx: 65] next:801080 | src:   1000000 | dst:  d0000000 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx: 66] next:8010c0 | src:   10c4000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:16, r:1] 
+    PIM_ISA[idx: 67] next:801100 | src:   1000020 | dst:  d0000020 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx: 68] next:801140 | src:   10c6000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:32, r:1] 
+    PIM_ISA[idx: 69] next:801180 | src:   1000040 | dst:  d0000000 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx: 70] next:8011c0 | src:   10c8000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:48, r:1] 
+    PIM_ISA[idx: 71] next:801200 | src:   1000060 | dst:  d0000020 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx: 72] next:801240 | src:   10ca000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:64, r:1] 
+    PIM_ISA[idx: 73] next:801280 | src:   1000080 | dst:  d0000000 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx: 74] next:8012c0 | src:   10cc000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:80, r:1] 
+    PIM_ISA[idx: 75] next:801300 | src:   10000a0 | dst:  d0000020 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx: 76] next:801340 | src:   10ce000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:96, r:1] 
+    PIM_ISA[idx: 77] next:801380 | src:   10000c0 | dst:  d0000000 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx: 78] next:8013c0 | src:   10d0000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:112, r:1] 
+    PIM_ISA[idx: 79] next:801400 | src:   10000e0 | dst:  d0000020 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx: 80] next:801440 | src:   10d2000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:128, r:1] 
+    PIM_ISA[idx: 81] next:801480 | src:   1000100 | dst:  d0000000 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx: 82] next:8014c0 | src:   10d4000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:144, r:1] 
+    PIM_ISA[idx: 83] next:801500 | src:   1000120 | dst:  d0000020 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx: 84] next:801540 | src:   10d6000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:160, r:1] 
+    PIM_ISA[idx: 85] next:801580 | src:   1000140 | dst:  d0000000 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx: 86] next:8015c0 | src:   10d8000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:176, r:1] 
+    PIM_ISA[idx: 87] next:801600 | src:   1000160 | dst:  d0000020 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx: 88] next:801640 | src:   10da000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:192, r:1] 
+    PIM_ISA[idx: 89] next:801680 | src:   1000180 | dst:  d0000000 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx: 90] next:8016c0 | src:   10dc000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:208, r:1] 
+    PIM_ISA[idx: 91] next:801700 | src:   10001a0 | dst:  d0000020 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx: 92] next:801740 | src:   10de000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:224, r:1] 
+    PIM_ISA[idx: 93] next:801780 | src:   10001c0 | dst:  d0000000 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx: 94] next:8017c0 | src:   10e0000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:240, r:1] 
+    PIM_ISA[idx: 95] next:801800 | src:   10001e0 | dst:  d0000020 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx: 96] next:801840 | src:   10e2000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:256, r:1] 
+    PIM_ISA[idx: 97] next:801880 | src:   1000200 | dst:  d0000000 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx: 98] next:8018c0 | src:   10e4000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:272, r:1] 
+    PIM_ISA[idx: 99] next:801900 | src:   1000220 | dst:  d0000020 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx:100] next:801940 | src:   10e6000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:288, r:1] 
+    PIM_ISA[idx:101] next:801980 | src:   1000240 | dst:  d0000000 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx:102] next:8019c0 | src:   10e8000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:304, r:1] 
+    PIM_ISA[idx:103] next:801a00 | src:   1000260 | dst:  d0000020 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx:104] next:801a40 | src:   10ea000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:320, r:1] 
+    PIM_ISA[idx:105] next:801a80 | src:   1000280 | dst:  d0000000 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx:106] next:801ac0 | src:   10ec000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:336, r:1] 
+    PIM_ISA[idx:107] next:801b00 | src:   10002a0 | dst:  d0000020 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx:108] next:801b40 | src:   10ee000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:352, r:1] 
+    PIM_ISA[idx:109] next:801b80 | src:   10002c0 | dst:  d0000000 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx:110] next:801bc0 | src:   10f0000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:368, r:1] 
+    PIM_ISA[idx:111] next:801c00 | src:   10002e0 | dst:  d0000020 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx:112] next:801c40 | src:   10f2000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:384, r:1] 
+    PIM_ISA[idx:113] next:801c80 | src:   1000300 | dst:  d0000000 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx:114] next:801cc0 | src:   10f4000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:400, r:1] 
+    PIM_ISA[idx:115] next:801d00 | src:   1000320 | dst:  d0000020 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx:116] next:801d40 | src:   10f6000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:416, r:1] 
+    PIM_ISA[idx:117] next:801d80 | src:   1000340 | dst:  d0000000 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx:118] next:801dc0 | src:   10f8000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:432, r:1] 
+    PIM_ISA[idx:119] next:801e00 | src:   1000360 | dst:  d0000020 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx:120] next:801e40 | src:   10fa000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:448, r:1] 
+    PIM_ISA[idx:121] next:801e80 | src:   1000380 | dst:  d0000000 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx:122] next:801ec0 | src:   10fc000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:464, r:1] 
+    PIM_ISA[idx:123] next:801f00 | src:   10003a0 | dst:  d0000020 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx:124] next:801f40 | src:   10fe000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:480, r:1] 
+    PIM_ISA[idx:125] next:801f80 | src:   10003c0 | dst:  d0000000 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx:126] next:801fc0 | src:   1100000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+[p:0, q:496, r:1] 
+    PIM_ISA[idx:127] next:802000 | src:   10003e0 | dst:  d0000020 | length:     20 | opcode: MAT_MUL_SILENT_RD_A
+    PIM_ISA[idx:128] next:802040 | src:   1102000 | dst:  d0000000 | length:   2000 | opcode: MAT_MUL_SILENT_RD_B
+    PIM_ISA[idx:129] next:802080 | src:  d0000000 | dst:   1082200 | length:    200 | opcode: MAT_MUL_SILENT_WR_C
+mpim_exec: desc_host:0x7fd7af9c9010, num_desc:129, last_desc:802080 
+PIM matmul latency 307144 ns at iter #0	307144
+PIM average matmul latency 307144 ns 1 512 512	307144
+Correctness check!
+
+            CPU       |    PIM
+idx[   0] 0x3aa0  |  0x3a9c 
+idx[   0] 0x3aab  |  0x3aa7 
+idx[   0] 0x3a9a  |  0x3a96 
+idx[   0] 0x3a9a  |  0x3a96 
+idx[   0] 0x3aa0  |  0x3a9c 
+idx[   0] 0x3a9f  |  0x3a9b 
+idx[   0] 0x3aa1  |  0x3a9d 
+idx[   0] 0x3a9b  |  0x3a97 
+idx[   0] 0x3a98  |  0x3a94 
+idx[   0] 0x3a9f  |  0x3a9b 
+idx[   0] 0x3aa1  |  0x3a9d 
+idx[   0] 0x3a9d  |  0x3a9a 
+idx[   0] 0x3a9f  |  0x3a9b 
+idx[   0] 0x3a9a  |  0x3a97 
+idx[   0] 0x3a96  |  0x3a92 
+idx[   0] 0x3a97  |  0x3a93 
+idx[ 256] 0x3aa1  |  0x3a9d 
+idx[ 256] 0x3a99  |  0x3a96 
+idx[ 256] 0x3a96  |  0x3a93 
+idx[ 256] 0x3a96  |  0x3a92 
+idx[ 256] 0x3a98  |  0x3a94 
+idx[ 256] 0x3a9c  |  0x3a98 
+idx[ 256] 0x3a9c  |  0x3a98 
+idx[ 256] 0x3a9b  |  0x3a97 
+idx[ 256] 0x3a9b  |  0x3a98 
+idx[ 256] 0x3a9e  |  0x3a9a 
+idx[ 256] 0x3a96  |  0x3a92 
+idx[ 256] 0x3a94  |  0x3a90 
+idx[ 256] 0x3a9e  |  0x3a9a 
+idx[ 256] 0x3a9e  |  0x3a9a 
+idx[ 256] 0x3a95  |  0x3a91 
+idx[ 256] 0x3a96  |  0x3a93 
+

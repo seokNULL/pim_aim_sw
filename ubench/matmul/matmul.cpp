@@ -19,7 +19,7 @@
 
 #include <pim.h>
 #include "convert_numeric.h"
-// #define  DUMP_BANK0_ONLY
+#define  DUMP_BANK0_ONLY
 
 #define FPGA_ID 0
 #define ITER  1
@@ -187,18 +187,7 @@ int main(int argc, char *argv[])
         return -1;
     }
 
-    // printf("Complete pim_malloc\n");
-    uint64_t A_pa = VA2PA((uint64_t)&PL_srcA_buf[0], fpga_id);    
-    uint64_t B_pa = VA2PA((uint64_t)&PL_srcB_buf[0], fpga_id);    
-    uint64_t C_pa = VA2PA((uint64_t)&PL_dstC_buf[0], fpga_id);    
-    // printf("A_va:%llx \n", &PL_srcA_buf[0]);
-    // printf("B_va:%llx \n", &PL_srcB_buf[0]);
-    // printf("C_va:%llx \n", &PL_dstC_buf[0]);
 
-    printf("A_pa:%llx \n", A_pa);
-    printf("B_pa:%llx \n", B_pa);
-    printf("C_pa:%llx \n", C_pa);
-    // getchar();
 
     //zeroing
     for(size_t i=0; i<srcA_size; i++){
@@ -212,7 +201,7 @@ int main(int argc, char *argv[])
     }
 
     for(size_t i=0; i<srcA_size; i++){
-      float tmp = generate_random()/10;
+       float tmp = generate_random()/10;
       // float tmp = 1.0;
       short tmp0 = float_to_short(tmp);
       PL_srcA_buf[i] = tmp0;
@@ -221,8 +210,8 @@ int main(int argc, char *argv[])
 
 
     for(size_t i=0; i<srcB_size; i++){
-      float tmp = generate_random_255()/10;
-      // float tmp = 0.125;
+      float tmp = generate_random_255()/100;
+      // float tmp = 0.001953125;
       // float tmp = (float)i;
       short tmp0 = float_to_short(tmp);
       PL_srcB_buf[i]=tmp0;
@@ -259,6 +248,21 @@ int main(int argc, char *argv[])
       printf("CPU matmul latency %llu ns at iter #%d\t%llu\n", (long long unsigned int) diff_CPU, i, (long long unsigned int) diff_CPU);
     }
     printf("CPU average matmul latency %llu ns %d %d %d\t%llu\n", (long long unsigned int) dur_CPU/ITER, p_size, q_size, r_size, (long long unsigned int) dur_CPU/ITER);
+
+    // printf("Complete pim_malloc\n");
+    uint64_t A_pa = VA2PA((uint64_t)&PL_srcA_buf[0], fpga_id);    
+    uint64_t B_pa = VA2PA((uint64_t)&PL_srcB_buf[0], fpga_id);    
+    uint64_t B_aligned_pa = VA2PA((uint64_t)&PL_srcB_aligned_buf[0], fpga_id);    
+    uint64_t C_pa = VA2PA((uint64_t)&PL_dstC_buf[0], fpga_id);    
+    // printf("A_va:%llx \n", &PL_srcA_buf[0]);
+    // printf("B_va:%llx \n", &PL_srcB_buf[0]);
+    // printf("C_va:%llx \n", &PL_dstC_buf[0]);
+
+    printf("A_pa:%llx \n", A_pa);
+    printf("B_pa:%llx \n", B_pa);
+    printf("B_aligned_pa:%llx \n", B_aligned_pa);
+    printf("C_pa:%llx \n", C_pa);
+    // getchar();
 
 #ifndef DECOUP
     set_info->srcA_va   = (uint64_t)&PL_srcA_buf[0];
@@ -311,7 +315,7 @@ int main(int argc, char *argv[])
         if ((i%256)==0){ // Only Bank 0
           for(int j=0; j<16; j++){
             a.f_val = dst_C_DRAM[i+j];
-            printf("idx[%4d] 0x%x  |  ", i, a.u_val);
+            printf("idx[%4d] 0x%x  |  ", i, a.u_val >> 16);
             printf("0x%x ", PL_dstC_buf[i+j]);
             printf("\n");
           }
