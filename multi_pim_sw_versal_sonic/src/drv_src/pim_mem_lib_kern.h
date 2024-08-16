@@ -11,6 +11,7 @@ extern volatile uint32_t *pim_mem_reg;
 
 #ifdef __x86_64__
 extern int probe_pim_mem_x86(void);
+// extern int probe_mem_address_map(void);
 #elif defined __aarch64__
 extern int probe_pim_mem_arm(struct platform_device *pdev);
 #endif

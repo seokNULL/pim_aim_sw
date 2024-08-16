@@ -19,7 +19,15 @@
 #define MEMORY_NUM 4
 #define DMA_CONF_NUM 2
 #define PCI_CONF_NUM 0 // PCI DMA (DO NOT USE)
-
+ //Dynamic address mapping configuration
+ #define PCI_ADDR_MAP_OFFSET 0x300000
+ #define PCI_ADDR_MAP_LEN 0x100000
+ #define PCI_ADDR_MAP_RD 0x1000
+ #define PCI_ADDR_MAP_WR 0x2000
+ #define ROCHBACO 0x0
+ #define ROCOBACH 0x1
+ #define CHROBACO 0x2
+ #define CHROCOBA 0x3
 
 /* For host DMA */
 #define DMA_COHERENT

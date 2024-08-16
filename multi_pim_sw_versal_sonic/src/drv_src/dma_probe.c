@@ -278,6 +278,11 @@ int probe_pl_dma_x86(void)
         // resource_size_t pci_len;
         resource_size_t mem_start;
         resource_size_t mem_len;
+        
+        // Dynamic address setting
+        unsigned int address_map_cs;
+        const char *mapping_str;
+        resource_size_t pim_mem_addr_map;
 
         if (pciem_dev == NULL) {
             printk(KERN_ERR " PL_DMA] Failed to find PL DMA");
@@ -380,6 +385,50 @@ int probe_pl_dma_x86(void)
     #else /* DMA TX completion polling mode */
         printk(" PL_DMA] CDMA polling mode");
 #endif
+
+
+        /*
+        * Dynamic addressing mapping decoding
+        * Address region 0x60_0020_0000 ~ 0x60_003f_ffff
+        */
+
+        pim_mem_addr_map = ioremap_wc(mem_start + PCI_ADDR_MAP_OFFSET, PCI_ADDR_MAP_LEN);
+        if (!pim_mem_addr_map) {
+            printk(KERN_ERR " PL_DMA] Could not allocate address mapping mem %llx - %llx", mem_start + PCI_ADDR_MAP_OFFSET, mem_start + PCI_ADDR_MAP_OFFSET + PCI_ADDR_MAP_LEN - 1);
+            goto error;
+        } 
+        printk(" PL_DMA] IOREMAP - ADDR_MAP  : 0x%llx - 0x%llx (%llx)", mem_start + PCI_ADDR_MAP_OFFSET, mem_start + PCI_ADDR_MAP_OFFSET + PCI_ADDR_MAP_LEN - 1, PCI_ADDR_MAP_LEN);
+        iowrite32(0xffff, pim_mem_addr_map + PCI_ADDR_MAP_RD);                // Send write to store current state address mapping 
+        address_map_cs = ioread32((void*)pim_mem_addr_map + PCI_ADDR_MAP_RD); // Read current state adress mapping
+        // printk("Value at address 0x%llx: 0x%x\n", pim_mem_addr_map + PCI_ADDR_MAP_RD, address_map_cs);    
+
+        switch(address_map_cs){
+            case ROCHBACO: mapping_str = "RoChBaCo"; break;
+            case ROCOBACH: mapping_str = "RoCoBaCh"; break;
+            case CHROBACO: mapping_str = "ChRoBaCo"; break;
+            case CHROCOBA: mapping_str = "ChRoCoBa"; break;
+            default: mapping_str = "Undef"; break;
+        }
+        printk("Current address mapping: %s\n", mapping_str);
+
+        // iowrite32(CHROCOBA, pim_mem_addr_map + PCI_ADDR_MAP_WR);              //Change address mapping setting
+        iowrite32(ROCOBACH, pim_mem_addr_map + PCI_ADDR_MAP_WR);              //Change address mapping setting
+        
+        iowrite32(0xffff, pim_mem_addr_map + PCI_ADDR_MAP_RD);                // Send write to store current state address mapping 
+        address_map_cs = ioread32(pim_mem_addr_map + PCI_ADDR_MAP_RD);
+        switch(address_map_cs){
+            case ROCHBACO: mapping_str = "RoChBaCo"; break;
+            case ROCOBACH: mapping_str = "RoCoBaCh"; break;
+            case CHROBACO: mapping_str = "ChRoBaCo"; break;
+            case CHROCOBA: mapping_str = "ChRoCoBa"; break;
+            default: mapping_str = "Undef"; break;
+        }
+        printk("Current address mapping: %s\n", mapping_str);
+        printk("Value at address 0x%llx: 0x%x\n", pim_mem_addr_map + PCI_ADDR_MAP_RD, address_map_cs);       
+
+        iounmap(pim_mem_addr_map);
+
+
     }
     return SUCCESS;
 
@@ -392,7 +441,7 @@ error:
 #ifdef INTR_ENABLE
     free_irq(cdma_dev->irq, cdma_dev);
 #endif
-    printk(" PL_DMA] Error DMA driver module\n");       
+    printk(" PL_DMA] Error DMA driver module\n");
     return -EIOMAP_FAULT;    
 }
 
