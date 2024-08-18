@@ -45,7 +45,7 @@
 #define USE_CDMA 	 (4)
 
 
-#define AIM_RESERVED_OFFSET 0x00800000 //8 MB
+#define PIM_RESERVED_OFFSET 0x01000000 
 
 /*Device 0's base memory address need to be checked before progrma execution*/
 #define DEV0_MEM_BASE 0x6000000000 //Device 0 - 8GB assumed 
@@ -603,39 +603,17 @@ int main(int argc, char *argv[]) {
             printf("Failed to open /dev/mem\n");
             return 1;
         }
-        uint64_t offset = DEV0_MEM_BASE + AIM_RESERVED_OFFSET;
+        uint64_t offset = DEV0_MEM_BASE + PIM_RESERVED_OFFSET;
         void* FpgaMem = mmap(NULL, size, PROT_READ | PROT_WRITE, MAP_SHARED, mem_fd, offset);
         if (FpgaMem == MAP_FAILED) {
             printf("Failed to mmap /dev/mem\n");
             close(mem_fd);
             return 1;
         }
-
-        float* FpgaMemSrc = mmap(NULL, size, PROT_READ | PROT_WRITE, MAP_SHARED, mem_fd, offset);
-        if (FpgaMem == MAP_FAILED) {
-            printf("Failed to mmap /dev/mem\n");
-            close(mem_fd);
-            return 1;
-        }
-
-        float* FpgaMemDst = mmap(NULL, size, PROT_READ | PROT_WRITE, MAP_SHARED, mem_fd, offset);
-        if (FpgaMem == MAP_FAILED) {
-            printf("Failed to mmap /dev/mem\n");
-            close(mem_fd);
-            return 1;
-        }
-        memset(FpgaMem, 0, size);
-		memset(FpgaMemSrc, 0, size);
-		memset(FpgaMemDst, 0, size);
-		
 		clock_gettime(CLOCK_MONOTONIC, &statrt_cpu);
         //Buffered copy
 		WriteToMmap(FpgaMem, SrcIn, size);   /*Host -> Card*/ 
         ReadFromMmap(DstOut, FpgaMem, size); /*Card -> Host*/ 
-		// //Direct copy
-		// for(int i=0; i<size; i++){
-		// 	FpgaMemDst[i] = FpgaMemSrc[i];
-		// }
 		clock_gettime(CLOCK_MONOTONIC, &end_cpu);
 	#ifdef PERF
 		dur_cpu = BILLION * (end_cpu.tv_sec - statrt_cpu.tv_sec) + (end_cpu.tv_nsec - statrt_cpu.tv_nsec);
@@ -680,9 +658,9 @@ int main(int argc, char *argv[]) {
 		int qdma_fd = open(devname, O_RDWR);
 		
 		clock_gettime(CLOCK_MONOTONIC, &statrt_qdma);			
-		ret = write_from_buffer(devname, qdma_fd, SrcIn, sizeof(float)*size, AIM_RESERVED_OFFSET); /*Host -> Card*/		
+		ret = write_from_buffer(devname, qdma_fd, SrcIn, sizeof(float)*size, PIM_RESERVED_OFFSET); /*Host -> Card*/		
 			if(ret < 0) goto out;
-		ret = read_to_buffer(devname, qdma_fd, DstOut, sizeof(float)*size, AIM_RESERVED_OFFSET); /*Host -> Card*/
+		ret = read_to_buffer(devname, qdma_fd, DstOut, sizeof(float)*size, PIM_RESERVED_OFFSET); /*Host -> Card*/
 		clock_gettime(CLOCK_MONOTONIC, &end_qdma);
 			if(ret < 0) goto out;
 	#ifdef PERF

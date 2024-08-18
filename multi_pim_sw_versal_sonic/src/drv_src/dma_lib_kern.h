@@ -28,7 +28,10 @@
  #define ROCOBACH 0x1
  #define CHROBACO 0x2
  #define CHROCOBA 0x3
-
+ #define ROCOBACH8 0x4
+ #define ROCOBACH4 0x5
+ #define ROCOBACH2 0x6
+ 
 /* For host DMA */
 #define DMA_COHERENT
 #define WC 1

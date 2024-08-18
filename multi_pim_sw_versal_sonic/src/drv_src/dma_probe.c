@@ -257,6 +257,21 @@ int register_host_drv(void) {
         return ret;    
 }
 
+const char* get_address_mapping(unsigned int addr_map){
+    const char* mapping_str;
+    switch(addr_map){
+        case ROCHBACO: mapping_str = "RoChBaCo"; break;
+        case ROCOBACH: mapping_str = "RoCoBaCh"; break;
+        case CHROBACO: mapping_str = "ChRoBaCo"; break;
+        case CHROCOBA: mapping_str = "ChRoCoBa"; break;   
+        case ROCOBACH8: mapping_str = "RoCoBaCh8"; break;
+        case ROCOBACH4: mapping_str = "RoCoBaCh4"; break;
+        case ROCOBACH2: mapping_str = "RoCoBaCh2"; break;
+        default: mapping_str = "Undef"; break;
+    }
+    return mapping_str;    
+}
+
 int probe_pl_dma_x86(void)
 {
     struct list_head *ptr;
@@ -400,31 +415,17 @@ int probe_pl_dma_x86(void)
         printk(" PL_DMA] IOREMAP - ADDR_MAP  : 0x%llx - 0x%llx (%llx)", mem_start + PCI_ADDR_MAP_OFFSET, mem_start + PCI_ADDR_MAP_OFFSET + PCI_ADDR_MAP_LEN - 1, PCI_ADDR_MAP_LEN);
         iowrite32(0xffff, pim_mem_addr_map + PCI_ADDR_MAP_RD);                // Send write to store current state address mapping 
         address_map_cs = ioread32((void*)pim_mem_addr_map + PCI_ADDR_MAP_RD); // Read current state adress mapping
-        // printk("Value at address 0x%llx: 0x%x\n", pim_mem_addr_map + PCI_ADDR_MAP_RD, address_map_cs);    
+        printk("Address Mapping (Current State): %s\n", get_address_mapping(address_map_cs));
 
-        switch(address_map_cs){
-            case ROCHBACO: mapping_str = "RoChBaCo"; break;
-            case ROCOBACH: mapping_str = "RoCoBaCh"; break;
-            case CHROBACO: mapping_str = "ChRoBaCo"; break;
-            case CHROCOBA: mapping_str = "ChRoCoBa"; break;
-            default: mapping_str = "Undef"; break;
-        }
-        printk("Current address mapping: %s\n", mapping_str);
-
-        // iowrite32(CHROCOBA, pim_mem_addr_map + PCI_ADDR_MAP_WR);              //Change address mapping setting
-        iowrite32(ROCOBACH, pim_mem_addr_map + PCI_ADDR_MAP_WR);              //Change address mapping setting
+        // iowrite32(ROCHBACO, pim_mem_addr_map + PCI_ADDR_MAP_WR);       //Change address mapping setting
+        // iowrite32(ROCOBACH, pim_mem_addr_map + PCI_ADDR_MAP_WR);    //Change address mapping setting
+        // iowrite32(CHROBACO, pim_mem_addr_map + PCI_ADDR_MAP_WR);    //Change address mapping setting
+        iowrite32(CHROCOBA, pim_mem_addr_map + PCI_ADDR_MAP_WR);    //Change address mapping setting
         
         iowrite32(0xffff, pim_mem_addr_map + PCI_ADDR_MAP_RD);                // Send write to store current state address mapping 
         address_map_cs = ioread32(pim_mem_addr_map + PCI_ADDR_MAP_RD);
-        switch(address_map_cs){
-            case ROCHBACO: mapping_str = "RoChBaCo"; break;
-            case ROCOBACH: mapping_str = "RoCoBaCh"; break;
-            case CHROBACO: mapping_str = "ChRoBaCo"; break;
-            case CHROCOBA: mapping_str = "ChRoCoBa"; break;
-            default: mapping_str = "Undef"; break;
-        }
-        printk("Current address mapping: %s\n", mapping_str);
-        printk("Value at address 0x%llx: 0x%x\n", pim_mem_addr_map + PCI_ADDR_MAP_RD, address_map_cs);       
+        printk("Address Mapping (Current State): %s\n", get_address_mapping(address_map_cs));
+        // printk("Value at address 0x%llx: 0x%x\n", pim_mem_addr_map + PCI_ADDR_MAP_RD, address_map_cs);
 
         iounmap(pim_mem_addr_map);
 
